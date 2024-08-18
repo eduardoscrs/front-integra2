@@ -1,5 +1,19 @@
 # React + Vite
 
+## Requisitos
+
+-Instalen Eslint y Prettier 
+- Node.js y npm instalados
+- Vite (se instala automáticamente con las dependencias)
+- npm install (en el directorio del proyecto)
+
+Ejecuta el servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
