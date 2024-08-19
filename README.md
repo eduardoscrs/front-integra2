@@ -12,6 +12,24 @@ Ejecuta el servidor de desarrollo:
 ```bash
 npm run dev
 ```
+<!-- nombre/
+│
+├── public/                # Archivos estáticos
+├── src/
+│   ├── assets/            # Recursos como imágenes, fuentes, etc.
+│   ├── components/        # Componentes reutilizables de React
+│   ├── pages/             # Páginas principales de la aplicación
+│   ├── services/          # Lógica para interactuar con el backend (APIs)
+│   ├── hooks/             # Custom hooks de React
+│   ├── context/           # React Context API para manejo global de estados
+│   ├── styles/            # Archivos de estilos (CSS, SCSS)
+│   ├── App.jsx            # Componente raíz de la aplicación
+│   ├── main.jsx           # Punto de entrada del proyecto
+│   └── router.jsx         # Configuración de rutas
+│
+├── index.html             # Archivo HTML principal
+├── package.json           # Dependencias y scripts del proyecto
+└── vite.config.js         # Configuración de Vite -->
 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
