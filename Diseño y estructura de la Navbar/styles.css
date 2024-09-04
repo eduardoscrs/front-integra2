@@ -1,45 +1,78 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    padding: 10px 20px;
-  }
-  
-  .navbar .logo a {
-    color: white;
-    font-size: 24px;
-    text-decoration: none;
-  }
-  
-  .navbar .nav-links {
-    list-style: none;
-    display: flex;
-  }
-  
-  .navbar .nav-links li {
-    margin: 0 15px;
-  }
-  
-  .navbar .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-  }
-  
-  .navbar .nav-links a:hover {
-    color: #f0a500;
-  }
-  
-  .navbar .login-btn a {
-    color: white;
-    background-color: #f0a500;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 5px;
-  }
-  
-  .navbar .login-btn a:hover {
-    background-color: #ffb700;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #434343, #000000);
+  padding: 10px 20px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo img {
+  max-width: 120px;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  position: relative;
+  margin: 2px;
+}
+
+.nav-links li::after {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 1px;
+  background-color: white;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav-links li:last-child::after {
+  display: none;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #ffa500;
+  transform: scale(1.05);
+}
+
+.login-btn a {
+  margin-right: 40px;
+  background-color: #ffa500;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-btn a:hover {
+  background-color: #ff7700;
+  transform: scale(1.1);
+}
