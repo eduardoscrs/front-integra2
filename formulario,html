@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Proyecto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Formulario de Proyecto</h2>
+        <form id="project-form" novalidate>
+            <input type="text" id="name" placeholder="Nombre" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" 
+                title="El nombre solo debe contener letras y espacios.">
+            <input type="text" id="rut" placeholder="RUT" required pattern="\d{1,2}\.\d{3}\.\d{3}-[0-9Kk]{1}" 
+                title="El RUT debe tener el formato 12.345.678-9.">
+            <input type="text" id="direccion" placeholder="Dirección" required pattern="[A-Za-z0-9ÁÉÍÓÚáéíóúÑñ\s]+"
+                title="La dirección solo debe contener letras, números y espacios.">
+            <input type="text" id="comuna" placeholder="Comuna" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+"
+                title="La comuna solo debe contener letras y espacios.">
+            <div class="date-container">
+                <input type="number" placeholder="día" min="1" max="31" required
+                    title="Por favor ingresa un día válido entre 1 y 31.">
+                <select id="mes" required>
+                    <option value="" disabled selected>mes</option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+                <input type="number" placeholder="año" min="1900" max="2100" required
+                    title="Por favor ingresa un año válido entre 1900 y 2100.">
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</body>
+</html>
