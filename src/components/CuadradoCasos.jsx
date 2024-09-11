@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function CuadradoCasos({ titulo, imageSrc, numeroCasos }) {
   return (
     <div className="cuadrado_casos">
@@ -7,5 +9,11 @@ function CuadradoCasos({ titulo, imageSrc, numeroCasos }) {
     </div>
   );
 }
+
+CuadradoCasos.propTypes = {
+  titulo: PropTypes.string.isRequired,
+  imageSrc: PropTypes.string.isRequired,
+  numeroCasos: PropTypes.string.isRequired,
+};
 
 export default CuadradoCasos;
