@@ -2,13 +2,13 @@ import CuadradoCasos from "../components/CuadradoCasos";
 
 const Casos = () => {
   return (
-    <div>
+    <>
       <h1>Casos Pendientes</h1>
-      <CuadradoCasos></CuadradoCasos>
-    </div>
+      <CuadradoCasos titulo="Casos totales" imageSrc="folder" numeroCasos="5" />
+      <CuadradoCasos titulo="Aceptados" imageSrc="checkCircle" numeroCasos="0" />
+      <CuadradoCasos titulo="Rechazados" imageSrc="xCircle" numeroCasos="0" />
+    </>
   );
 };
 
 export default Casos;
-
-/* exportar componente cuadrado_sup_casos  */
