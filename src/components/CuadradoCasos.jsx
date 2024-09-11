@@ -2,10 +2,14 @@ import PropTypes from 'prop-types';
 
 function CuadradoCasos({ titulo, imageSrc, numeroCasos }) {
   return (
-    <div className="cuadrado_casos">
-      <h2>{titulo}</h2>
-      <img src={`${imageSrc}.svg`} alt="Icono" />
-      <p>{numeroCasos}</p>
+    <div className="cuadrado-casos">
+      <div className="contenido-cuadrado">
+        <section className="titulo-imagen">
+          <h2 className="titulos-casos">{titulo}</h2>
+          <img src={`${imageSrc}.svg`} alt="Icono" />
+        </section>
+        <p className="numero-casos">{numeroCasos}</p>
+      </div>
     </div>
   );
 }

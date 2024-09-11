@@ -1,0 +1,32 @@
+.seccion-cuadrados {
+  display: flex;
+  gap: 60px;
+}
+
+.cuadrado-casos {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.contenido-cuadrado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.titulos-casos {
+  color: black;
+}
+
+.titulo-imagen {
+  display: flex;
+  gap: 10px;
+}
+
+.numero-casos {
+  color: black;
+  font-size: 70px;
+}
