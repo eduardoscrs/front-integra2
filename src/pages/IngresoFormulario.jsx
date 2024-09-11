@@ -104,10 +104,10 @@ const IngresoFormulario = () => {
             type="number"
             id="año"
             placeholder="Año"
-            min="1900"
-            max="2100"
+            min="1910"
+            max="2024"
             required
-            title="Por favor ingresa un año válido entre 1900 y 2100."
+            title="Por favor ingresa un año válido entre 1910 y 2024."
             value={formData.año}
             onChange={handleChange}
           />
