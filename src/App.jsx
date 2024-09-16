@@ -1,12 +1,13 @@
-import './App.css';
-import Navbar from './navbar/navbar';  // Importa el Navbar
+import Sidebar from './components/Sidebar';
 
 function App() {
   return (
-    <>
-      <Navbar /> {/* Muestra solo el Navbar */}
-
-    </>
+    <div className="App">
+      <Sidebar />
+      <div className="main-content">
+        {/* Aquí va el contenido principal de la página */}
+      </div>
+    </div>
   );
 }
 
