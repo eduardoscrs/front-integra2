@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom"; // Importa Link para redirigir
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -36,7 +37,9 @@ const Sidebar = () => {
 
       {/* Login Section */}
       <div className="sidebar__login">
-        <button className="login__button">Login</button>
+        <Link to="/login">
+          <button className="login__button">Login</button>
+        </Link>
       </div>
     </div>
   );

@@ -52,7 +52,7 @@
   }
   
   .login__button {
-    background-color: #4caf50;
+    background-color: #7a5adc;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -63,7 +63,7 @@
   }
   
   .login__button:hover {
-    background-color: #45a049;
+    background-color: #3c3991;
   }
   
   .sidebar--closed .sidebar__menu li {
