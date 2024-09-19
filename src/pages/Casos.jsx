@@ -1,5 +1,6 @@
 import '../styles/CuadradoCasos.css';
 import CuadradoCasos from '../components/CuadradoCasos';
+import { xCircle, folder, checkCircle } from '../assets';
 
 const Casos = () => {
   return (
@@ -8,15 +9,15 @@ const Casos = () => {
       <section className="seccion-cuadrados">
         <CuadradoCasos
           titulo="Casos totales"
-          imageSrc="folder"
+          imageSrc={folder}
           numeroCasos="5"
         />
         <CuadradoCasos
           titulo="Aceptados"
-          imageSrc="checkCircle"
+          imageSrc={checkCircle}
           numeroCasos="0"
         />
-        <CuadradoCasos titulo="Rechazados" imageSrc="xCircle" numeroCasos="0" />
+        <CuadradoCasos titulo="Rechazados" imageSrc={xCircle} numeroCasos="0" />
       </section>
     </>
   );

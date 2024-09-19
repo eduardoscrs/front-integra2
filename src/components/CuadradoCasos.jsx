@@ -6,7 +6,7 @@ function CuadradoCasos({ titulo, imageSrc, numeroCasos }) {
       <div className="contenido-cuadrado">
         <section className="titulo-imagen">
           <h2 className="titulos-casos">{titulo}</h2>
-          <img src={`${imageSrc}.svg`} alt="Icono" />
+          <img src={imageSrc} alt="Icono" />
         </section>
         <p className="numero-casos">{numeroCasos}</p>
       </div>
