@@ -70,21 +70,6 @@ form select:valid {
     background-color: #f0f0f0;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #6a5acd;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #5a4db1;
-}
-
 small {
     color: #ff6666;
     font-size: 12px;

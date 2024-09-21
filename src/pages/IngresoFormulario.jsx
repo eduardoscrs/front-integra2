@@ -112,7 +112,7 @@ const IngresoFormulario = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Enviar</button>
+       
       </form>
     </div>
   );
