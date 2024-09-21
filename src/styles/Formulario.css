@@ -68,6 +68,7 @@ form select:valid {
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f0f0f0;
+    color: #838080;
 }
 .date-container select option {
     color: #000;
