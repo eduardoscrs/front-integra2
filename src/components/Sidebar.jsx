@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"; // Importa Link para redirigir
-import './Sidebar.css';
+import '../styles/Sidebar.css';
 import logo from '../assets/logo.png'; 
 
 

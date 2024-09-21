@@ -1,25 +1,34 @@
+import '../styles/Login.css';
 
 const Login = () => {
   return (
     <div className="login-container">
-      <h2>Bienvenido a SegurApp</h2>
-      <button>Login with Google</button>
-      <form>
-        <div>
+      <div className="login-logo">
+        <img src="ruta/al/logo.png" alt="Logo" />
+      </div>
+      <h2 className="login-title">Bienvenido a SegurApp</h2>
+      <button className="google-login-btn">
+        <img src="ruta/al/icono-google.png" alt="Google Icon" /> Login with Google
+      </button>
+      <form className="login-form">
+        <div className="input-group">
           <label>Email</label>
           <input type="email" placeholder="ejemplo@gmail.com" />
         </div>
-        <div>
+        <div className="input-group">
           <label>Password</label>
           <input type="password" placeholder="******" />
         </div>
-        <div>
-          <input type="checkbox" /> Recuérdame
+        <div className="remember-me">
+          <input type="checkbox" id="remember" />
+          <label htmlFor="remember">Recuérdame</label>
         </div>
-        <button type="submit">Login</button>
-        <a href="#">Olvidaste la contraseña?</a>
+        <button type="submit" className="login-btn">Login</button>
+        <a href="#" className="forgot-password">Olvidaste la contraseña?</a>
       </form>
-      <p>¿No tienes cuenta? <a href="#">Regístrate</a></p>
+      <p className="signup-prompt">
+        ¿No tienes cuenta? <a href="#">Regístrate</a>
+      </p>
     </div>
   );
 }
