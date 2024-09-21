@@ -1,5 +1,5 @@
 import React from 'react';
-import ProyectoFormulario from './components/ProyectoFormulario'; // Importar ProyectoFormulario si se usa
+import FormularioProyecto from './components/FormularioProyecto'; // Importar ProyectoFormulario
 
 const IngresoFormulario = () => {
   return (
