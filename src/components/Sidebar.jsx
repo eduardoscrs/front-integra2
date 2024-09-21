@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"; // Importa Link para redirigir
+import { Outlet, Link } from "react-router-dom"; // Importa Link para redirigir
 import '../styles/Sidebar.css';
 import logo from '../assets/logo.png'; 
 
@@ -40,6 +40,7 @@ const Sidebar = () => {
           <button className="login__button">Login</button>
         </Link>
       </div>
+      <Outlet/>
     </div>
   );
 };
