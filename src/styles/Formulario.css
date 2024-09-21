@@ -6,14 +6,15 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-
 }
+
 .forms-wrapper {
     display: flex;
     gap: 50px; 
     justify-content: center;
     align-items: flex-start; 
 }
+
 .form-container {
     background-color: white;
     padding: 40px;
@@ -33,11 +34,11 @@ form input[type="text"],
 form input[type="number"],
 form select {
     width: 100%;
-    padding: 12px; /* Ajuste del padding para mayor espacio */
+    padding: 12px; 
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #f9f9f9; /* Color más claro */
+    background-color: #f9f9f9;
 }
 
 form input[type="text"].error,
@@ -54,6 +55,7 @@ form select:valid {
     background-color: #e6ffe6;
 }
 
+/* Contenedor de fechas (día, mes, año) */
 .date-container {
     display: flex;
     justify-content: space-between;
@@ -61,7 +63,7 @@ form select:valid {
 
 .date-container input[type="number"] {
     width: 30%;
-    padding: 12px; /* Ajuste del padding */
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f9f9f9;
@@ -78,7 +80,6 @@ form select:valid {
 
 .date-container select option {
     color: #000;
-    background-color: #f9f9f9; 
 }
 
 small {
@@ -92,10 +93,11 @@ small {
 /* Estilos para las secciones de los sectores */
 .sector-section {
     border: 1px solid #ddd;
-    padding: 25px; /* Aumentar padding para un diseño más aireado */
+    padding: 25px; 
     margin-bottom: 20px;
     border-radius: 5px;
     background-color: #ffffff;
+    position: relative;
 }
 
 .sector-section h3 {
@@ -104,6 +106,30 @@ small {
     margin-bottom: 20px;
 }
 
+/* Botón para eliminar secciones */
+button[type="button"].delete-section-button {
+    background-color: #ff6666;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+button[type="button"].delete-section-button:hover {
+    background-color: #e05555;
+}
+
+/* Inputs organizados en filas dentro de cada sector */
+.inputs-row {
+    display: flex;
+    gap: 15px;
+}
+
+/* Campos dentro de cada fila del sector */
 .sector-section input[type="text"],
 .sector-section input[type="number"],
 .sector-section select {
@@ -115,37 +141,16 @@ small {
     background-color: #f9f9f9;
 }
 
-/* Botones principales */
-button {
-    padding: 15px; /* Tamaño del botón aumentado */
-    background-color: #6a5acd;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%; /* El botón se estira a todo el ancho */
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #5b4bb5;
-}
-
-/* Botón para eliminar secciones */
-button[type="button"] {
-    background-color: #6a5acd ;
-    margin-top: 10px;
-}
-
-button[type="button"]:hover {
-    background-color: #e05555;
-}
-
 /* Botón para agregar sectores */
 .add-section-button {
     background-color: #6a5acd;
     color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
     margin-top: 20px;
 }
 
@@ -153,10 +158,19 @@ button[type="button"]:hover {
     background-color: #5b4bb5;
 }
 
-/* Generar informe */
+/* Botón de generar informe */
 button[type="submit"] {
     width: 100%;
     margin-top: 15px;
+    padding: 15px;
     background-color: #6a5acd;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #5b4bb5;
 }

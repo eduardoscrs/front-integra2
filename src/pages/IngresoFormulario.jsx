@@ -105,16 +105,15 @@ const IngresoFormulario = () => {
               <option value="01">Enero</option>
               <option value="02">Febrero</option>
               <option value="03">Marzo</option>
-            <option value="04">Abril</option>
-            <option value="05">Mayo</option>
-            <option value="06">Junio</option>
-            <option value="07">Julio</option>
-            <option value="08">Agosto</option>
-            <option value="09">Septiembre</option>
-            <option value="10">Octubre</option>
-            <option value="11">Noviembre</option>
-            <option value="12">Diciembre</option>
-
+              <option value="04">Abril</option>
+              <option value="05">Mayo</option>
+              <option value="06">Junio</option>
+              <option value="07">Julio</option>
+              <option value="08">Agosto</option>
+              <option value="09">Septiembre</option>
+              <option value="10">Octubre</option>
+              <option value="11">Noviembre</option>
+              <option value="12">Diciembre</option>
             </select>
             <input
               type="number"
@@ -135,6 +134,13 @@ const IngresoFormulario = () => {
         {sectores.map((sector, index) => (
           <div key={index} className="sector-section">
             <h3>Sector {index + 1}</h3>
+            <button
+              type="button"
+              className="delete-section-button"
+              onClick={() => eliminarSector(index)}
+            >
+              Eliminar sección
+            </button>
             <input
               type="text"
               name="nombreSector"
@@ -142,7 +148,9 @@ const IngresoFormulario = () => {
               value={sector.nombreSector}
               onChange={(e) => handleSectorChange(index, e)}
             />
-            <div className="date-container">
+
+            {/* Fila con Largo, Ancho, Área dañada y Subcategoría */}
+            <div className="inputs-row">
               <input
                 type="text"
                 name="largo"
@@ -164,19 +172,17 @@ const IngresoFormulario = () => {
                 value={sector.areaDañada}
                 onChange={(e) => handleSectorChange(index, e)}
               />
+          
+              <select
+                name="subcategoria"
+                value={sector.subcategoria}
+                onChange={(e) => handleSectorChange(index, e)}
+              >
+                <option value="" disabled>Seleccione subcategoría</option>
+                <option value="sub1">Subcategoría 1</option>
+                <option value="sub2">Subcategoría 2</option>
+              </select>
             </div>
-            <select
-              name="subcategoria"
-              value={sector.subcategoria}
-              onChange={(e) => handleSectorChange(index, e)}
-            >
-              <option value="" disabled>Seleccione subcategoría</option>
-              <option value="sub1">Subcategoría 1</option>
-              <option value="sub2">Subcategoría 2</option>
-            </select>
-            <button type="button" onClick={() => eliminarSector(index)}>
-              Eliminar sección
-            </button>
           </div>
         ))}
 
