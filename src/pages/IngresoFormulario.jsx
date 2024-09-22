@@ -41,6 +41,11 @@ const IngresoFormulario = () => {
     setSectores(updatedSectores);
   };
 
+  const agregarImagenes = () => {
+    console.log("Agregar imágenes");
+    // Lógica para manejar la adición de imágenes.
+  };
+
   const exportarAExcel = () => {
     const dataToExport = [{ ...formData }];
 
@@ -178,13 +183,6 @@ const IngresoFormulario = () => {
                 value={sector.ancho}
                 onChange={(e) => handleSectorChange(index, e)}
               />
-              <input
-                type="number"
-                name="ancho"
-                placeholder="Ancho"
-                value={sector.ancho}
-                onChange={(e) => handleSectorChange(index, e)}
-              />
             </div>
 
             <div className="inputs-row">
@@ -231,10 +229,19 @@ const IngresoFormulario = () => {
         <button type="button" onClick={agregarSector} className="add-section-button">
           Agregar sección
         </button>
+
+        <button type="button" onClick={agregarImagenes} className="add-images-button">
+          Agregar imágenes
+        </button>
+
         <button type="submit" className="generate-report-button">Generar informe</button>
       </div>
     </div>
   );
 };
+
+<footer>
+  <p>© 2024 SegurApp - Todos los derechos reservados</p>
+</footer>
 
 export default IngresoFormulario;

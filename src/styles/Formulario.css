@@ -1,33 +1,44 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #f4f4f4;
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: flex-start;
+    overflow-x: hidden;
 }
 
 .forms-wrapper {
     display: flex;
-    gap: 50px; 
+    flex-direction: row;
+    gap: 20px;
     justify-content: center;
-    align-items: flex-start; 
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-grow: 1;  
 }
 
 .form-container {
     background-color: white;
-    padding: 40px;
+    padding: 45px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px; 
+    flex: 1;
+    max-width: 370px;
+    min-width: 280px;
+    max-height: 85vh; 
 }
-
 h2 {
     text-align: center;
-    font-size: 24px;
-    color: #6a5acd; 
-    margin-bottom: 30px; 
+    font-size: 20px;
+    color: #6a5acd;
+    margin-bottom: 20px;
     font-weight: bold;
 }
 
@@ -35,26 +46,12 @@ form input[type="text"],
 form input[type="number"],
 form select {
     width: 100%;
-    padding: 15px; /* Inputs más grandes */
-    margin-bottom: 20px; /* Mayor espacio entre los inputs */
+    padding: 12px;
+    margin-bottom: 15px;
     border: 1px solid #ddd;
-    border-radius: 8px; /* Bordes más redondeados */
+    border-radius: 6px;
     background-color: #f9f9f9;
-    font-size: 16px; /* Texto más grande */
-}
-
-form input[type="text"].error,
-form input[type="number"].error,
-form select.error {
-    border-color: #ff6666;
-    background-color: #ffe6e6;
-}
-
-form input[type="text"]:valid,
-form input[type="number"]:valid,
-form select:valid {
-    border-color: #66cc66;
-    background-color: #e6ffe6;
+    font-size: 14px;
 }
 
 .date-container {
@@ -64,120 +61,131 @@ form select:valid {
 
 .date-container input[type="number"] {
     width: 30%;
-    padding: 15px; /* Inputs más grandes */
+    padding: 12px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 6px;
     background-color: #f9f9f9;
 }
 
 .date-container select {
     width: 35%;
-    padding: 15px; /* Inputs más grandes */
+    padding: 12px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 6px;
     background-color: #f9f9f9;
     color: #838080;
 }
 
-.date-container select option {
-    color: #000;
-}
-
-/* Estilos para las secciones de los sectores */
 .sector-section {
     border: 1px solid #ddd;
-    padding: 25px;
-    margin-bottom: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
     border-radius: 8px;
     background-color: #ffffff;
     position: relative;
+    width: 100%;
 }
 
 .sector-section h3 {
-    font-size: 22px;
+    font-size: 18px;
     color: #6a5acd;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: bold;
 }
+
 button[type="button"].delete-section-button {
     background-color: #ff6666;
     color: white;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border: none;
     border-radius: 8px;
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
 }
 
-button[type="button"].delete-section-button:hover {
-    background-color: #e05555;
-}
-
-
-/* Estilo para los inputs y selects en fila */
 .inputs-row {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     justify-content: space-between;
 }
 
-/* Inputs y selects dentro de las filas */
 .sector-section input[type="text"],
 .sector-section input[type="number"],
 .sector-section select {
     width: 100%;
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 12px;
+    margin-bottom: 10px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 6px;
     background-color: #f9f9f9;
 }
 
-/* Título de la sección "Seleccione subcategoría" */
+.sector-section input[name="nombreSector"] {
+    width: 93%;  
+}
+
 .subcategory-section-title {
-    font-size: 18px;
+    font-size: 16px;
     color: #6a5acd;
     margin-bottom: 10px;
     font-weight: bold;
 }
 
-/* Inputs dentro de la sección "Subcategoría" */
 .subcategory-inputs {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-/* Inputs de subcategoría */
-.subcategory-inputs input {
-    width: 100%;
-    padding: 15px;
     margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
 }
 
-/* Botones principales (Agregar sección, Generar informe) */
 button[type="button"].add-section-button,
 button[type="submit"] {
     background-color: #6a5acd;
     color: white;
-    padding: 15px;
+    padding: 12px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     width: 100%;
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 10px;
+}
+button[type="button"].add-images-button {
+    background-color: #6a5acd;  
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+button[type="button"].add-images-button:hover {
+    background-color: #5b4bb5;
 }
 
 button[type="button"].add-section-button:hover,
 button[type="submit"]:hover {
     background-color: #5b4bb5;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;  
+    width: 100%;
+    bottom: 0;
+}
+
+footer p {
+    margin: 0;
 }
