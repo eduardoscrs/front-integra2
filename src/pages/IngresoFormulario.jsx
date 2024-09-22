@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../styles/Formulario.css';  
 
 const IngresoFormulario = () => {
-  
+
   const [formData, setFormData] = useState({
     nombre: '',
     rut: '',
@@ -15,7 +15,7 @@ const IngresoFormulario = () => {
 
   // Estado para el formulario de sectores
   const [sectores, setSectores] = useState([
-    { nombreSector: '', largo: '', ancho: '', areaDañada: '', subcategoria: '' }
+    { nombreSector: '', largo: '', ancho: '', areaDañada: '', subcategoria: '', añadirSubcategoria: '', enviarDatos: '' }
   ]);
 
   // Manejar cambios en el formulario principal
@@ -36,7 +36,7 @@ const IngresoFormulario = () => {
 
   // Añadir una nueva sección de sector
   const agregarSector = () => {
-    setSectores([...sectores, { nombreSector: '', largo: '', ancho: '', areaDañada: '', subcategoria: '' }]);
+    setSectores([...sectores, { nombreSector: '', largo: '', ancho: '', areaDañada: '', subcategoria: '', añadirSubcategoria: '', enviarDatos: '' }]);
   };
 
   // Eliminar una sección de sector
@@ -172,7 +172,6 @@ const IngresoFormulario = () => {
                 value={sector.areaDañada}
                 onChange={(e) => handleSectorChange(index, e)}
               />
-          
               <select
                 name="subcategoria"
                 value={sector.subcategoria}
@@ -182,6 +181,27 @@ const IngresoFormulario = () => {
                 <option value="sub1">Subcategoría 1</option>
                 <option value="sub2">Subcategoría 2</option>
               </select>
+            </div>
+
+            {/* Sección de Subcategoría */}
+            <div className="subcategory-section">
+              <h4 className="subcategory-section-title">Seleccione subcategoría</h4>
+              <div className="subcategory-inputs">
+                <input
+                  type="text"
+                  name="añadirSubcategoria"
+                  placeholder="Añadir subcategoría"
+                  value={sector.añadirSubcategoria}
+                  onChange={(e) => handleSectorChange(index, e)}
+                />
+                <input
+                  type="text"
+                  name="enviarDatos"
+                  placeholder="Enviar datos"
+                  value={sector.enviarDatos}
+                  onChange={(e) => handleSectorChange(index, e)}
+                />
+              </div>
             </div>
           </div>
         ))}
