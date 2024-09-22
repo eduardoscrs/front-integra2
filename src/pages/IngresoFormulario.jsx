@@ -147,23 +147,35 @@ const IngresoFormulario = () => {
       <div className="form-container">
         {sectores.map((sector, index) => (
           <div key={index} className="sector-section">
-            <h3>Sector {index + 1}</h3>
-            <button type="button" className="delete-section-button" onClick={() => eliminarSector(index)}>
-              Eliminar sección
-            </button>
+            <div className="sector-header">
+              <h3>Sector {index + 1}</h3>
+              <button type="button" className="delete-section-button" onClick={() => eliminarSector(index)}>
+                Eliminar sección
+              </button>
+            </div>
+
             <input
               type="text"
               name="nombreSector"
               placeholder="Nombre del sector"
               value={sector.nombreSector}
               onChange={(e) => handleSectorChange(index, e)}
+              className="full-width-input"
             />
+
             <div className="inputs-row">
               <input
                 type="number"
                 name="largo"
                 placeholder="Largo"
                 value={sector.largo}
+                onChange={(e) => handleSectorChange(index, e)}
+              />
+              <input
+                type="number"
+                name="ancho"
+                placeholder="Ancho"
+                value={sector.ancho}
                 onChange={(e) => handleSectorChange(index, e)}
               />
               <input
@@ -174,24 +186,10 @@ const IngresoFormulario = () => {
                 onChange={(e) => handleSectorChange(index, e)}
               />
             </div>
-            {/* Fila con Largo, Ancho, Área dañada y Subcategoría */}
+
             <div className="inputs-row">
               <input
-                type="text"
-                name="largo"
-                placeholder="Largo"
-                value={sector.largo}
-                onChange={(e) => handleSectorChange(index, e)}
-              />
-              <input
-                type="text"
-                name="ancho"
-                placeholder="Ancho"
-                value={sector.ancho}
-                onChange={(e) => handleSectorChange(index, e)}
-              />
-              <input
-                type="text"
+                type="number"
                 name="areaDañada"
                 placeholder="Área dañada"
                 value={sector.areaDañada}
@@ -208,9 +206,8 @@ const IngresoFormulario = () => {
               </select>
             </div>
 
-            {/* Sección de Subcategoría */}
             <div className="subcategory-section">
-              <h4 className="subcategory-section-title">Seleccione subcategoría</h4>
+              <h4 className="subcategory-section-title">Añadir subcategoría</h4>
               <div className="subcategory-inputs">
                 <input
                   type="text"
@@ -234,7 +231,7 @@ const IngresoFormulario = () => {
         <button type="button" onClick={agregarSector} className="add-section-button">
           Agregar sección
         </button>
-        <button type="submit">Generar informe</button>
+        <button type="submit" className="generate-report-button">Generar informe</button>
       </div>
     </div>
   );
