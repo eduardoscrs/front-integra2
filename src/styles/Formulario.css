@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #eeeeee;
+    background-color: #f4f4f4; /* Fondo gris claro */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,25 +20,27 @@ body {
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 350px; 
+    width: 400px; /* Más ancho para mayor comodidad */
 }
 
 h2 {
     text-align: center;
     font-size: 24px;
-    color: #6a5acd;
+    color: #6a5acd; /* Púrpura */
     margin-bottom: 30px; 
+    font-weight: bold;
 }
 
 form input[type="text"],
 form input[type="number"],
 form select {
     width: 100%;
-    padding: 12px; 
-    margin-bottom: 15px;
+    padding: 15px; /* Inputs más grandes */
+    margin-bottom: 20px; /* Mayor espacio entre los inputs */
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px; /* Bordes más redondeados */
     background-color: #f9f9f9;
+    font-size: 16px; /* Texto más grande */
 }
 
 form input[type="text"].error,
@@ -55,7 +57,6 @@ form select:valid {
     background-color: #e6ffe6;
 }
 
-/* Contenedor de fechas (día, mes, año) */
 .date-container {
     display: flex;
     justify-content: space-between;
@@ -63,17 +64,17 @@ form select:valid {
 
 .date-container input[type="number"] {
     width: 30%;
-    padding: 12px;
+    padding: 15px; /* Inputs más grandes */
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #f9f9f9;
 }
 
 .date-container select {
     width: 35%;
-    padding: 12px;
+    padding: 15px; /* Inputs más grandes */
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #f9f9f9;
     color: #838080;
 }
@@ -82,20 +83,12 @@ form select:valid {
     color: #000;
 }
 
-small {
-    color: #ff6666;
-    font-size: 12px;
-    margin-top: -10px;
-    margin-bottom: 10px;
-    display: block;
-}
-
 /* Estilos para las secciones de los sectores */
 .sector-section {
     border: 1px solid #ddd;
-    padding: 25px; 
+    padding: 25px;
     margin-bottom: 20px;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #ffffff;
     position: relative;
 }
@@ -104,40 +97,39 @@ small {
     font-size: 22px;
     color: #6a5acd;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
-/* Botón para eliminar secciones */
 button[type="button"].delete-section-button {
     background-color: #ff6666;
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
+    font-size: 14px;
 }
 
 button[type="button"].delete-section-button:hover {
     background-color: #e05555;
 }
 
-/* Inputs organizados en filas dentro de cada sector */
 .inputs-row {
     display: flex;
     gap: 15px;
 }
 
-/* Campos dentro de cada fila del sector */
 .sector-section input[type="text"],
 .sector-section input[type="number"],
 .sector-section select {
     width: 100%;
-    padding: 12px;
+    padding: 15px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #f9f9f9;
 }
 
@@ -147,11 +139,12 @@ button[type="button"].delete-section-button:hover {
     color: white;
     padding: 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
     width: 100%;
     margin-top: 20px;
+    font-weight: bold;
 }
 
 .add-section-button:hover {
@@ -166,9 +159,10 @@ button[type="submit"] {
     background-color: #6a5acd;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold;
 }
 
 button[type="submit"]:hover {
