@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import * as XLSX from 'xlsx';
 import '../styles/Formulario.css';  
 
@@ -42,7 +41,6 @@ const IngresoFormulario = () => {
     setSectores(updatedSectores);
   };
 
-  // Separar la lógica de exportar Excel
   const exportarAExcel = () => {
     const dataToExport = [{ ...formData }];
 
@@ -61,20 +59,18 @@ const IngresoFormulario = () => {
     const worksheet = XLSX.utils.json_to_sheet(dataToExport);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Datos');
-    
-    // Generar y descargar el archivo Excel
     XLSX.writeFile(workbook, 'datos_formulario.xlsx');
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();  // Prevenir el comportamiento por defecto del formulario
-    exportarAExcel();     // Generar el archivo Excel después de prevenir el envío del formulario
+    e.preventDefault();
+    exportarAExcel();
   };
 
   return (
     <div className="forms-wrapper">
       <div className="form-container">
-        <h2>Formulario de Caso</h2>
+        <h2>Formulario de caso</h2>
         <form id="project-form" onSubmit={handleSubmit} noValidate>
           <input
             type="text"
@@ -121,7 +117,18 @@ const IngresoFormulario = () => {
             />
             <select id="mes" required value={formData.mes} onChange={handleChange}>
               <option value="" disabled>Mes</option>
-              {/* Opciones de mes */}
+              <option value="01">Enero</option>
+              <option value="02">Febrero</option>
+              <option value="03">Marzo</option>
+              <option value="04">Abril</option>
+              <option value="05">Mayo</option>
+              <option value="06">Junio</option>
+              <option value="07">Julio</option>
+              <option value="08">Agosto</option>
+              <option value="09">Septiembre</option>
+              <option value="10">Octubre</option>
+              <option value="11">Noviembre</option>
+              <option value="12">Diciembre</option>
             </select>
             <input
               type="number"
@@ -151,7 +158,76 @@ const IngresoFormulario = () => {
               value={sector.nombreSector}
               onChange={(e) => handleSectorChange(index, e)}
             />
-            {/* Otros inputs */}
+            <div className="inputs-row">
+              <input
+                type="number"
+                name="largo"
+                placeholder="Largo"
+                value={sector.largo}
+                onChange={(e) => handleSectorChange(index, e)}
+              />
+              <input
+                type="number"
+                name="ancho"
+                placeholder="Ancho"
+                value={sector.ancho}
+                onChange={(e) => handleSectorChange(index, e)}
+              />
+            </div>
+            {/* Fila con Largo, Ancho, Área dañada y Subcategoría */}
+            <div className="inputs-row">
+              <input
+                type="text"
+                name="largo"
+                placeholder="Largo"
+                value={sector.largo}
+                onChange={(e) => handleSectorChange(index, e)}
+              />
+              <input
+                type="text"
+                name="ancho"
+                placeholder="Ancho"
+                value={sector.ancho}
+                onChange={(e) => handleSectorChange(index, e)}
+              />
+              <input
+                type="text"
+                name="areaDañada"
+                placeholder="Área dañada"
+                value={sector.areaDañada}
+                onChange={(e) => handleSectorChange(index, e)}
+              />
+              <select
+                name="subcategoria"
+                value={sector.subcategoria}
+                onChange={(e) => handleSectorChange(index, e)}
+              >
+                <option value="" disabled>Seleccione subcategoría</option>
+                <option value="sub1">Subcategoría 1</option>
+                <option value="sub2">Subcategoría 2</option>
+              </select>
+            </div>
+
+            {/* Sección de Subcategoría */}
+            <div className="subcategory-section">
+              <h4 className="subcategory-section-title">Seleccione subcategoría</h4>
+              <div className="subcategory-inputs">
+                <input
+                  type="text"
+                  name="añadirSubcategoria"
+                  placeholder="Añadir subcategoría"
+                  value={sector.añadirSubcategoria}
+                  onChange={(e) => handleSectorChange(index, e)}
+                />
+                <input
+                  type="text"
+                  name="enviarDatos"
+                  placeholder="Enviar datos"
+                  value={sector.enviarDatos}
+                  onChange={(e) => handleSectorChange(index, e)}
+                />
+              </div>
+            </div>
           </div>
         ))}
 
