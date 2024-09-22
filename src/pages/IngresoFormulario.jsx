@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import * as XLSX from 'xlsx';
 import '../styles/Formulario.css';  
 
 const IngresoFormulario = () => {
@@ -48,8 +49,20 @@ const IngresoFormulario = () => {
   // Manejar envío del formulario completo
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Formulario enviado:', { formData, sectores });
+    
+    // Combina datos del formulario y sectores en un objeto
+    const dataToExport = [
+      { ...formData, sectores: JSON.stringify(sectores) }
+    ];
+
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Datos');
+
+    // Genera el archivo Excel
+    XLSX.writeFile(workbook, 'datos_formulario.xlsx');
   };
+
 
   return (
     <div className="forms-wrapper">
@@ -215,4 +228,4 @@ const IngresoFormulario = () => {
   );
 };
 
-export default IngresoFormulario;
+export default IngresoFormulario; 
