@@ -4,36 +4,48 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
-    justify-content: flex-start;
-    overflow-x: hidden;
 }
 
+/* Asegura que los formularios se alineen en fila horizontal */
 .forms-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    display: flex;  /* Flexbox para alinear los formularios en horizontal */
+    justify-content: space-between;  /* Espacio entre los formularios */
+    align-items: flex-start;  /* Alineación superior de los formularios */
+    width: 100%;  /* Usa el 100% del espacio disponible */
+    max-width: 1200px;  /* Limita el ancho máximo del contenedor */
     padding: 20px;
     box-sizing: border-box;
-    flex-grow: 1;  
+    gap: 20px;  /* Espacio entre los formularios */
+    flex-wrap: nowrap;  /* No permite que los formularios se muevan a otra línea */
 }
 
+/* Estilos para el contenedor de formularios */
 .form-container {
     background-color: white;
-    padding: 45px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    max-width: 370px;
-    min-width: 280px;
-    max-height: 85vh; 
+    width: 48%;  /* Ajustamos el ancho para que ambos formularios quepan en una fila */
+    box-sizing: border-box;
+    flex-shrink: 0;  /* Evita que los formularios se reduzcan en tamaño */
 }
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .forms-wrapper {
+        flex-direction: column;  /* Coloca los formularios en una columna en pantallas pequeñas */
+        gap: 20px;
+    }
+
+    .form-container {
+        width: 100%;  /* Ocupa todo el ancho en pantallas pequeñas */
+    }
+}
+
+/* Header Styles */
 h2 {
     text-align: center;
     font-size: 20px;
@@ -42,6 +54,7 @@ h2 {
     font-weight: bold;
 }
 
+/* Form Input Styles */
 form input[type="text"],
 form input[type="number"],
 form select {
@@ -52,30 +65,26 @@ form select {
     border-radius: 6px;
     background-color: #f9f9f9;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
+/* Date Inputs Styles */
 .date-container {
     display: flex;
     justify-content: space-between;
+    gap: 10px; /* Espacio entre los inputs de fecha */
 }
 
-.date-container input[type="number"] {
-    width: 30%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background-color: #f9f9f9;
-}
-
+.date-container input[type="number"],
 .date-container select {
-    width: 35%;
+    width: 100%; /* El ancho dentro del contenedor ajustado */
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 6px;
     background-color: #f9f9f9;
-    color: #838080;
 }
 
+/* Sector Section Styling */
 .sector-section {
     border: 1px solid #ddd;
     padding: 15px;
@@ -93,6 +102,7 @@ form select {
     font-weight: bold;
 }
 
+/* Delete Section Button */
 button[type="button"].delete-section-button {
     background-color: #ff6666;
     color: white;
@@ -106,6 +116,7 @@ button[type="button"].delete-section-button {
     font-size: 12px;
 }
 
+/* Inputs in Sector Section */
 .inputs-row {
     display: flex;
     gap: 10px;
@@ -123,10 +134,12 @@ button[type="button"].delete-section-button {
     background-color: #f9f9f9;
 }
 
+/* Custom Width for Sector Name Input */
 .sector-section input[name="nombreSector"] {
     width: 93%;  
 }
 
+/* Subcategory Section Title */
 .subcategory-section-title {
     font-size: 16px;
     color: #6a5acd;
@@ -134,6 +147,7 @@ button[type="button"].delete-section-button {
     font-weight: bold;
 }
 
+/* Subcategory Inputs */
 .subcategory-inputs {
     display: flex;
     gap: 10px;
@@ -141,6 +155,7 @@ button[type="button"].delete-section-button {
     margin-bottom: 15px;
 }
 
+/* General Button Styles */
 button[type="button"].add-section-button,
 button[type="submit"] {
     background-color: #6a5acd;
@@ -154,6 +169,8 @@ button[type="submit"] {
     font-weight: bold;
     margin-top: 10px;
 }
+
+/* Add Images Button */
 button[type="button"].add-images-button {
     background-color: #6a5acd;  
     color: white;
@@ -167,15 +184,14 @@ button[type="button"].add-images-button {
     margin-top: 10px;
 }
 
-button[type="button"].add-images-button:hover {
-    background-color: #5b4bb5;
-}
-
+/* Button Hover Effects */
+button[type="button"].add-images-button:hover,
 button[type="button"].add-section-button:hover,
 button[type="submit"]:hover {
     background-color: #5b4bb5;
 }
 
+/* Footer Styles */
 footer {
     background-color: #333;
     color: white;

@@ -74,9 +74,9 @@ const IngresoFormulario = () => {
 
   return (
     <div className="forms-wrapper">
-      <div className="form-container">
-        <h2>Formulario de caso</h2>
-        <form id="project-form" onSubmit={handleSubmit} noValidate>
+      <form id="project-form" onSubmit={handleSubmit} noValidate>
+        <div className="form-container">
+          <h2>Formulario de caso</h2>
           <input
             type="text"
             id="nombre"
@@ -146,96 +146,96 @@ const IngresoFormulario = () => {
               onChange={handleChange}
             />
           </div>
-        </form>
-      </div>
+        </div>
 
-      <div className="form-container">
-        {sectores.map((sector, index) => (
-          <div key={index} className="sector-section">
-            <div className="sector-header">
-              <h3>Sector {index + 1}</h3>
-              <button type="button" className="delete-section-button" onClick={() => eliminarSector(index)}>
-                Eliminar sección
-              </button>
-            </div>
+        <div className="form-container">
+          {sectores.map((sector, index) => (
+            <div key={index} className="sector-section">
+              <div className="sector-header">
+                <h3>Sector {index + 1}</h3>
+                <button type="button" className="delete-section-button" onClick={() => eliminarSector(index)}>
+                  Eliminar sección
+                </button>
+              </div>
 
-            <input
-              type="text"
-              name="nombreSector"
-              placeholder="Nombre del sector"
-              value={sector.nombreSector}
-              onChange={(e) => handleSectorChange(index, e)}
-              className="full-width-input"
-            />
-
-            <div className="inputs-row">
               <input
-                type="number"
-                name="largo"
-                placeholder="Largo"
-                value={sector.largo}
+                type="text"
+                name="nombreSector"
+                placeholder="Nombre del sector"
+                value={sector.nombreSector}
                 onChange={(e) => handleSectorChange(index, e)}
+                className="full-width-input"
               />
-              <input
-                type="number"
-                name="ancho"
-                placeholder="Ancho"
-                value={sector.ancho}
-                onChange={(e) => handleSectorChange(index, e)}
-              />
-            </div>
 
-            <div className="inputs-row">
-              <input
-                type="number"
-                name="areaDañada"
-                placeholder="Área dañada"
-                value={sector.areaDañada}
-                onChange={(e) => handleSectorChange(index, e)}
-              />
-              <select
-                name="subcategoria"
-                value={sector.subcategoria}
-                onChange={(e) => handleSectorChange(index, e)}
-              >
-                <option value="" disabled>Seleccione subcategoría</option>
-                <option value="sub1">Subcategoría 1</option>
-                <option value="sub2">Subcategoría 2</option>
-              </select>
-            </div>
-
-            <div className="subcategory-section">
-              <h4 className="subcategory-section-title">Añadir subcategoría</h4>
-              <div className="subcategory-inputs">
+              <div className="inputs-row">
                 <input
-                  type="text"
-                  name="añadirSubcategoria"
-                  placeholder="Añadir subcategoría"
-                  value={sector.añadirSubcategoria}
+                  type="number"
+                  name="largo"
+                  placeholder="Largo"
+                  value={sector.largo}
                   onChange={(e) => handleSectorChange(index, e)}
                 />
                 <input
-                  type="text"
-                  name="enviarDatos"
-                  placeholder="Enviar datos"
-                  value={sector.enviarDatos}
+                  type="number"
+                  name="ancho"
+                  placeholder="Ancho"
+                  value={sector.ancho}
                   onChange={(e) => handleSectorChange(index, e)}
                 />
               </div>
+
+              <div className="inputs-row">
+                <input
+                  type="number"
+                  name="areaDañada"
+                  placeholder="Área dañada"
+                  value={sector.areaDañada}
+                  onChange={(e) => handleSectorChange(index, e)}
+                />
+                <select
+                  name="subcategoria"
+                  value={sector.subcategoria}
+                  onChange={(e) => handleSectorChange(index, e)}
+                >
+                  <option value="" disabled>Seleccione subcategoría</option>
+                  <option value="sub1">Subcategoría 1</option>
+                  <option value="sub2">Subcategoría 2</option>
+                </select>
+              </div>
+
+              <div className="subcategory-section">
+                <h4 className="subcategory-section-title">Añadir subcategoría</h4>
+                <div className="subcategory-inputs">
+                  <input
+                    type="text"
+                    name="añadirSubcategoria"
+                    placeholder="Añadir subcategoría"
+                    value={sector.añadirSubcategoria}
+                    onChange={(e) => handleSectorChange(index, e)}
+                  />
+                  <input
+                    type="text"
+                    name="enviarDatos"
+                    placeholder="Enviar datos"
+                    value={sector.enviarDatos}
+                    onChange={(e) => handleSectorChange(index, e)}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        <button type="button" onClick={agregarSector} className="add-section-button">
-          Agregar sección
-        </button>
+          <button type="button" onClick={agregarSector} className="add-section-button">
+            Agregar sección
+          </button>
 
-        <button type="button" onClick={agregarImagenes} className="add-images-button">
-          Agregar imágenes
-        </button>
+          <button type="button" onClick={agregarImagenes} className="add-images-button">
+            Agregar imágenes
+          </button>
 
-        <button type="submit" className="generate-report-button">Generar informe</button>
-      </div>
+          <button type="submit" className="generate-report-button">Generar informe</button>
+        </div>
+      </form>
     </div>
   );
 };
