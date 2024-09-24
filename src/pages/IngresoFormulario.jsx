@@ -73,7 +73,8 @@ const IngresoFormulario = () => {
   };
 
   return (
-    <div className="forms-wrapper">
+    <div 
+    className="forms-wrapper">
       <form id="project-form" onSubmit={handleSubmit} noValidate>
         <div className="form-container">
           <h2>Formulario de caso</h2>
@@ -109,7 +110,8 @@ const IngresoFormulario = () => {
             value={formData.comuna}
             onChange={handleChange}
           />
-          <div className="date-container">
+          <div 
+          className="date-container">
             <input
               type="number"
               id="dia"
@@ -148,7 +150,8 @@ const IngresoFormulario = () => {
           </div>
         </div>
 
-        <div className="form-container">
+        <div 
+        className="form-container">
           {sectores.map((sector, index) => (
             <div key={index} className="sector-section">
               <div className="sector-header">
@@ -156,7 +159,7 @@ const IngresoFormulario = () => {
                 <button type="button" className="delete-section-button" onClick={() => eliminarSector(index)}>
                   Eliminar sección
                 </button>
-              </div>
+        </div>
 
               <input
                 type="text"
@@ -167,7 +170,8 @@ const IngresoFormulario = () => {
                 className="full-width-input"
               />
 
-              <div className="inputs-row">
+              <div 
+              className="inputs-row">
                 <input
                   type="number"
                   name="largo"
@@ -184,7 +188,8 @@ const IngresoFormulario = () => {
                 />
               </div>
 
-              <div className="inputs-row">
+              <div 
+              className="inputs-row">
                 <input
                   type="number"
                   name="areaDañada"
@@ -203,7 +208,8 @@ const IngresoFormulario = () => {
                 </select>
               </div>
 
-              <div className="subcategory-section">
+              <div 
+              className="subcategory-section">
                 <h4 className="subcategory-section-title">Añadir subcategoría</h4>
                 <div className="subcategory-inputs">
                   <input

@@ -18,7 +18,7 @@ body {
     max-width: 1200px;  /* Limita el ancho máximo del contenedor */
     padding: 20px;
     box-sizing: border-box;
-    gap: 20px;  /* Espacio entre los formularios */
+    gap: 30px;  /* Aumenté el espacio entre los formularios */
     flex-wrap: nowrap;  /* No permite que los formularios se muevan a otra línea */
 }
 
@@ -28,7 +28,7 @@ body {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 48%;  /* Ajustamos el ancho para que ambos formularios quepan en una fila */
+    width: 49%;  /* Ajustamos el ancho para que ambos formularios quepan en una fila */
     box-sizing: border-box;
     flex-shrink: 0;  /* Evita que los formularios se reduzcan en tamaño */
 }
