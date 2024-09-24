@@ -6,8 +6,8 @@ function ListaCasos({ numeroCaso, estadoCaso }) {
       <p>Caso {numeroCaso}</p>
       <p>{estadoCaso}</p>
       <div className="botones-caso">
-        <button className="btnAcceptar">Aceptar</button>
-        <button className="btnRechazar">Rechazar</button>
+        <button className="btn-acceptar">Aceptar</button>
+        <button className="btn-rechazar">Rechazar</button>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { Casos, Login, IngresoFormulario } from './pages';
+import { Casos, Login, IngresoFormulario, PerfilUsuario } from './pages';
 import NavBar from './components/NavBar';
 
 // si necesitan agregar mas rutas, pueden hacerlo en este componente
@@ -17,6 +17,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/ingreso-formulario" element={<IngresoFormulario />} />
         <Route path="/casos" element={<Casos />} />
+        <Route path="/perfil-usuario" element={<PerfilUsuario />}></Route>
       </Routes>
     </>
   );
