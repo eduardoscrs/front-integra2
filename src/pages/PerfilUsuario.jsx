@@ -1,9 +1,11 @@
+import '../styles/DatosUsuario.css';
 import DatosUsuario from '../components/DatosUsuario';
+import { usuario } from '../assets';
 
 const PerfilUsuario = () => {
   return (
     <div>
-      <img src="" alt="" />
+      <img src={usuario} alt="Imagen de perfil del usuario" />
       <h1>Usuario</h1>
       <span>Detalles de perfil</span>
       <button>Editar perfil</button>
