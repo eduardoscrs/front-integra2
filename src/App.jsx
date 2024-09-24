@@ -1,9 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
+import AdminPage from './components/AdminPage';  // Página simulada para el admin
+import InspectorPage from './components/InspectorPage';  // Página simulada para el inspector
 import './styles/login.css';
 
 function App() {
+  const handleLogin = (user) => {
+    console.log("User logged in:", user);
+  };
+
   return (
     <Router>
       <div className="App">
@@ -24,11 +30,14 @@ function App() {
           {/* Ruta para la página de login */}
           <Route 
             path="/login" 
-            element={<Login />} 
+            element={<Login onLogin={handleLogin} />} 
           />
           
+          {/* Rutas basadas en el rol del usuario */}
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/inspector" element={<InspectorPage />} />
+
           {/* Puedes agregar más rutas aquí */}
-          
         </Routes>
       </div>
     </Router>
