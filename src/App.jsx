@@ -1,8 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
 import AdminPage from './components/AdminPage';  // Página simulada para el admin
 import InspectorPage from './components/InspectorPage';  // Página simulada para el inspector
+import { Casos, IngresoFormulario, PerfilUsuario } from './pages';
+import NavBar from './components/NavBar';
 import './styles/login.css';
 
 function App() {
@@ -10,38 +12,51 @@ function App() {
     console.log("User logged in:", user);
   };
 
+  const location = useLocation();
+
   return (
     <Router>
-      <div className="App">
-        <Routes>
-          {/* Ruta para la página de inicio o raíz */}
-          <Route 
-            path="/" 
-            element={
-              <>
-                <Sidebar />
-                <div className="main-content">
-                  {/* Aquí puedes poner contenido adicional o componentes para la página principal */}
-                </div>
-              </>
-            } 
-          />
-          
-          {/* Ruta para la página de login */}
-          <Route 
-            path="/login" 
-            element={<Login onLogin={handleLogin} />} 
-          />
-          
-          {/* Rutas basadas en el rol del usuario */}
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/inspector" element={<InspectorPage />} />
+      <>
+        {/* Mostrar NavBar solo si no estamos en la página de login */}
+        {location.pathname !== '/' && <NavBar />}
 
-          {/* Puedes agregar más rutas aquí */}
-        </Routes>
-      </div>
+        <div className="App">
+          <Routes>
+            {/* Ruta para la página de inicio o raíz */}
+            <Route 
+              path="/" 
+              element={
+                <>
+                  <Sidebar />
+                  <div className="main-content">
+                    {/* Aquí puedes poner contenido adicional o componentes para la página principal */}
+                  </div>
+                </>
+              } 
+            />
+            
+            {/* Ruta para la página de login */}
+            <Route 
+              path="/login" 
+              element={<Login onLogin={handleLogin} />} 
+            />
+            
+            {/* Rutas basadas en el rol del usuario */}
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/inspector" element={<InspectorPage />} />
+
+            {/* Rutas de otras funcionalidades */}
+            <Route path="/ingreso-formulario" element={<IngresoFormulario />} />
+            <Route path="/casos" element={<Casos />} />
+            <Route path="/perfil-usuario" element={<PerfilUsuario />} />
+
+            {/* Puedes agregar más rutas aquí */}
+          </Routes>
+        </div>
+      </>
     </Router>
   );
 }
 
 export default App;
+

@@ -1,0 +1,9 @@
+.seccion-titulos3 {
+  display: flex;
+  gap: 150px;
+}
+
+.lista-caso {
+  display: flex;
+  gap: 140px;
+}
