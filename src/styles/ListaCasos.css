@@ -1,3 +1,8 @@
+/* .div-lista-casos {
+  background-color: white;
+  border-radius: 5px;
+} */
+
 .seccion-titulos3 {
   display: flex;
   gap: 150px;
@@ -6,4 +11,30 @@
 .lista-caso {
   display: flex;
   gap: 140px;
+}
+
+/* .circulo-caso {
+  background-color: #d9d9d9;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+} */
+
+.estado-caso {
+  background-color: #fff7b0;
+  border-radius: 80px;
+  height: 25px;
+  width: 65px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-acceptar {
+  background-color: #4fbd28;
+}
+
+.btn-rechazar {
+  background-color: #ef4444;
 }

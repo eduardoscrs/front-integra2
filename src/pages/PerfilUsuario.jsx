@@ -14,10 +14,12 @@ const PerfilUsuario = () => {
         <h1>Usuario</h1>
         <span>Detalles de perfil</span>
         <button className="btn-editar-perfil">Editar perfil</button>
-        <DatosUsuario datoBold="Rol" />
-        <DatosUsuario datoUsuario="Nombre Apellido" />
-        <DatosUsuario datoBold="Correo" datoUsuario="correo@gmail.com" />
-        <DatosUsuario datoBold="Celular" datoUsuario="+56912345678" />
+        <div className="div-componentes-usuario">
+          <DatosUsuario datoBold="Rol" />
+          <DatosUsuario datoUsuario="Nombre Apellido" />
+          <DatosUsuario datoBold="Correo" datoUsuario="correo@gmail.com" />
+          <DatosUsuario datoBold="Celular" datoUsuario="+56912345678" />
+        </div>
         <button className="btn-cambiar-contraseña">Cambiar contraseña</button>
       </section>
     </div>
