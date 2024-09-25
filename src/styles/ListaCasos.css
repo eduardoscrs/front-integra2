@@ -13,6 +13,12 @@
   gap: 140px;
 }
 
+/* .lista-caso hr {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+} */
+
 /* .circulo-caso {
   background-color: #d9d9d9;
   border-radius: 50%;
@@ -29,6 +35,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.botones-caso {
+  display: flex;
+  gap: 10px;
+  height: 35px;
 }
 
 .btn-acceptar {

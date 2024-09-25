@@ -1,32 +1,9 @@
-.imagen-datos {
-  display: flex;
-  gap: 40px;
-}
-
-.seccion-usuario {
-  display: flex;
-  flex-direction: column;
-}
-
-.seccion-usuario span {
-  display: block;
-}
-
 .cuadrado-usuario {
   width: 500px;
   border: 1px solid black;
   border-radius: 7px;
 }
 
-.btn-editar-perfil {
-  margin-left: auto;
-}
-
-.div-componentes-usuario {
-  gap: 10px;
-}
-
-.btn-cambiar-contraseña {
-  background-color: #ec221f;
-  width: 500px;
+.datos-bold {
+  font-weight: bold;
 }

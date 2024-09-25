@@ -1,3 +1,4 @@
+import '../styles/PerfilUsuario.css';
 import '../styles/DatosUsuario.css';
 import DatosUsuario from '../components/DatosUsuario';
 import { usuario } from '../assets';
@@ -13,14 +14,14 @@ const PerfilUsuario = () => {
       <section className="seccion-usuario">
         <h1>Usuario</h1>
         <span>Detalles de perfil</span>
-        <button className="btn-editar-perfil">Editar perfil</button>
         <div className="div-componentes-usuario">
-          <DatosUsuario datoBold="Rol" />
-          <DatosUsuario datoUsuario="Nombre Apellido" />
-          <DatosUsuario datoBold="Correo" datoUsuario="correo@gmail.com" />
+          <button className="btn-editar-perfil">Editar perfil</button>
+          <DatosUsuario datoUsuario="Rol" />
+          <DatosUsuario datoBold="Nombre" datoUsuario="Eduardo Escares" />
+          <DatosUsuario datoBold="Correo" datoUsuario="eduardo@gmail.com" />
           <DatosUsuario datoBold="Celular" datoUsuario="+56912345678" />
+          <button className="btn-cambiar-contraseña">Cambiar contraseña</button>
         </div>
-        <button className="btn-cambiar-contraseña">Cambiar contraseña</button>
       </section>
     </div>
   );
