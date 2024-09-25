@@ -1,9 +1,19 @@
+.imagen-datos {
+  display: flex;
+  gap: 40px;
+}
+
+.seccion-usuario span {
+  display: block;
+}
+
 .cuadrado-usuario {
   width: 500px;
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 7px;
 }
 
-.datos-bold {
-  font-weight: bold;
-}
+/* .btn-editar-perfil {
+  position: absolute;
+  right: 0;
+} */
