@@ -11,8 +11,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-<<<<<<< HEAD
-=======
 }
 
 a {
@@ -30,7 +28,6 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
->>>>>>> daf2ce0d890ea5e5fdc9571e4d13eda0d9ba61ec
 }
 
 a {
