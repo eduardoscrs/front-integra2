@@ -1,3 +1,9 @@
+.contenedor-casos {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+}
+
 .seccion-cuadrados {
   display: flex;
   gap: 60px;
@@ -6,7 +12,7 @@
 .cuadrado-casos {
   width: 200px;
   height: 170px;
-  background-color: white;
+  background-color: rgb(213, 235, 218);
   border-radius: 20px;
 }
 
