@@ -29,9 +29,24 @@ const Sidebar = () => {
       {/* Menu */}
       <ul className="sidebar__menu">
         <li><i className="icon-home"></i> Inicio</li>
-        <li><i className="icon-dashboard"></i> Servicios</li>
-        <li><i className="icon-products"></i> Sobre Nosotros</li>
-        <li><i className="icon-analytics"></i> Contacto</li>
+        <li>
+          <Link to="/ingreso-formulario">
+            <i className="icon-dashboard"></i>Formulario
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/casos">
+            <i className="icon-products"></i> Casos
+          </Link>
+        </li>
+        
+        <li>
+          <Link to="/perfil-usuario">
+            <i className="icon-analytics"></i> Perfil
+          </Link>
+        </li>
+
       </ul>
 
       {/* Login Section */}
