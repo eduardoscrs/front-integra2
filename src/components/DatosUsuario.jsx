@@ -2,9 +2,11 @@ import PropTypes from 'prop-types';
 
 function DatosUsuario({ datoBold, datoUsuario }) {
   return (
-    <div className="cuadrado-usuario">
+    <div>
       <p className="datos-bold">{datoBold}</p>
-      <p className="datos-usuario">{datoUsuario}</p>
+      <div className="cuadrado-usuario">
+        <p className="datos-usuario">{datoUsuario}</p>
+      </div>
     </div>
   );
 }
