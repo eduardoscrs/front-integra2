@@ -1,23 +1,13 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
+/* Estilos del contenedor de los formularios */
 .forms-wrapper {
-    display: flex;  /* Flexbox para alinear los formularios en horizontal */
-    justify-content: space-between;  /* Espacio entre los formularios */
-    align-items: flex-start;  /* Alineación superior de los formularios */
-    width: 100%;  /* Usa el 100% del espacio disponible */
-    max-width: 1000px;  /* Limita el ancho máximo del contenedor */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1000px;
     padding: 20px;
     box-sizing: border-box;
-    gap: 30px;  /* Espacio entre los formularios */
+    gap: 30px;
 }
 
 .form-container {
@@ -25,33 +15,33 @@ body {
     padding: 45px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;  /* El ancho de cada formulario será del 100% dentro de su contenedor */
-    max-width: 45%;  /* Los formularios ocuparán menos del 50% para que quepan uno al lado del otro */
+    width: 100%;
+    max-width: 45%;
     box-sizing: border-box;
-    flex-shrink: 0;  /* Evita que los formularios se reduzcan en tamaño */
+    flex-shrink: 0;
 }
 
 /* Media queries para pantallas más pequeñas */
 @media (max-width: 1200px) {
     .form-container {
-        max-width: 48%;  /* Ajuste para pantallas medianas */
+        max-width: 48%;
     }
 }
 
 @media (max-width: 768px) {
     .forms-wrapper {
-        flex-direction: column;  /* Coloca los formularios en una columna en pantallas pequeñas */
+        flex-direction: column;
         gap: 20px;
     }
 
     .form-container {
-        width: 100%;  /* Ocupa todo el ancho en pantallas pequeñas */
+        width: 100%;
         max-width: 100%;
     }
 }
 
-/* Header Styles */
-h2 {
+/* Estilos para el encabezado */
+.form-container h2 {
     text-align: center;
     font-size: 20px;
     color: #6a5acd;
@@ -59,10 +49,10 @@ h2 {
     font-weight: bold;
 }
 
-/* Form Input Styles */
-form input[type="text"],
-form input[type="number"],
-form select {
+/* Estilos de inputs dentro de los formularios */
+.form-container form input[type="text"],
+.form-container form input[type="number"],
+.form-container form select {
     color: #454444;
     width: 100%;
     padding: 12px;
@@ -74,24 +64,24 @@ form select {
     box-sizing: border-box;
 }
 
-/* Date Inputs Styles */
+/* Estilos para los inputs de fecha */
 .date-container {
     display: flex;
     justify-content: space-between;
-    gap: 10px; /* Espacio entre los inputs de fecha */
+    gap: 10px;
 }
 
 .date-container input[type="number"],
 .date-container select {
     color: #454444;
-    width: 100%; /* El ancho dentro del contenedor ajustado */
+    width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 6px;
     background-color: #f9f9f9;
 }
 
-/* Sector Section Styling */
+/* Estilos de las secciones de sector */
 .sector-section {
     color: #454444;
     border: 1px solid #ddd;
@@ -110,8 +100,8 @@ form select {
     font-weight: bold;
 }
 
-/* Delete Section Button */
-button[type="button"].delete-section-button {
+/* Botón para eliminar la sección */
+.sector-section button.delete-section-button {
     background-color: #ff6666;
     color: white;
     padding: 8px 16px;
@@ -124,7 +114,7 @@ button[type="button"].delete-section-button {
     font-size: 12px;
 }
 
-/* Inputs in Sector Section */
+/* Filas de inputs dentro de las secciones de sector */
 .inputs-row {
     display: flex;
     gap: 10px;
@@ -142,12 +132,11 @@ button[type="button"].delete-section-button {
     background-color: #f9f9f9;
 }
 
-/* Custom Width for Sector Name Input */
 .sector-section input[name="nombreSector"] {
-    width: 93%;  
+    width: 93%;
 }
 
-/* Subcategory Section Title */
+/* Estilos de la subcategoría */
 .subcategory-section-title {
     font-size: 16px;
     color: #6a5acd;
@@ -155,7 +144,6 @@ button[type="button"].delete-section-button {
     font-weight: bold;
 }
 
-/* Subcategory Inputs */
 .subcategory-inputs {
     display: flex;
     gap: 10px;
@@ -163,9 +151,10 @@ button[type="button"].delete-section-button {
     margin-bottom: 15px;
 }
 
-/* General Button Styles */
-button[type="button"].add-section-button,
-button[type="submit"] {
+/* Estilos generales de los botones */
+.form-container button.add-section-button,
+.form-container button[type="submit"],
+.form-container button.add-images-button {
     background-color: #6a5acd;
     color: white;
     padding: 12px;
@@ -178,19 +167,19 @@ button[type="submit"] {
     margin-top: 10px;
 }
 
-/* Add Images Button */
-button[type="button"].add-images-button {
-    background-color: #6a5acd;  
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    width: 100%;
-    font-weight: bold;
-    margin-top: 10px;
+/* Estilos del botón de agregar imágenes */
+.form-container button.add-images-button {
+    background-color: #6a5acd;
 }
+
+/* Efectos hover para los botones */
+.form-container button.add-section-button:hover,
+.form-container button.add-images-button:hover,
+.form-container button[type="submit"]:hover {
+    background-color: #5b4bb5;
+}
+
+/* Estilos del modal */
 .modal {
     position: fixed;
     z-index: 1000;
@@ -199,67 +188,44 @@ button[type="button"].add-images-button {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
-  }
-  
-  .modal-content {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Ancho de la modal */
-    max-width: 600px; /* Ancho máximo */
+    width: 80%;
+    max-width: 600px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .close {
+}
+
+.close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
-  
-  .imagenes-grid {
+}
+
+.imagenes-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-  }
-  
-  .imagen-preview {
+}
+
+.imagen-preview {
     width: 100px;
     height: 100px;
     object-fit: cover;
     border: 1px solid #ddd;
     border-radius: 6px;
-  }
-  
-
-/* Button Hover Effects */
-button[type="button"].add-images-button:hover,
-button[type="button"].add-section-button:hover,
-button[type="submit"]:hover {
-    background-color: #5b4bb5;
-}
-
-/* Footer Styles */
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;  
-    width: 100%;
-    bottom: 0;
-}
-
-footer p {
-    margin: 0;
 }
