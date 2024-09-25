@@ -5,6 +5,14 @@
   background-color: white;
 }
 
+.imagen-usuario {
+  display: flex;
+  height: 500px;
+  width: 450px;
+  /* justify-content: center;
+  align-items: center; */
+}
+
 .seccion-usuario {
   display: flex;
   flex-direction: column;
