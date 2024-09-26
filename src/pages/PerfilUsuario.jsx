@@ -2,10 +2,12 @@ import '../styles/PerfilUsuario.css';
 import '../styles/DatosUsuario.css';
 import DatosUsuario from '../components/DatosUsuario';
 import { usuario } from '../assets';
+import Sidebar from '../components/Sidebar';
 
 const PerfilUsuario = () => {
   return (
     <div className="imagen-datos">
+      <Sidebar></Sidebar>
       <img
         src={usuario}
         alt="Imagen de perfil del usuario"
