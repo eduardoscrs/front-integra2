@@ -12,7 +12,7 @@ Ejecuta el servidor de desarrollo:
 ```bash
 npm run dev
 ```
-<!-- nombre/
+nombre/
 │
 ├── public/                # Archivos estáticos
 ├── src/
@@ -29,7 +29,7 @@ npm run dev
 │
 ├── index.html             # Archivo HTML principal
 ├── package.json           # Dependencias y scripts del proyecto
-└── vite.config.js         # Configuración de Vite -->
+└── vite.config.js         # Configuración de Vite
 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
