@@ -12,7 +12,9 @@ Ejecuta el servidor de desarrollo:
 ```bash
 npm run dev
 ```
-nombre/
+
+```plaintext
+front-integra2/
 │
 ├── public/                # Archivos estáticos
 ├── src/
