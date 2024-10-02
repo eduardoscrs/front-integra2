@@ -4,8 +4,32 @@ import CuadradoCasos from '../components/CuadradoCasos';
 import ListaCasos from '../components/ListaCasos';
 import { xCircle, folder, checkCircle } from '../assets';
 import Sidebar from '../components/Sidebar';
+import { useEffect, useState } from 'react'; // Para manejar el estado y el efecto
+import { obtenerCasos } from '../services/casosService'; // Importa el servicio para hacer la petición a la API
 
 const Casos = () => {
+  const [casos, setCasos] = useState([]); // Estado para guardar los casos obtenidos de la API
+  const [error, setError] = useState(null); // Estado para manejar errores
+
+  // Efecto que se ejecuta cuando el componente se monta
+  useEffect(() => {
+    const fetchCasos = async () => {
+      try {
+        const casosObtenidos = await obtenerCasos(); // Llama a la función del servicio para obtener los casos
+        setCasos(casosObtenidos); // Almacena los casos en el estado
+      } catch (error) {
+        setError('Error al cargar los casos');
+        console.error(error);
+      }
+    };
+
+    fetchCasos();
+  }, []); // Se ejecuta solo al montar el componente
+
+  if (error) {
+    return <p>{error}</p>; // Muestra un mensaje de error si ocurre algún problema
+  }
+
   return (
     <div className="contenedor-casos">
       <Sidebar />
@@ -15,17 +39,21 @@ const Casos = () => {
           <CuadradoCasos
             titulo="Casos totales"
             imageSrc={folder}
-            numeroCasos="5"
+            numeroCasos={casos.length} // Cambia el número de casos totales con la cantidad obtenida
           />
           <CuadradoCasos
             titulo="Aceptados"
             imageSrc={checkCircle}
-            numeroCasos="0"
+            numeroCasos={
+              casos.filter((caso) => caso.estado === 'Aceptado').length
+            } // Filtra por casos aceptados
           />
           <CuadradoCasos
             titulo="Rechazados"
             imageSrc={xCircle}
-            numeroCasos="0"
+            numeroCasos={
+              casos.filter((caso) => caso.estado === 'Rechazado').length
+            } // Filtra por casos rechazados
           />
         </section>
 
@@ -37,11 +65,13 @@ const Casos = () => {
             <h3>Acciones</h3>
           </section>
           <section className="seccion-lista-casos">
-            <ListaCasos numeroCaso="1" estadoCaso="Pendiente" />
-            <ListaCasos numeroCaso="2" estadoCaso="Pendiente" />
-            <ListaCasos numeroCaso="3" estadoCaso="Pendiente" />
-            <ListaCasos numeroCaso="4" estadoCaso="Pendiente" />
-            <ListaCasos numeroCaso="5" estadoCaso="Pendiente" />
+            {casos.map((caso) => (
+              <ListaCasos
+                key={caso.id} // Asigna una clave única basada en el id del caso
+                numeroCaso={caso.id}
+                estadoCaso={caso.estado}
+              />
+            ))}
           </section>
         </div>
       </div>
