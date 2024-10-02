@@ -5,7 +5,7 @@ import ListaCasos from '../components/ListaCasos';
 import { xCircle, folder, checkCircle } from '../assets';
 import Sidebar from '../components/Sidebar';
 import { useEffect, useState } from 'react'; // Para manejar el estado y el efecto
-import { obtenerCasos } from '../services/casosService'; // Importa el servicio para hacer la petición a la API
+import { obtenerCasos, actualizarCaso } from '../services/casosService'; // Importa el servicio para hacer la petición a la API
 
 const Casos = () => {
   const [casos, setCasos] = useState([]); // Estado para guardar los casos obtenidos de la API
@@ -29,6 +29,21 @@ const Casos = () => {
   if (error) {
     return <p>{error}</p>; // Muestra un mensaje de error si ocurre algún problema
   }
+
+  // Función para manejar la aceptación de un caso
+  const aceptarCaso = async (id) => {
+    try {
+      await actualizarCaso(id, { estado: 'Aceptado' });
+      // Actualizar el estado del caso en el frontend
+      setCasos(
+        casos.map((caso) =>
+          caso.id === id ? { ...caso, estado: 'Aceptado' } : caso
+        )
+      );
+    } catch (error) {
+      console.error('Error al aceptar el caso:', error);
+    }
+  };
 
   return (
     <div className="contenedor-casos">
@@ -70,6 +85,7 @@ const Casos = () => {
                 key={caso.id} // Asigna una clave única basada en el id del caso
                 numeroCaso={caso.id}
                 estadoCaso={caso.estado}
+                onAceptar={() => aceptarCaso(caso.id)}
               />
             ))}
           </section>
