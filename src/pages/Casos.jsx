@@ -33,15 +33,28 @@ const Casos = () => {
   // Función para manejar la aceptación de un caso
   const aceptarCaso = async (id) => {
     try {
-      await actualizarCaso(id, { estado: 'Aceptado' });
-      // Actualizar el estado del caso en el frontend
+      await actualizarCaso(id, { estado: 3 }); // 3 es el ID_estado para "Aceptado"
       setCasos(
         casos.map((caso) =>
-          caso.id === id ? { ...caso, estado: 'Aceptado' } : caso
+          caso.ID_caso === id ? { ...caso, estado: 'Aceptado' } : caso
         )
       );
     } catch (error) {
       console.error('Error al aceptar el caso:', error);
+    }
+  };
+
+  // Función para manejar el rechazo de un caso
+  const rechazarCaso = async (id) => {
+    try {
+      await actualizarCaso(id, { estado: 4 });
+      setCasos(
+        casos.map((caso) =>
+          caso.ID_caso === id ? { ...caso, estado: 'Rechazado' } : caso
+        )
+      );
+    } catch (error) {
+      console.error('Error al rechazar el caso:', error);
     }
   };
 
@@ -82,10 +95,11 @@ const Casos = () => {
           <section className="seccion-lista-casos">
             {casos.map((caso) => (
               <ListaCasos
-                key={caso.id} // Asigna una clave única basada en el id del caso
-                numeroCaso={caso.id}
-                estadoCaso={caso.estado}
-                onAceptar={() => aceptarCaso(caso.id)}
+                key={caso.ID_caso} // Asigna una clave única basada en el id del caso
+                numeroCaso={caso.ID_caso}
+                estadoCaso={caso.nombre_estado}
+                onAceptar={() => aceptarCaso(caso.ID_caso)}
+                onRechazar={() => rechazarCaso(caso.ID_caso)}
               />
             ))}
           </section>

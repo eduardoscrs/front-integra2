@@ -17,7 +17,7 @@ function CuadradoCasos({ titulo, imageSrc, numeroCasos }) {
 CuadradoCasos.propTypes = {
   titulo: PropTypes.string.isRequired,
   imageSrc: PropTypes.string.isRequired,
-  numeroCasos: PropTypes.string.isRequired,
+  numeroCasos: PropTypes.number.isRequired,
 };
 
 export default CuadradoCasos;

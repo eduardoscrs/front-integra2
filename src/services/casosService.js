@@ -50,22 +50,21 @@ export const crearCaso = async (nuevoCaso) => {
   }
 };
 
-// Función para actualizar un caso
-export const actualizarCaso = async (id, datosActualizados) => {
-  try {
-    const response = await fetch(`${API_URL}/api/casos/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(datosActualizados),
-    });
-    if (!response.ok) {
-      throw new Error(`Error al actualizar el caso con ID ${id}`);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error(`Error al actualizar el caso con ID ${id}:`, error);
-    throw error;
+export const actualizarCaso = async (id, data) => {
+  const response = await fetch(`${API_URL}/api/casos/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      estado: data.estado,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Error al actualizar el caso con ID ${id}: ${response.statusText}`
+    );
   }
+  return await response.json();
 };
