@@ -50,21 +50,39 @@ export const crearCaso = async (nuevoCaso) => {
   }
 };
 
-export const actualizarCaso = async (id, data) => {
-  const response = await fetch(`${API_URL}/api/casos/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      estado: data.estado,
-    }),
-  });
+export const actualizarSoloEstado = async (id, nuevoEstado) => {
+  try {
+    // Obtener el caso completo
+    const caso = await obtenerCasoPorId(id);
 
-  if (!response.ok) {
-    throw new Error(
-      `Error al actualizar el caso con ID ${id}: ${response.statusText}`
-    );
+    // Actualizar solo el estado, manteniendo el resto de los campos iguales
+    const datosActualizados = {
+      tipo_siniestro: caso.tipo_siniestro,
+      descripcion_siniestro: caso.descripcion_siniestro,
+      ID_Cliente: caso.ID_Cliente,
+      ID_inspector: caso.ID_inspector,
+      ID_contratista: caso.ID_contratista,
+      ID_estado: nuevoEstado, // Solo cambia el estado
+    };
+
+    // Enviar la actualización al backend
+    const response = await fetch(`${API_URL}/api/casos`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(datosActualizados),
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Error al actualizar el caso con ID ${id}: ${response.statusText}`
+      );
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error al actualizar solo el estado:', error);
+    throw error;
   }
-  return await response.json();
 };
