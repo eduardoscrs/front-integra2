@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/Login.css';
 import logo from '../assets/logo.png'; 
 import logo_google from '../assets/logo_google.png'; 
@@ -86,7 +86,11 @@ const Login = ({ onLogin }) => {
               <label htmlFor="remember">Recuérdame</label>
             </div>
             <button type="submit" className="login-btn">Login</button>
-            <a href="#" className="forgot-password">¿Olvidaste la contraseña?</a>
+            
+            {/* Enlace a la página de recuperación de contraseña */}
+            <Link to="/password-recovery" className="forgot-password">
+              ¿Olvidaste la contraseña?
+            </Link>
           </form>
           <p className="signup-prompt">
             ¿No tienes cuenta? <a href="#">Regístrate</a>

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
+import PasswordRecovery from './components/PasswordRecovery';
 import AdminPage from './components/AdminPage';  // Página simulada para el admin
 import InspectorPage from './components/InspectorPage';  // Página simulada para el inspector
 import {Casos, IngresoFormulario, PerfilUsuario } from './pages'
@@ -33,6 +34,8 @@ function App() {
             path="/login" 
             element={<Login onLogin={handleLogin} />} 
           />
+
+          <Route path="/password-recovery" element={<PasswordRecovery />} /> {/* Nueva ruta */}
           
           {/* Rutas basadas en el rol del usuario */}
           <Route path="/admin" element={<AdminPage />} />
