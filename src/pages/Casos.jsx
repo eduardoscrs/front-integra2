@@ -5,7 +5,7 @@ import ListaCasos from '../components/ListaCasos';
 import { xCircle, folder, checkCircle } from '../assets';
 import Sidebar from '../components/Sidebar';
 import { useEffect, useState } from 'react'; // Para manejar el estado y el efecto
-import { obtenerCasos, actualizarSoloEstado } from '../services/casosService'; // Importa el servicio para hacer la petición a la API
+import { obtenerCasos, actualizarCaso } from '../services/casosService'; // Importa el servicio para hacer la petición a la API
 
 const Casos = () => {
   const [casos, setCasos] = useState([]); // Estado para guardar los casos obtenidos de la API
@@ -33,7 +33,7 @@ const Casos = () => {
   // Función para manejar la aceptación de un caso
   const aceptarCaso = async (id) => {
     try {
-      await actualizarSoloEstado(id, { ID_estado: 3 }); // 3 es el ID_estado para "Aceptado"
+      await actualizarCaso(id, { ID_estado: 3 }); // 3 es el ID_estado para "Aceptado"
       setCasos(
         casos.map((caso) =>
           caso.ID_caso === id ? { ...caso, estado: 'Aceptado' } : caso
@@ -47,7 +47,7 @@ const Casos = () => {
   // Función para manejar el rechazo de un caso
   const rechazarCaso = async (id) => {
     try {
-      await actualizarSoloEstado(id, { ID_estado: 4 });
+      await actualizarCaso(id, { ID_estado: 4 });
       setCasos(
         casos.map((caso) =>
           caso.ID_caso === id ? { ...caso, estado: 'Rechazado' } : caso
