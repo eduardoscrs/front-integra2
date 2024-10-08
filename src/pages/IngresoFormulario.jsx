@@ -180,9 +180,9 @@ const IngresoFormulario = () => {
           required
         >
           <option value="" disabled>Selecciona un contratista</option>
-          <option value="Contratista 1">Contratista 1</option>
-          <option value="Contratista 2">Contratista 2</option>
-          <option value="Contratista 3">Contratista 3</option>
+          <option value="Contratista 1">Carpintero </option>
+          <option value="Contratista 2">Electricista</option>
+          <option value="Contratista 3">Plomero</option>
         </select>
           </div>
         </form>
