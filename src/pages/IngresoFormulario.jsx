@@ -16,6 +16,7 @@ const IngresoFormulario = () => {
   const [sectores, setSectores] = useState([
     { nombreSector: '', largo: '', ancho: '', areaDañada: '', subcategoria: '', añadirSubcategoria: '', enviarDatos: '' }
   ]);
+   const [contratista, setContratista] = useState('');
 
   const [imagenes, setImagenes] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la apertura de la modal
@@ -171,6 +172,18 @@ const IngresoFormulario = () => {
               value={formData.año}
               onChange={handleChange}
             />
+            {/* Selección de contratista */}
+        <select
+          id="contratista"
+          value={contratista}
+          onChange={(e) => setContratista(e.target.value)}
+          required
+        >
+          <option value="" disabled>Selecciona un contratista</option>
+          <option value="Contratista 1">Contratista 1</option>
+          <option value="Contratista 2">Contratista 2</option>
+          <option value="Contratista 3">Contratista 3</option>
+        </select>
           </div>
         </form>
       </div>
