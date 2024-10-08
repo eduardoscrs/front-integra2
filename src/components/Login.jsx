@@ -63,7 +63,7 @@ const Login = ({ onLogin }) => {
             <img src={logo_google} alt="Google Icon" /> Login with Google
           </button>
           <form className="login-form" onSubmit={handleLogin}>
-            <div className="input-group">
+            <div className="input-groups">
               <label>Email</label>
               <input 
                 type="email" 
@@ -72,7 +72,7 @@ const Login = ({ onLogin }) => {
                 onChange={(e) => setEmail(e.target.value)} 
               />
             </div>
-            <div className="input-group">
+            <div className="input-groups">
               <label>Password</label>
               <input 
                 type="password" 

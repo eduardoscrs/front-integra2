@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Outlet, Link } from "react-router-dom"; // Importa Link para redirigir
 import '../styles/Sidebar.css';
-import logo from '../assets/logo.png'; 
+import logo from '../assets/Segurapp_rbg.png'; 
 
 
 const Sidebar = () => {
