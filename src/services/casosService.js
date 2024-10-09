@@ -62,7 +62,7 @@ export const actualizarEstadoCaso = async (id, estado) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ estado }),
+      body: JSON.stringify({ ID_estado: estado }),
     });
 
     if (!response.ok) {

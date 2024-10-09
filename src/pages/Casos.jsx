@@ -33,12 +33,7 @@ const Casos = () => {
   // Función para manejar la aceptación de un caso
   const aceptarCaso = async (id) => {
     try {
-      await actualizarEstadoCaso(id, { ID_estado: 3 }); // 3 es el ID_estado para "Aceptado"
-      setCasos(
-        casos.map((caso) =>
-          caso.ID_caso === id ? { ...caso, estado: 'Aceptado' } : caso
-        )
-      );
+      await actualizarEstadoCaso(id, 3);
     } catch (error) {
       console.error('Error al aceptar el caso:', error);
     }
@@ -47,12 +42,7 @@ const Casos = () => {
   // Función para manejar el rechazo de un caso
   const rechazarCaso = async (id) => {
     try {
-      await actualizarEstadoCaso(id, { ID_estado: 4 });
-      setCasos(
-        casos.map((caso) =>
-          caso.ID_caso === id ? { ...caso, estado: 'Rechazado' } : caso
-        )
-      );
+      await actualizarEstadoCaso(id, 4);
     } catch (error) {
       console.error('Error al rechazar el caso:', error);
     }
