@@ -50,21 +50,28 @@ export const crearCaso = async (nuevoCaso) => {
   }
 };
 
-export const actualizarCaso = async (id, data) => {
-  const response = await fetch(`${API_URL}/api/casos/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      ID_estado: data.ID_estado,
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(
-      `Error al actualizar el caso con ID ${id}: ${response.statusText}`
-    );
+export const actualizarEstadoCaso = async (id, estado) => {
+  if (estado === null || estado === undefined) {
+    console.error('El campo estado es requerido');
+    return;
   }
-  return await response.json();
+
+  try {
+    const response = await fetch(`${API_URL}/api/casos/${id}/estado`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ estado }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al actualizar el estado');
+    }
+
+    const result = await response.json();
+    console.log('Estado actualizado:', result);
+  } catch (error) {
+    console.error('Error al actualizar el estado:', error);
+  }
 };
