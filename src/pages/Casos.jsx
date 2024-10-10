@@ -62,16 +62,12 @@ const Casos = () => {
           <CuadradoCasos
             titulo="Aceptados"
             imageSrc={checkCircle}
-            numeroCasos={
-              casos.filter((caso) => caso.estado === 'Aceptado').length
-            } // Filtra por casos aceptados
+            numeroCasos={casos.filter((caso) => caso.ID_estado === 3).length} // Filtra por casos aceptados
           />
           <CuadradoCasos
             titulo="Rechazados"
             imageSrc={xCircle}
-            numeroCasos={
-              casos.filter((caso) => caso.estado === 'Rechazado').length
-            } // Filtra por casos rechazados
+            numeroCasos={casos.filter((caso) => caso.ID_estado === 4).length} // Filtra por casos rechazados
           />
         </section>
 
