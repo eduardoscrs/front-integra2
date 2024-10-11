@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import * as XLSX from 'xlsx';
 import '../styles/Formulario.css';
+import { crearCaso } from '../services/formularioService';
 
 const IngresoFormulario = () => {
   const [formData, setFormData] = useState({
@@ -43,6 +44,24 @@ const IngresoFormulario = () => {
     const updatedSectores = sectores.filter((_, i) => i !== index);
     setSectores(updatedSectores);
   };
+  
+  const enviarDatos = async () => {
+    const datosFormulario = {
+      ...formData,
+      contratista,
+      sectores, // Añade los sectores también
+    };
+  
+    try {
+      await crearCaso(datosFormulario);
+      console.log("Datos enviados exitosamente!");
+      alert("Los datos se han enviado correctamente."); // Muestra una alerta de éxito
+    } catch (error) {
+      console.error("Error al enviar los datos:", error);
+      alert("Ocurrió un error al enviar los datos. Por favor, intenta de nuevo."); // Muestra una alerta de error
+    }
+  };
+  
 
   const agregarImagenes = () => {
     document.getElementById('imagenInput').click(); // Simula un clic en el input de archivo
@@ -185,6 +204,9 @@ const IngresoFormulario = () => {
           <option value="Contratista 3">Plomero</option>
         </select>
           </div>
+        <button type="button" onClick={enviarDatos} className="add-section-button">
+          Enviar datos
+        </button>
         </form>
       </div>
 
@@ -264,6 +286,10 @@ const IngresoFormulario = () => {
             </div>
           </div>
         ))}
+
+        
+
+
 
         <button type="button" onClick={agregarSector} className="add-section-button">
           Agregar sección
