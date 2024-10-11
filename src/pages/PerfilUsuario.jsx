@@ -46,7 +46,7 @@ const PerfilUsuario = () => {
         <span>Detalles de perfil</span>
         <div className="div-componentes-usuario">
           <button className="btn-editar-perfil">Editar perfil</button>
-          <DatosUsuario datoBold="Rol" datoUsuario={usuario.ID_rol} />
+          <DatosUsuario datoBold="Rol" datoUsuario={usuario.nombre_rol} />
           <DatosUsuario
             datoBold="Nombre"
             datoUsuario={`${usuario.nombre} ${usuario.apellido}`}
