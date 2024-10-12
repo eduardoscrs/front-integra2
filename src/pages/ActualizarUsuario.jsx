@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { actualizarPerfil, obtenerUsuarioId } from '../services/perfilService';
+import '../styles/ActualizarUsuario.css';
 
 const ActualizarUsuario = () => {
   const [usuario, setUsuario] = useState({
@@ -46,7 +47,6 @@ const ActualizarUsuario = () => {
       correo: usuario.correo,
       direccion: usuario.direccion,
       comuna: usuario.comuna,
-      // ID_rol: usuario.ID_rol, // Si necesitas incluir el ID_rol
     };
 
     try {
@@ -59,56 +59,68 @@ const ActualizarUsuario = () => {
   };
 
   return (
-    <div>
+    <div className="contenedor-formulario-usuario">
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="nombre"
-          // value={usuario.nombre}
-          onChange={handleChange}
-          placeholder={usuario.nombre}
-          required
-        />
-        <input
-          type="text"
-          name="apellido"
-          value={usuario.apellido}
-          onChange={handleChange}
-          placeholder="Apellido"
-          required
-        />
-        <input
-          type="text"
-          name="celular"
-          value={usuario.celular}
-          onChange={handleChange}
-          placeholder="Celular"
-          required
-        />
-        <input
-          type="text"
-          name="correo"
-          value={usuario.correo}
-          onChange={handleChange}
-          placeholder="Correo"
-          required
-        />
-        <input
-          type="text"
-          name="direccion"
-          value={usuario.direccion}
-          onChange={handleChange}
-          placeholder="Dirección"
-          required
-        />
-        <input
-          type="text"
-          name="comuna"
-          value={usuario.comuna}
-          onChange={handleChange}
-          placeholder="Comuna"
-          required
-        />
+        <div className="div-campos">
+          <label htmlFor="nombre">Nombre: </label>
+          <input
+            type="text"
+            name="nombre"
+            value={usuario.nombre || ''}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="div-campos">
+          <label htmlFor="apellido">Apellido: </label>
+          <input
+            type="text"
+            name="apellido"
+            value={usuario.apellido || ''}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="div-campos">
+          <label htmlFor="celular">Celular: </label>
+          <input
+            type="text"
+            name="celular"
+            value={usuario.celular || ''}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="div-campos">
+          <label htmlFor="correo">Correo: </label>
+          <input
+            type="text"
+            name="email"
+            value={usuario.correo || ''}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="div-campos">
+          <label htmlFor="direccion">Direccion: </label>
+          <input
+            type="text"
+            name="direccion"
+            value={usuario.direccion || ''}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="div-campos">
+          <label htmlFor="comuna">Comuna: </label>
+          <input
+            type="text"
+            name="comuna"
+            value={usuario.comuna || ''}
+            onChange={handleChange}
+            required
+          />
+        </div>
         <button type="submit">Actualizar Usuario</button>
       </form>
       {mensaje && <p>{mensaje}</p>}

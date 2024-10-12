@@ -15,6 +15,7 @@ export const obtenerUsuarioId = async (id) => {
 
 export const actualizarPerfil = async (id, datosUsuario) => {
   try {
+    console.log(JSON.stringify(datosUsuario));
     const response = await fetch(`${API_URL}/api/users/${id}`, {
       method: 'PUT',
       headers: {
