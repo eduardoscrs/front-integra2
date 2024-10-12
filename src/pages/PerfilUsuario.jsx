@@ -4,10 +4,12 @@ import DatosUsuario from '../components/DatosUsuario';
 import { usuarioImg } from '../assets';
 import Sidebar from '../components/Sidebar';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { obtenerUsuarioId } from '../services/perfilService';
 
 const PerfilUsuario = () => {
-  const [usuario, setUsuario] = useState([]); // Estado para guardar los casos obtenidos de la API
+  const navigate = useNavigate(); // Inicializa useNavigate
+  const [usuario, setUsuario] = useState(null); // Estado para guardar los casos obtenidos de la API
   const [error, setError] = useState(null); // Estado para manejar errores
   const userId = 1; // Cambia esto por la forma en que obtienes el ID del usuario (ej. desde el auth)
 
@@ -33,6 +35,11 @@ const PerfilUsuario = () => {
     return <p>Cargando...</p>;
   }
 
+  // Función para manejar la navegación al hacer clic en "Editar perfil"
+  const handleEditarPerfil = () => {
+    navigate('/actualizar-usuario'); // Redirige a la página de ActualizarUsuario
+  };
+
   return (
     <div className="imagen-datos">
       <Sidebar></Sidebar>
@@ -45,7 +52,9 @@ const PerfilUsuario = () => {
         <h1>Usuario</h1>
         <span>Detalles de perfil</span>
         <div className="div-componentes-usuario">
-          <button className="btn-editar-perfil">Editar perfil</button>
+          <button className="btn-editar-perfil" onClick={handleEditarPerfil}>
+            Editar perfil
+          </button>
           <DatosUsuario datoBold="Rol" datoUsuario={usuario.nombre_rol} />
           <DatosUsuario
             datoBold="Nombre"
