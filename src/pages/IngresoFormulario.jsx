@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../styles/Formulario.css';
 import { crearCaso } from '../services/formularioService';
+import * as XLSX from 'xlsx'; 
 
 const IngresoFormulario = () => {
   const [formData, setFormData] = useState({
@@ -19,9 +20,9 @@ const IngresoFormulario = () => {
     total_costo: '',
     ID_caso: '',
   });
-  
+
   const [imagenes, setImagenes] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la apertura de la modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChangeCaso = (e) => {
     setFormData({
@@ -40,7 +41,6 @@ const IngresoFormulario = () => {
   const enviarDatos = async () => {
     try {
       await crearCaso(formData);
-      console.log('Datos de caso enviados exitosamente!');
       alert('Los datos del caso se han enviado correctamente.');
     } catch (error) {
       console.error('Error al enviar los datos del caso:', error);
@@ -50,8 +50,6 @@ const IngresoFormulario = () => {
 
   const enviarDatosSector = async () => {
     try {
-      // Aquí puedes añadir la función para enviar los datos del sector.
-      console.log('Datos de sector enviados exitosamente!');
       alert('Los datos del sector se han enviado correctamente.');
     } catch (error) {
       console.error('Error al enviar los datos del sector:', error);
@@ -60,18 +58,18 @@ const IngresoFormulario = () => {
   };
 
   const agregarImagenes = () => {
-    document.getElementById('imagenInput').click(); // Simula un clic en el input de archivo
+    document.getElementById('imagenInput').click();
   };
 
   const handleImagenesSeleccionadas = (e) => {
-    const files = Array.from(e.target.files); // Convertir los archivos seleccionados a un array
-    const newImagenes = files.map((file) => URL.createObjectURL(file)); // Crear URLs temporales
-    setImagenes((prevImagenes) => [...prevImagenes, ...newImagenes]); // Añadir las nuevas imágenes al estado
-    setIsModalOpen(true); // Abrir la modal cuando se seleccionen imágenes
+    const files = Array.from(e.target.files);
+    const newImagenes = files.map((file) => URL.createObjectURL(file));
+    setImagenes((prevImagenes) => [...prevImagenes, ...newImagenes]);
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Cierra la modal
+    setIsModalOpen(false);
   };
 
   const handleSubmitCaso = (e) => {
@@ -84,9 +82,35 @@ const IngresoFormulario = () => {
     enviarDatosSector();
   };
 
+  // Función para exportar los datos a Excel
+  const exportarExcel = () => {
+    const datos = [
+      {
+        tipo_siniestro: formData.tipo_siniestro,
+        descripcion_siniestro: formData.descripcion_siniestro,
+        ID_Cliente: formData.ID_Cliente,
+        ID_inspector: formData.ID_inspector,
+        ID_contratista: formData.ID_contratista,
+        ID_estado: formData.ID_estado,
+      },
+      {
+        nombre_sector: sectorData.nombre_sector,
+        dano_sector: sectorData.dano_sector,
+        porcentaje_perdida: sectorData.porcentaje_perdida,
+        total_costo: sectorData.total_costo,
+        ID_caso: sectorData.ID_caso,
+      },
+    ];
+
+    const hoja = XLSX.utils.json_to_sheet(datos);
+    const libro = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(libro, hoja, 'Datos');
+
+    XLSX.writeFile(libro, 'datos_formulario.xlsx');
+  };
+
   return (
     <div className="forms-wrapper">
-      {/* Contenedor para el Formulario de Caso */}
       <div className="form-container">
         <form id="case-form" onSubmit={handleSubmitCaso} noValidate>
           <h2>Formulario de Caso</h2>
@@ -151,7 +175,6 @@ const IngresoFormulario = () => {
         </form>
       </div>
 
-      {/* Contenedor para el Formulario de Sector */}
       <div className="form-container">
         <form id="sector-form" onSubmit={handleSubmitSector} noValidate>
           <h2>Formulario de Sector</h2>
@@ -218,6 +241,11 @@ const IngresoFormulario = () => {
             style={{ display: 'none' }}
             onChange={handleImagenesSeleccionadas}
           />
+          
+          {/* Botón para descargar el Excel */}
+          <button type="submit" onClick={exportarExcel} className="submit-button">
+            Descargar Excel
+          </button>
         </form>
       </div>
 
