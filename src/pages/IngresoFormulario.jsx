@@ -19,6 +19,9 @@ const IngresoFormulario = () => {
     total_costo: '',
     ID_caso: '',
   });
+  
+  const [imagenes, setImagenes] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la apertura de la modal
 
   const handleChangeCaso = (e) => {
     setFormData({
@@ -54,6 +57,21 @@ const IngresoFormulario = () => {
       console.error('Error al enviar los datos del sector:', error);
       alert('Ocurrió un error al enviar los datos del sector. Por favor, intenta de nuevo.');
     }
+  };
+
+  const agregarImagenes = () => {
+    document.getElementById('imagenInput').click(); // Simula un clic en el input de archivo
+  };
+
+  const handleImagenesSeleccionadas = (e) => {
+    const files = Array.from(e.target.files); // Convertir los archivos seleccionados a un array
+    const newImagenes = files.map((file) => URL.createObjectURL(file)); // Crear URLs temporales
+    setImagenes((prevImagenes) => [...prevImagenes, ...newImagenes]); // Añadir las nuevas imágenes al estado
+    setIsModalOpen(true); // Abrir la modal cuando se seleccionen imágenes
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); // Cierra la modal
   };
 
   const handleSubmitCaso = (e) => {
@@ -187,8 +205,35 @@ const IngresoFormulario = () => {
           <button type="submit" className="submit-button">
             Enviar datos de Sector
           </button>
+
+          <button type="button" onClick={agregarImagenes} className="add-images-button">
+            Agregar imágenes
+          </button>
+
+          <input
+            id="imagenInput"
+            type="file"
+            accept="image/*"
+            multiple
+            style={{ display: 'none' }}
+            onChange={handleImagenesSeleccionadas}
+          />
         </form>
       </div>
+
+      {isModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
+            <h2>Imágenes seleccionadas</h2>
+            <div className="images-preview">
+              {imagenes.map((imagen, index) => (
+                <img key={index} src={imagen} alt={`Imagen ${index + 1}`} />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
