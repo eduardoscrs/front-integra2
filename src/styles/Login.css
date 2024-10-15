@@ -1,3 +1,4 @@
+/* Estilos base */
 .login-container {
   max-width: 400px;
   padding: 5rem;
@@ -57,12 +58,9 @@
   padding: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 4px;
-  color: #555; /* Cambiar color del texto */
-  background-color: #dcdcdc; /* Cambiar color de fondo si lo deseas */
+  color: #555;
+  background-color: #dcdcdc;
 }
-
-
-
 
 .remember-me {
   display: flex;
@@ -128,6 +126,77 @@
 }
 
 .login-image img {
-  width: 400px; /* Ajusta según necesites */
+  width: 400px;
   margin-right: 2rem;
+}
+
+/* Estilos responsivos */
+
+/* Para pantallas medianas y pequeñas */
+@media screen and (max-width: 768px) {
+  .login-container {
+    max-width: 90%;
+    padding: 3rem;
+    position: relative;
+    right: auto;
+    top: auto;
+    margin: 0 auto;
+  }
+
+  .google-login-btn {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .forgot-password {
+    position: relative;
+    right: auto;
+    top: auto;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .remember-me {
+    margin-right: 0;
+    justify-content: space-between;
+    font-size: 0.8rem;
+  }
+
+  .login-box {
+    display: block;
+    padding: 1.5rem;
+  }
+
+  .login-image img {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+
+/* Para pantallas móviles (muy pequeñas) */
+@media screen and (max-width: 480px) {
+  .login-container {
+    max-width: 95%;
+    padding: 2rem;
+  }
+
+  .login-title {
+    font-size: 1.2rem;
+  }
+
+  .google-login-btn {
+    font-size: 0.8rem;
+  }
+
+  .login-btn {
+    padding: 0.5rem;
+  }
+
+  .signup-prompt {
+    font-size: 0.8rem;
+  }
+
+  .forgot-password {
+    font-size: 0.8rem;
+  }
 }
