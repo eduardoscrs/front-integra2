@@ -32,6 +32,15 @@ const Casos = () => {
 
   // Función para manejar la aceptación de un caso
   const aceptarCaso = async (id) => {
+    // Actualiza el estado antes de la respuesta en el front
+    setCasos(
+      casos.map((caso) =>
+        caso.ID_caso === id
+          ? { ...caso, ID_estado: 3, nombre_estado: 'Aceptado' }
+          : caso
+      )
+    );
+
     try {
       await actualizarEstadoCaso(id, 3);
     } catch (error) {
@@ -41,6 +50,15 @@ const Casos = () => {
 
   // Función para manejar el rechazo de un caso
   const rechazarCaso = async (id) => {
+    // Actualiza el estado antes de la respuesta en el front
+    setCasos(
+      casos.map((caso) =>
+        caso.ID_caso === id
+          ? { ...caso, ID_estado: 4, nombre_estado: 'Rechazado' }
+          : caso
+      )
+    );
+
     try {
       await actualizarEstadoCaso(id, 4);
     } catch (error) {
