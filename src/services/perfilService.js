@@ -41,7 +41,7 @@ export const actualizarContrasena = async (
   nuevaContrasena
 ) => {
   try {
-    const response = await fetch(`${API_URL}/api/users/${id}/contrasena`, {
+    const response = await fetch(`${API_URL}/api/users/${id}/password`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

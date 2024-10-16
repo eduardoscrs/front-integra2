@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
-import { actualizarContrasena } from '../services/perfilService';
+import {
+  actualizarContrasena,
+  obtenerUsuarioId,
+} from '../services/perfilService';
 
 const ActualizarContrasena = () => {
   const [usuarioId, setUsuarioId] = useState(null); // Definir usuarioId como estado
@@ -8,12 +11,19 @@ const ActualizarContrasena = () => {
   const [mensaje, setMensaje] = useState('');
 
   useEffect(() => {
-    // Aquí puedes obtener el usuarioId desde donde lo estés almacenando (e.g., localStorage, sesión, etc.)
-    const id = localStorage.getItem('usuarioId'); // Ejemplo con localStorage
-    if (id) {
-      setUsuarioId(id); // Almacena el ID en el estado
-    }
-  }, []); // El efecto se ejecuta solo al montar el componente
+    const fetchUsuarioId = async () => {
+      try {
+        // Suponiendo que ya tienes el ID en alguna variable, reemplaza "idUsuario" con el valor adecuado
+        const usuario = await obtenerUsuarioId(1); // Llamas la función para obtener los datos del usuario
+        setUsuarioId(usuario.ID_usuario); // Establece el ID del usuario en el estado
+      } catch (error) {
+        setMensaje('Error al obtener el ID del usuario');
+        console.error(error);
+      }
+    };
+
+    fetchUsuarioId(); // Llamar a la función para obtener el ID
+  }, []); // Solo se ejecuta cuando el componente se monta
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +36,7 @@ const ActualizarContrasena = () => {
     try {
       // Llamar al servicio de actualización de contraseña
       const result = await actualizarContrasena(
-        usuarioId,
+        1,
         contrasenaActual,
         nuevaContrasena
       );
