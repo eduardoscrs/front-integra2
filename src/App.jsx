@@ -4,6 +4,7 @@ import Login from './components/Login';
 import PasswordRecovery from './components/PasswordRecovery';
 import AdminPage from './components/AdminPage';  // Página simulada para el admin
 import InspectorPage from './components/InspectorPage';  // Página simulada para el inspector
+import Logout from './components/Logout';
 import {Casos, IngresoFormulario, PerfilUsuario } from './pages'
 import './styles/login.css';
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="/ingreso-formulario" element={<IngresoFormulario/>}/>
           <Route path="/casos" element={<Casos/>}/>
           <Route path="/perfil-usuario" element={<PerfilUsuario/>}/>
+          <Route path="/logout" element={<Logout />} />
           {/* Puedes agregar más rutas aquí */}
           
         </Routes>

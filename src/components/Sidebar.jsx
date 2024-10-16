@@ -47,6 +47,12 @@ const Sidebar = () => {
           </Link>
         </li>
 
+        <li>
+          <Link to="/logout">
+            <i className="icon-analytics"></i> Logout
+          </Link>
+        </li>
+
       </ul>
 
       {/* Login Section */}
