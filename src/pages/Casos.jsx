@@ -33,7 +33,11 @@ const Casos = () => {
   // Función para manejar la aceptación de un caso
   const aceptarCaso = async (id) => {
     try {
+<<<<<<< Updated upstream
       await actualizarEstadoCaso(id, 3);
+=======
+      await actualizarEstadoCaso(id, 3); // 3 es el ID_estado para "Aceptado"
+>>>>>>> Stashed changes
     } catch (error) {
       console.error('Error al aceptar el caso:', error);
     }
