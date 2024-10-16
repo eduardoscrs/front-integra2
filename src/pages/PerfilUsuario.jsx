@@ -19,7 +19,7 @@ const PerfilUsuario = () => {
         const datoUsuario = await obtenerUsuarioId(userId); // Llama a la función del servicio para obtener los casos
         setUsuario(datoUsuario); // Almacena los casos en el estado
       } catch (error) {
-        setError('Error al cargar los estudiantes');
+        setError('Error al cargar el perfil del usuario');
         console.error(error);
       }
     };
@@ -38,6 +38,10 @@ const PerfilUsuario = () => {
   // Función para manejar la navegación al hacer clic en "Editar perfil"
   const handleEditarPerfil = () => {
     navigate('/actualizar-usuario'); // Redirige a la página de ActualizarUsuario
+  };
+
+  const handleCambiarContrasena = () => {
+    navigate('/actualizar-contrasena');
   };
 
   return (
@@ -65,7 +69,12 @@ const PerfilUsuario = () => {
           <DatosUsuario datoBold="Direccion" datoUsuario={usuario.direccion} />
           <DatosUsuario datoBold="Comuna" datoUsuario={usuario.comuna} />
 
-          <button className="btn-cambiar-contraseña">Cambiar contraseña</button>
+          <button
+            className="btn-cambiar-contraseña"
+            onClick={handleCambiarContrasena}
+          >
+            Cambiar contraseña
+          </button>
         </div>
       </section>
     </div>
