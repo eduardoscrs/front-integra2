@@ -1,0 +1,9 @@
+.cuadrado-usuario {
+  width: 500px;
+  border: 1px solid black;
+  border-radius: 7px;
+}
+
+.datos-bold {
+  font-weight: bold;
+}

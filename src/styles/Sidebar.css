@@ -1,0 +1,81 @@
+/* Estilos base del sidebar */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 250px;
+    height: 100vh;
+    background-color: #f5f5f5;
+    padding: 1rem;
+    transition: width 0.5s ease; /* Transición para la animación */
+    overflow: hidden;
+  }
+  
+  .sidebar--closed {
+    width: 80px; /* Tamaño reducido cuando el sidebar está cerrado */
+  }
+  
+  .sidebar__logo img {
+    margin-top: 30px;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .sidebar__menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar__menu li {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .sidebar__menu li:hover {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+  }
+  
+  .icon-home, .icon-dashboard, .icon-products, .icon-analytics, .icon-schedules, .icon-history, .icon-sales {
+    margin-right: 10px;
+  }
+  
+  /* Sección de login */
+  .sidebar__login {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .login__button {
+    background-color: #7a5adc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .login__button:hover {
+    background-color: #3c3991;
+  }
+  
+  .sidebar--closed .sidebar__menu li {
+    justify-content: center;
+  }
+  
+  .sidebar--closed .sidebar__menu li i {
+    margin-right: 0;
+  }
+  
+  .sidebar--closed .sidebar__menu li span {
+    display: none;
+  }
+  
