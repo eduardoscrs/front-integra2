@@ -19,7 +19,7 @@ const PerfilUsuario = () => {
         const datoUsuario = await obtenerUsuarioId(userId); // Llama a la función del servicio para obtener los casos
         setUsuario(datoUsuario); // Almacena los casos en el estado
       } catch (error) {
-        setError('Error al cargar los casos');
+        setError('Error al cargar los estudiantes');
         console.error(error);
       }
     };
