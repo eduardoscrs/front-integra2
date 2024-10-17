@@ -67,7 +67,7 @@ const IngresoFormulario = () => {
       console.log('Respuesta de la API del caso:', responseCaso);
       alert('Los datos del caso se han enviado correctamente.');
   
-      // Enviar datos del sector (sin cambios en este caso)
+      // Enviar datos del sector
       const responseSector = await crearSector(sectorData);
       console.log('Respuesta de la API del sector:', responseSector);
       alert('Los datos del sector se han enviado correctamente.');
@@ -266,12 +266,17 @@ const IngresoFormulario = () => {
             onChange={handleImagenesSeleccionadas}
             style={{ display: 'none' }}
           />
+
+          
+          <button type="button"  onClick={enviarDatosJuntos} className="button">
+            Enviar datos de Caso y Sector
+          </button>
+
+          <button type= "button"  onClick={exportarExcel} className="button">
+            Exportar a Excel
+          </button>
         </form>
       </div>
-
-      <button onClick={enviarDatosJuntos} className="submit-button">
-        Enviar datos de Caso y Sector
-      </button>
 
       {isModalOpen && (
         <div className="modal">
@@ -283,10 +288,6 @@ const IngresoFormulario = () => {
           </div>
         </div>
       )}
-
-      <button onClick={exportarExcel} className="export-button">
-        Exportar a Excel
-      </button>
     </div>
   );
 };
