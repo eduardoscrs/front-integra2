@@ -1,53 +1,32 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+// import { useNavigate, Link } from 'react-router-dom';
 import '../styles/Login.css';
-import logo from '../assets/logo.png'; 
-import logo_google from '../assets/logo_google.png'; 
+import logo from '../assets/logo.png';
+import logo_google from '../assets/logo_google.png';
+import { Alogin } from '../services/loginService'; // Importar el servicio de login
 import LoginPropTypes from '../config/LoginPropTypes'; // Importar validaciones
 
-const Login = ({ onLogin }) => {
+const Login = () => {
+  // Definir los estados para email y password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [error, setError] = useState(null); // Estado para manejar errores
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
-    // Simular autenticación por rol y contraseña
-    const user = {
-      email,
-      role: ''
+    const usuario = {
+      email: email, // Usar el valor del estado email
+      password: password // Usar el valor del estado password
     };
 
-    // Definir credenciales simuladas
-    const adminCredentials = {
-      email: 'admin@example.com',
-      password: 'admin123'
-    };
-
-    const inspectorCredentials = {
-      email: 'inspector@example.com',
-      password: 'inspector123'
-    };
-
-    // Verificar credenciales
-    if (email === adminCredentials.email && password === adminCredentials.password) {
-      user.role = 'admin';
-    } else if (email === inspectorCredentials.email && password === inspectorCredentials.password) {
-      user.role = 'inspector';
-    } else {
-      alert('Credenciales incorrectas');
-      return;
-    }
-
-    // Llamar a la función de login
-    onLogin(user);
-
-    // Redirigir según el rol del usuario
-    if (user.role === 'admin') {
-      navigate('/admin');
-    } else if (user.role === 'inspector') {
-      navigate('/inspector');
+    try {
+      const response = await Alogin(usuario);
+      console.log('Login exitoso:', response);
+      // Manejar el token o la respuesta como sea necesario, por ejemplo, guardarlo en el localStorage
+      // localStorage.setItem('token', response.token);
+    } catch (error) {
+      console.error('Error en el login:', error);
+      setError(error.message); // Establecer el error en el estado para mostrarlo si es necesario
     }
   };
 
@@ -70,6 +49,7 @@ const Login = ({ onLogin }) => {
                 placeholder="ejemplo@gmail.com" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)} 
+                required
               />
             </div>
             <div className="input-groups">
@@ -79,18 +59,19 @@ const Login = ({ onLogin }) => {
                 placeholder="******" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)} 
+                required
               />
             </div>
             <div className="remember-me">
               <input type="checkbox" id="remember" />
               <label htmlFor="remember">Recuérdame</label>
             </div>
+            {error && <p className="error-message">{error}</p>} {/* Mostrar mensaje de error */}
             <button type="submit" className="login-btn">Login</button>
             
-            {/* Enlace a la página de recuperación de contraseña */}
-            <Link to="/password-recovery" className="forgot-password">
+            {/* <Link to="/password-recovery" className="forgot-password">
               ¿Olvidaste la contraseña?
-            </Link>
+            </Link> */}
           </form>
           <p className="signup-prompt">
             ¿No tienes cuenta? <a href="#">Regístrate</a>
