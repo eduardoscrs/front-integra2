@@ -300,11 +300,11 @@ const IngresoFormulario = () => {
           />
 
           <div className="button-container">
-            <button type="button" onClick={mostrarSubsectorFormulario} className="submit-button">
+            <button type="button" onClick={mostrarSubsectorFormulario} className="add-images-button">
               Agregar Subsector
             </button>
 
-            <button type="button" className="submit-button" onClick={enviarDatosJuntos}>
+            <button type="button" className="submit-button" onClick={enviarDatosJuntos} >
               Enviar datos
             </button>
 
