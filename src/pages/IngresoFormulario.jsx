@@ -23,6 +23,12 @@ const IngresoFormulario = () => {
     ID_caso: '',
   });
 
+  // Estado para subsectores dinámicos
+  const [subSectores, setSubSectores] = useState([]);
+
+  // Estado para mostrar/ocultar el formulario de subsector
+  const [mostrarSubsectorForm, setMostrarSubsectorForm] = useState(false);
+
   // Estado para las imágenes
   const [imagenes, setImagenes] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,36 +49,60 @@ const IngresoFormulario = () => {
     });
   };
 
+  // Manejador de cambios para cada subsector dinámico
+  const handleChangeSubSector = (index, e) => {
+    const updatedSubSectores = [...subSectores];
+    updatedSubSectores[index][e.target.id] = e.target.value;
+    setSubSectores(updatedSubSectores);
+  };
+
+  // Añadir un nuevo subsector
+  const agregarSubSector = () => {
+    setSubSectores([
+      ...subSectores,
+      {
+        ID_material: '',
+        nombre_sub_sector: '',
+        cantidad_material: '',
+        tipo_reparacion: '',
+        ID_sector: '',
+      },
+    ]);
+  };
+
+  // Mostrar/ocultar formulario de subsector
+  const mostrarSubsectorFormulario = () => {
+    setMostrarSubsectorForm(true);
+  };
+
   const enviarDatosJuntos = async () => {
-    // Validación
-    for (const key in formData) {
-      if (!formData[key]) {
-        alert(`El campo ${key} es obligatorio.`);
-        return;
-      }
-    }
-  
-    // Convertir ID_* a números
-    const datosCaso = {
-      ...formData,
-      ID_Cliente: Number(formData.ID_Cliente),
-      ID_inspector: Number(formData.ID_inspector),
-      ID_contratista: Number(formData.ID_contratista),
-      ID_estado: Number(formData.ID_estado),
-    };
-  
     try {
+      // Validación de campos de formulario de caso
+      for (const key in formData) {
+        if (!formData[key]) {
+          alert(`El campo ${key} es obligatorio.`);
+          return;
+        }
+      }
+
+      // Convertir ID_* a números
+      const datosCaso = {
+        ...formData,
+        ID_Cliente: Number(formData.ID_Cliente),
+        ID_inspector: Number(formData.ID_inspector),
+        ID_contratista: Number(formData.ID_contratista),
+        ID_estado: Number(formData.ID_estado),
+      };
+
       console.log('Enviando datos del caso:', datosCaso);
-      const responseCaso = await crearCaso(datosCaso);
-      console.log('Respuesta de la API del caso:', responseCaso);
+      await crearCaso(datosCaso);
       alert('Los datos del caso se han enviado correctamente.');
-  
+
       // Enviar datos del sector
-      const responseSector = await crearSector(sectorData);
-      console.log('Respuesta de la API del sector:', responseSector);
+      await crearSector(sectorData);
       alert('Los datos del sector se han enviado correctamente.');
-  
-      // Reiniciar formularios después de enviar
+
+      // Reiniciar formularios
       setFormData({
         tipo_siniestro: '',
         descripcion_siniestro: '',
@@ -81,7 +111,7 @@ const IngresoFormulario = () => {
         ID_contratista: '',
         ID_estado: '',
       });
-  
+
       setSectorData({
         nombre_sector: '',
         dano_sector: '',
@@ -89,13 +119,14 @@ const IngresoFormulario = () => {
         total_costo: '',
         ID_caso: '',
       });
-  
+
+      // Reiniciar subsector
+      setSubSectores([]);
     } catch (error) {
       console.error('Error al enviar los datos:', error.message || error);
       alert(`Ocurrió un error al enviar los datos: ${error.message || 'Error desconocido.'}`);
     }
   };
-  
 
   // Función para abrir el selector de imágenes
   const agregarImagenes = () => {
@@ -133,6 +164,7 @@ const IngresoFormulario = () => {
         total_costo: sectorData.total_costo,
         ID_caso: sectorData.ID_caso,
       },
+      ...subSectores,
     ];
 
     const hoja = XLSX.utils.json_to_sheet(datos);
@@ -263,27 +295,89 @@ const IngresoFormulario = () => {
             type="file"
             accept="image/*"
             multiple
-            onChange={handleImagenesSeleccionadas}
             style={{ display: 'none' }}
+            onChange={handleImagenesSeleccionadas}
           />
 
-          
-          <button type="button"  onClick={enviarDatosJuntos} className="button">
-            Enviar datos de Caso y Sector
-          </button>
+          <div className="button-container">
+            <button type="button" onClick={mostrarSubsectorFormulario} className="submit-button">
+              Agregar Subsector
+            </button>
 
-          <button type= "button"  onClick={exportarExcel} className="button">
-            Exportar a Excel
-          </button>
+            <button type="button" className="submit-button" onClick={enviarDatosJuntos}>
+              Enviar datos
+            </button>
+
+            <button type="button" className="submit-button" onClick={exportarExcel}>
+              Exportar a Excel
+            </button>
+          </div>
         </form>
       </div>
 
+      {/* Subsectores (se muestra cuando se presiona el botón "Agregar Subsector") */}
+      {mostrarSubsectorForm && (
+        <div className="form-container">
+          <h2>Formulario de Subsector</h2>
+          {subSectores.map((subSector, index) => (
+            <div key={index}>
+              <input
+                type="text"
+                id="nombre_sub_sector"
+                placeholder="Nombre del sub-sector"
+                value={subSector.nombre_sub_sector}
+                onChange={(e) => handleChangeSubSector(index, e)}
+              />
+
+              <input
+                type="number"
+                id="ID_material"
+                placeholder="ID Material"
+                value={subSector.ID_material}
+                onChange={(e) => handleChangeSubSector(index, e)}
+              />
+
+              <input
+                type="number"
+                id="cantidad_material"
+                placeholder="Cantidad Material"
+                value={subSector.cantidad_material}
+                onChange={(e) => handleChangeSubSector(index, e)}
+              />
+
+              <input
+                type="text"
+                id="tipo_reparacion"
+                placeholder="Tipo de Reparación"
+                value={subSector.tipo_reparacion}
+                onChange={(e) => handleChangeSubSector(index, e)}
+              />
+
+              <input
+                type="number"
+                id="ID_sector"
+                placeholder="ID del Sector"
+                value={subSector.ID_sector}
+                onChange={(e) => handleChangeSubSector(index, e)}
+              />
+            </div>
+          ))}
+
+          <button type="button" onClick={agregarSubSector}>
+            Añadir más subsector
+          </button>
+        </div>
+      )}
+
+      {/* Modal para previsualización de imágenes */}
       {isModalOpen && (
         <div className="modal">
-          <button onClick={closeModal} className="close-modal">Cerrar</button>
           <div className="modal-content">
-            {imagenes.map((img, index) => (
-              <img key={index} src={img} alt={`Imagen ${index + 1}`} />
+            <span className="close-button" onClick={closeModal}>
+              &times;
+            </span>
+            {imagenes.map((imagen, index) => (
+              <img key={index} src={imagen} alt={`Imagen ${index + 1}`} className="preview-image" />
             ))}
           </div>
         </div>

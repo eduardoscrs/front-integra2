@@ -216,6 +216,7 @@
     cursor: pointer;
 }
 
+/* Estilos para la galería de imágenes */
 .imagenes-grid {
     display: flex;
     flex-wrap: wrap;
@@ -228,4 +229,11 @@
     object-fit: cover;
     border: 1px solid #ddd;
     border-radius: 6px;
+}
+
+/* Contenedor para los botones */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Separación entre botones */
 }
