@@ -7,26 +7,35 @@ import { Alogin } from '../services/loginService'; // Importar el servicio de lo
 import LoginPropTypes from '../config/LoginPropTypes'; // Importar validaciones
 
 const Login = () => {
-  // Definir los estados para email y password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null); // Estado para manejar errores
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const usuario = {
-      email: email, // Usar el valor del estado email
-      password: password // Usar el valor del estado password
-    };
-
+    const usuario = { email, password }; // Crear el objeto usuario
+  
     try {
-      const response = await Alogin(usuario);
+      const response = await Alogin(usuario); // Llamar al servicio de login
       console.log('Login exitoso:', response);
-      // Manejar el token o la respuesta como sea necesario, por ejemplo, guardarlo en el localStorage
-      // localStorage.setItem('token', response.token);
+  
+      const { token, role } = response; // Obtener el token y el rol del backend
+  
+      // Guardar el token y el rol en el localStorage o sessionStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
+  
+      // Manejar la lógica de redirección basada en el rol
+      if (role === 'Cliente') {
+        // Redirigir a la página del cliente
+      } else if (role === 'Inspector') {
+        // Redirigir a la página del inspector
+      } else if (role === 'Contratista') {
+        // Redirigir a la página del contratista
+      }
     } catch (error) {
       console.error('Error en el login:', error);
-      setError(error.message); // Establecer el error en el estado para mostrarlo si es necesario
+      setError(error.message); // Establecer el error en el estado
     }
   };
 
@@ -44,34 +53,26 @@ const Login = () => {
           <form className="login-form" onSubmit={handleLogin}>
             <div className="input-groups">
               <label>Email</label>
-              <input 
-                type="email" 
-                placeholder="ejemplo@gmail.com" 
+              <input
+                type="email"
+                placeholder="ejemplo@gmail.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)} 
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="input-groups">
               <label>Password</label>
-              <input 
-                type="password" 
-                placeholder="******" 
+              <input
+                type="password"
+                placeholder="******"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)} 
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
-            <div className="remember-me">
-              <input type="checkbox" id="remember" />
-              <label htmlFor="remember">Recuérdame</label>
-            </div>
-            {error && <p className="error-message">{error}</p>} {/* Mostrar mensaje de error */}
+            {error && <p className="error-message">{error}</p>}
             <button type="submit" className="login-btn">Login</button>
-            
-            {/* <Link to="/password-recovery" className="forgot-password">
-              ¿Olvidaste la contraseña?
-            </Link> */}
           </form>
           <p className="signup-prompt">
             ¿No tienes cuenta? <a href="#">Regístrate</a>
@@ -82,7 +83,6 @@ const Login = () => {
   );
 };
 
-// Usar las validaciones de LoginPropTypes
-Login.propTypes = LoginPropTypes;
-
 export default Login;
+
+Login.propTypes = LoginPropTypes;
