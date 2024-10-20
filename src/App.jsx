@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; // Añade Navigate para las redirecciones
+import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
 import PasswordRecovery from './components/PasswordRecovery';
@@ -9,35 +10,36 @@ import {Casos, IngresoFormulario, PerfilUsuario } from './pages'
 import './styles/login.css';
 
 function App() {
-  const handleLogin = (user) => {
-    console.log("User logged in:", user);
-  };
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  useEffect(() => {
+    // Comprobamos si existe un token almacenado en localStorage
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   return (
     <Router>
       <div className="App">
         <Routes>
-          {/* Ruta para la página de inicio o raíz */}
+          {/* Si el usuario no está logueado, redirigir al login */}
           <Route 
             path="/" 
             element={
-              <>
-                <Sidebar />
-                <div className="main-content">
-                  {/* Aquí puedes poner contenido adicional o componentes para la página principal */}
-                </div>
-              </>
-            } 
+              isLoggedIn ? <Sidebar /> : <Navigate to="/login" />
+            }
           />
           
           {/* Ruta para la página de login */}
           <Route 
             path="/login" 
-            element={<Login onLogin={handleLogin} />} 
+            element={<Login onLogin={() => setIsLoggedIn(true)} />} 
           />
 
           <Route path="/password-recovery" element={<PasswordRecovery />} /> {/* Nueva ruta */}
-          
+
           {/* Rutas basadas en el rol del usuario */}
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/inspector" element={<InspectorPage />} />
@@ -45,8 +47,6 @@ function App() {
           <Route path="/casos" element={<Casos/>}/>
           <Route path="/perfil-usuario" element={<PerfilUsuario/>}/>
           <Route path="/logout" element={<Logout />} />
-          {/* Puedes agregar más rutas aquí */}
-          
         </Routes>
       </div>
     </Router>
@@ -54,5 +54,7 @@ function App() {
 }
 
 export default App;
+
+
 
 

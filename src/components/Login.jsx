@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate para la redirección
 import '../styles/Login.css';
 import logo from '../assets/logo.png';
 import logo_google from '../assets/logo_google.png';
@@ -10,6 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null); // Estado para manejar errores
+  const navigate = useNavigate(); // Hook de navegación para redirigir
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,17 +22,17 @@ const Login = () => {
   
       const { token, role } = response; // Obtener el token y el rol del backend
   
-      // Guardar el token y el rol en el localStorage o sessionStorage
+      // Guardar el token y el rol en el localStorage
       localStorage.setItem('token', token);
       localStorage.setItem('role', role);
   
-      // Manejar la lógica de redirección basada en el rol
+      // Redirigir a la página según el rol
       if (role === 'Cliente') {
-        // Redirigir a la página del cliente
+        navigate('/'); // Cliente va al Sidebar por defecto
       } else if (role === 'Inspector') {
-        // Redirigir a la página del inspector
+        navigate('/inspector');
       } else if (role === 'Contratista') {
-        // Redirigir a la página del contratista
+        navigate('/admin'); // O la página correspondiente al contratista
       }
     } catch (error) {
       console.error('Error en el login:', error);
@@ -86,3 +87,4 @@ const Login = () => {
 export default Login;
 
 Login.propTypes = LoginPropTypes;
+
