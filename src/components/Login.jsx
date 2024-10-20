@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate para la redirección
+import { useNavigate, Link } from 'react-router-dom'; // Importa useNavigate para la redirección
 import '../styles/Login.css';
 import logo from '../assets/logo.png';
 import logo_google from '../assets/logo_google.png';
@@ -72,8 +72,15 @@ const Login = () => {
                 required
               />
             </div>
+            <div className="remember-me">
+              <input type="checkbox" id="remember" />
+              <label htmlFor="remember">Recuérdame</label>
+            </div>
             {error && <p className="error-message">{error}</p>}
             <button type="submit" className="login-btn">Login</button>
+            <Link to="/password-recovery" className="forgot-password">
+              ¿Olvidaste la contraseña?
+            </Link>
           </form>
           <p className="signup-prompt">
             ¿No tienes cuenta? <a href="#">Regístrate</a>
