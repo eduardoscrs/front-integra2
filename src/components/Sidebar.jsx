@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Outlet, Link } from "react-router-dom"; // Importa Link para redirigir
 import '../styles/Sidebar.css';
-import logo from '../assets/logo.png'; 
+import logo from '../assets/Segurapp_rbg.png'; 
 
 
 const Sidebar = () => {
@@ -44,6 +44,12 @@ const Sidebar = () => {
         <li>
           <Link to="/perfil-usuario">
             <i className="icon-analytics"></i> Perfil
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/logout">
+            <i className="icon-analytics"></i> Logout
           </Link>
         </li>
 

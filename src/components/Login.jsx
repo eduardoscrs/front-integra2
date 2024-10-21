@@ -1,53 +1,42 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Importa useNavigate para la redirección
 import '../styles/Login.css';
-import logo from '../assets/logo.png'; 
-import logo_google from '../assets/logo_google.png'; 
+import logo from '../assets/logo.png';
+import logo_google from '../assets/logo_google.png';
+import { Alogin } from '../services/loginService'; // Importar el servicio de login
 import LoginPropTypes from '../config/LoginPropTypes'; // Importar validaciones
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [error, setError] = useState(null); // Estado para manejar errores
+  const navigate = useNavigate(); // Hook de navegación para redirigir
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
-    // Simular autenticación por rol y contraseña
-    const user = {
-      email,
-      role: ''
-    };
-
-    // Definir credenciales simuladas
-    const adminCredentials = {
-      email: 'admin@example.com',
-      password: 'admin123'
-    };
-
-    const inspectorCredentials = {
-      email: 'inspector@example.com',
-      password: 'inspector123'
-    };
-
-    // Verificar credenciales
-    if (email === adminCredentials.email && password === adminCredentials.password) {
-      user.role = 'admin';
-    } else if (email === inspectorCredentials.email && password === inspectorCredentials.password) {
-      user.role = 'inspector';
-    } else {
-      alert('Credenciales incorrectas');
-      return;
-    }
-
-    // Llamar a la función de login
-    onLogin(user);
-
-    // Redirigir según el rol del usuario
-    if (user.role === 'admin') {
-      navigate('/admin');
-    } else if (user.role === 'inspector') {
-      navigate('/inspector');
+    const usuario = { email, password }; // Crear el objeto usuario
+  
+    try {
+      const response = await Alogin(usuario); // Llamar al servicio de login
+      console.log('Login exitoso:', response);
+  
+      const { token, role } = response; // Obtener el token y el rol del backend
+  
+      // Guardar el token y el rol en el localStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
+  
+      // Redirigir a la página según el rol
+      if (role === 'Cliente') {
+        navigate('/'); // Cliente va al Sidebar por defecto
+      } else if (role === 'Inspector') {
+        navigate('/inspector');
+      } else if (role === 'Contratista') {
+        navigate('/admin'); // O la página correspondiente al contratista
+      }
+    } catch (error) {
+      console.error('Error en el login:', error);
+      setError(error.message); // Establecer el error en el estado
     }
   };
 
@@ -63,30 +52,35 @@ const Login = ({ onLogin }) => {
             <img src={logo_google} alt="Google Icon" /> Login with Google
           </button>
           <form className="login-form" onSubmit={handleLogin}>
-            <div className="input-group">
+            <div className="input-groups">
               <label>Email</label>
-              <input 
-                type="email" 
-                placeholder="ejemplo@gmail.com" 
+              <input
+                type="email"
+                placeholder="ejemplo@gmail.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)} 
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
-            <div className="input-group">
+            <div className="input-groups">
               <label>Password</label>
-              <input 
-                type="password" 
-                placeholder="******" 
+              <input
+                type="password"
+                placeholder="******"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)} 
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             <div className="remember-me">
               <input type="checkbox" id="remember" />
               <label htmlFor="remember">Recuérdame</label>
             </div>
+            {error && <p className="error-message">{error}</p>}
             <button type="submit" className="login-btn">Login</button>
-            <a href="#" className="forgot-password">¿Olvidaste la contraseña?</a>
+            <Link to="/password-recovery" className="forgot-password">
+              ¿Olvidaste la contraseña?
+            </Link>
           </form>
           <p className="signup-prompt">
             ¿No tienes cuenta? <a href="#">Regístrate</a>
@@ -97,7 +91,7 @@ const Login = ({ onLogin }) => {
   );
 };
 
-// Usar las validaciones de LoginPropTypes
+export default Login;
+
 Login.propTypes = LoginPropTypes;
 
-export default Login;
