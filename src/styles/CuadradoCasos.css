@@ -2,6 +2,18 @@
   background-color: white;
   border-radius: 5px;
   padding: 20px;
+  display: flex;
+}
+
+/* .contenedor-casos * {
+  display: flex;
+  flex-direction: column;
+} */
+
+.no-sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
 .seccion-cuadrados {
