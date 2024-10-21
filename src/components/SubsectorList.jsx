@@ -1,5 +1,6 @@
-import { useState } from 'react';
+////import { useState } from 'react';
 
+/*
 const SubsectorList = ({ subsectorData, onSubsectorChange }) => {
   const [subsectores, setSubsectores] = useState(subsectorData || []);
 
@@ -53,3 +54,4 @@ const SubsectorList = ({ subsectorData, onSubsectorChange }) => {
 };
 
 export default SubsectorList;
+*/
