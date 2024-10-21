@@ -2,6 +2,6 @@ import xCircle from './xCircle.svg';
 import folder from './folder.svg';
 import checkCircle from './checkCircle.svg';
 
-import usuario from './usuario.jpg';
+import usuarioImg from './usuarioImg.jpg';
 
-export { xCircle, folder, checkCircle, usuario };
+export { xCircle, folder, checkCircle, usuarioImg };
