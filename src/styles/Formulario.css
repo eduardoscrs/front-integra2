@@ -18,7 +18,6 @@
     width: 100%;
     max-width: 45%;
     box-sizing: border-box;
-    flex-shrink: 0;
 }
 
 /* Media queries para pantallas más pequeñas */
@@ -151,32 +150,30 @@
     margin-bottom: 15px;
 }
 
-/* Estilos generales de los botones */
-.form-container button.add-section-button,
-.form-container button[type="submit"],
-.form-container button.add-images-button {
-    background-color: #6a5acd;
+/* Contenedor para los botones */
+.button-container {
+    display: flex;
+    flex-direction: column; /* Alinea los botones en una columna */
+    gap: 10px; /* Separación entre botones */
+    margin-top: 20px; /* Espaciado superior para los botones */
+}
+
+/* Estilos de los botones específicos */
+.button-container button {
+    background-color: #6a5acd; /* Color de fondo del tono deseado */
     color: white;
     padding: 12px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
-    width: 100%;
     font-weight: bold;
-    margin-top: 10px;
-}
-
-/* Estilos del botón de agregar imágenes */
-.form-container button.add-images-button {
-    background-color: #6a5acd;
+    width: 100%; /* Botones ocupan el 100% del ancho del contenedor */
 }
 
 /* Efectos hover para los botones */
-.form-container button.add-section-button:hover,
-.form-container button.add-images-button:hover,
-.form-container button[type="submit"]:hover {
-    background-color: #5b4bb5;
+.button-container button:hover {
+    background-color: #5b4bb5; /* Color de fondo al pasar el mouse */
 }
 
 /* Estilos del modal */
@@ -230,11 +227,3 @@
     border: 1px solid #ddd;
     border-radius: 6px;
 }
-
-/* Contenedor para los botones */
-.button-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Separación entre botones */
-}
-
