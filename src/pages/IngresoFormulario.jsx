@@ -1,26 +1,44 @@
 import { useState } from 'react';
-import * as XLSX from 'xlsx'; // Librería para exportar a Excel
+import * as XLSX from 'xlsx';
 import '../styles/Formulario.css';
-import { crearCaso } from '../services/formularioService';
+
 
 const IngresoFormulario = () => {
+  // State for main form data
   const [formData, setFormData] = useState({
-    ID_caso: 30,
-    tipo_siniestro: '',
-    descripcion_siniestro: '',
-    ID_Cliente: '',
-    ID_inspector: '',
-    ID_contratista: '',
-    ID_estado: '',
-    nombre_estado: 'Aceptado',
-    sectores: [],
-    imagen: null, // Para almacenar la imagen
+    nombre: '',
+    rut: '',
+    direccion: '',
+    comuna: '',
+    dia: '',
+    mes: '',
+    año: '',
+    ID_caso: 30
   });
 
-  const [sectores, setSectores] = useState([]);
-  const [imagenPrevisualizada, setImagenPrevisualizada] = useState(null); // Para previsualizar la imagen
-  const [mostrarModal, setMostrarModal] = useState(false); // Controlar el modal de imagen
+  // State for sectors
+  const [sectores, setSectores] = useState([
+    {
+      ID_caso: formData.ID_caso,
+      tipo_siniestro: '',
+      descripcion_siniestro: '',
+      ID_Cliente: '',
+      ID_inspector: '',
+      ID_contratista: '',
+      ID_estado: '',
+      nombre_estado: 'Aceptado',
+      nombre_sector: '',
+      dano_sector: '',
+      porcentaje_perdida: '',
+      total_costo: '',
+    }
+  ]);
 
+  // State for images and modal control
+  const [imagenes, setImagenes] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Handle changes in the main form
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -28,21 +46,15 @@ const IngresoFormulario = () => {
     });
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFormData({
-        ...formData,
-        imagen: file // Guardar la imagen en formData
-      });
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImagenPrevisualizada(e.target.result); // Mostrar la imagen previsualizada
-      };
-      reader.readAsDataURL(file);
-    }
+  // Handle changes in the sectors
+  const manejarCambioSector = (index, e) => {
+    const updatedSectores = sectores.map((sector, i) =>
+      i === index ? { ...sector, [e.target.id]: e.target.value } : sector
+    );
+    setSectores(updatedSectores);
   };
 
+  // Add a new sector
   const agregarSector = () => {
     const nuevoSector = {
       ID_sector: Math.random(),
@@ -50,224 +62,290 @@ const IngresoFormulario = () => {
       dano_sector: '',
       porcentaje_perdida: '',
       total_costo: '',
-      ID_caso: formData.ID_caso,
+      ID_caso: formData.ID_caso
     };
     setSectores([...sectores, nuevoSector]);
   };
 
-  const manejarCambioSector = (index, e) => {
-    const updatedSectores = [...sectores];
-    updatedSectores[index][e.target.id] = e.target.value;
-    setSectores(updatedSectores);
-  };
-
+  // Delete an existing sector
   const eliminarSector = (index) => {
-    const updatedSectores = sectores.filter((_, i) => i !== index);
-    setSectores(updatedSectores);
-  };
-
-  const enviarDatos = async () => {
-    const datosAEnviar = {
-      ...formData,
-      sectores: sectores,
-    };
-
-    try {
-      await crearCaso(datosAEnviar);
-      console.log("Datos enviados exitosamente!");
-      alert("Los datos se han enviado correctamente.");
-    } catch (error) {
-      console.error("Error al enviar los datos:", error);
-      alert("Ocurrió un error al enviar los datos. Por favor, intenta de nuevo.");
+    if (sectores.length > 1) {
+      const updatedSectores = sectores.filter((_, i) => i !== index);
+      setSectores(updatedSectores);
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    enviarDatos();
+  // Trigger file input for image selection
+  const agregarImagenes = () => {
+    document.getElementById('imagenInput').click();
   };
 
-  const exportarExcel = () => {
-    // Crear una hoja de trabajo (worksheet)
-    const ws = XLSX.utils.aoa_to_sheet([]);
+  // Handle selected images
+  const handleImagenesSeleccionadas = (e) => {
+    const files = Array.from(e.target.files);
+    const newImagenes = files.map((file) => URL.createObjectURL(file));
+    setImagenes((prevImagenes) => [...prevImagenes, ...newImagenes]);
+    setIsModalOpen(true);
+  };
 
-    // Fusionar celdas para el título
-    ws['!merges'] = [
-      { s: { r: 0, c: 0 }, e: { r: 0, c: 8 } },  // Fusión para "C&C"
-      { s: { r: 1, c: 0 }, e: { r: 1, c: 8 } },  // Fusión para "Ingeniería y Obras Menores"
-      { s: { r: 3, c: 0 }, e: { r: 3, c: 8 } },  // Fusión para "PROYECTO"
-      { s: { r: 4, c: 0 }, e: { r: 4, c: 8 } },  // Fusión para "REPARACIÓN DAÑOS EN VIVIENDA"
-      { s: { r: 5, c: 0 }, e: { r: 5, c: 7 } },  // Fusión para nombre del cliente
-      { s: { r: 5, c: 8 }, e: { r: 5, c: 8 } },  // Fecha a la derecha
+  // Export data to Excel
+  const exportarAExcel = () => {
+    const dataToExport = [
+      {
+        "Nombre": formData.nombre,
+        "RUT": formData.rut,
+        "Dirección": formData.direccion,
+        "Comuna": formData.comuna,
+        "Día": formData.dia,
+        "Mes": formData.mes,
+        "Año": formData.año
+      },
+      { "Nombre del sector": "Sectores:" }
     ];
 
-    // Añadir el contenido
-    XLSX.utils.sheet_add_aoa(ws, [
-      ['C&C'],  // Primera fila fusionada
-      ['Ingeniería y Obras Menores'],  // Segunda fila fusionada
-      [],  // Fila vacía
-      ['PROYECTO'],  // Tercera fila fusionada
-      ['REPARACIÓN DAÑOS EN VIVIENDA'],  // Cuarta fila fusionada
-      [`NOMBRE: "" SN°1908983`, '', '', '', '', '', '', '', '20/9/2024'],  // Nombre y fecha
-      [],  // Fila vacía
-      ['Nombre del sector', 'Descripción del daño', 'Porcentaje de pérdida', 'Total costo'],  // Encabezados de la tabla de sectores
-    ]);
-
-    // Añadir los sectores
-    sectores.forEach((sector) => {
-      XLSX.utils.sheet_add_aoa(ws, [[
-        sector.nombre_sector,
-        sector.dano_sector,
-        sector.porcentaje_perdida,
-        sector.total_costo,
-      ]], { origin: -1 }); // Agregar filas consecutivamente
+    // Add main sector data
+    dataToExport.push({
+      "ID Caso": sectores[0].ID_caso,
+      "Tipo de siniestro": sectores[0].tipo_siniestro,
+      "Descripción del siniestro": sectores[0].descripcion_siniestro,
+      "ID Cliente": sectores[0].ID_Cliente,
+      "ID Inspector": sectores[0].ID_inspector,
+      "ID Contratista": sectores[0].ID_contratista,
+      "ID Estado": sectores[0].ID_estado,
+      "Nombre Estado": sectores[0].nombre_estado
     });
 
-    // Definir ancho de las columnas
-    ws['!cols'] = [
-      { wch: 20 },  // Ancho de columna para Nombre del sector
-      { wch: 30 },  // Ancho de columna para Descripción del daño
-      { wch: 20 },  // Ancho de columna para Porcentaje de pérdida
-      { wch: 15 },  // Ancho de columna para Total costo
-    ];
+    // Add additional sectors
+    sectores.slice(1).forEach((sector, index) => {
+      dataToExport.push({
+        "Sector": Sector ${index + 2},
+        "Nombre del sector": sector.nombre_sector,
+        "Área dañada": sector.dano_sector,
+        "Porcentaje de pérdida": sector.porcentaje_perdida,
+        "Total costo": sector.total_costo,
+      });
+    });
 
-    // Crear el libro de trabajo (workbook) y agregar la hoja
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sectores');
-
-    // Exportar el archivo
-    XLSX.writeFile(wb, 'sectores_actualizados.xlsx');
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Datos Formulario');
+    XLSX.writeFile(workbook, 'datos_formulario.xlsx');
   };
 
-  const abrirModal = () => {
-    setMostrarModal(true);
-  };
-
-  const cerrarModal = () => {
-    setMostrarModal(false);
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    exportarAExcel();
   };
 
   return (
-    <div className="form-container">
-      <form id="case-form" onSubmit={handleSubmit} noValidate>
-        <h2>Formulario de Caso</h2>
+    <div className="forms-wrapper">
+      <div className="form-container">
+        <form id="project-form" onSubmit={handleSubmit} noValidate>
+          <h2>Formulario de caso</h2>
+          <input
+            type="text"
+            id="nombre"
+            placeholder="Nombre"
+            required
+            value={formData.nombre}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            id="rut"
+            placeholder="RUT"
+            required
+            value={formData.rut}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            id="direccion"
+            placeholder="Dirección"
+            required
+            value={formData.direccion}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            id="comuna"
+            placeholder="Comuna"
+            required
+            value={formData.comuna}
+            onChange={handleChange}
+          />
+          <div className="date-container">
+            <input
+              type="number"
+              id="dia"
+              placeholder="Día"
+              min="1"
+              max="31"
+              required
+              value={formData.dia}
+              onChange={handleChange}
+            />
+            <select id="mes" required value={formData.mes} onChange={handleChange}>
+              <option value="" disabled>Mes</option>
+              <option value="01">Enero</option>
+              <option value="02">Febrero</option>
+              <option value="03">Marzo</option>
+              <option value="04">Abril</option>
+              <option value="05">Mayo</option>
+              <option value="06">Junio</option>
+              <option value="07">Julio</option>
+              <option value="08">Agosto</option>
+              <option value="09">Septiembre</option>
+              <option value="10">Octubre</option>
+              <option value="11">Noviembre</option>
+              <option value="12">Diciembre</option>
+            </select>
+            <input
+              type="number"
+              id="año"
+              placeholder="Año"
+              min="1910"
+              max="2024"
+              required
+              value={formData.año}
+              onChange={handleChange}
+            />
+          </div>
+        </form>
+      </div>
 
-        <input
-          type="text"
-          id="tipo_siniestro"
-          placeholder="Tipo de siniestro"
-          required
-          value={formData.tipo_siniestro}
-          onChange={handleChange}
-        />
+      <div className="form-container">
+        <div className="sector-section">
+          <div className="sector-header">
+            <h3>Sector 1: Datos del Caso</h3>
+          </div>
 
-        <input
-          type="text"
-          id="descripcion_siniestro"
-          placeholder="Descripción del siniestro"
-          required
-          value={formData.descripcion_siniestro}
-          onChange={handleChange}
-        />
+          <input
+            type="text"
+            id="tipo_siniestro"
+            placeholder="Tipo de siniestro"
+            required
+            value={sectores[0].tipo_siniestro}
+            onChange={(e) => manejarCambioSector(0, e)}
+          />
+          <input
+            type="text"
+            id="descripcion_siniestro"
+            placeholder="Descripción del siniestro"
+            required
+            value={sectores[0].descripcion_siniestro}
+            onChange={(e) => manejarCambioSector(0, e)}
+          />
+          <input
+            type="number"
+            id="ID_Cliente"
+            placeholder="ID Cliente"
+            required
+            value={sectores[0].ID_Cliente}
+            onChange={(e) => manejarCambioSector(0, e)}
+          />
+          <input
+            type="number"
+            id="ID_inspector"
+            placeholder="ID Inspector"
+            required
+            value={sectores[0].ID_inspector}
+            onChange={(e) => manejarCambioSector(0, e)}
+          />
+          <input
+            type="number"
+            id="ID_contratista"
+            placeholder="ID Contratista"
+            required
+            value={sectores[0].ID_contratista}
+            onChange={(e) => manejarCambioSector(0, e)}
+          />
+          <input
+            type="number"
+            id="ID_estado"
+            placeholder="ID Estado"
+            required
+            value={sectores[0].ID_estado}
+            onChange={(e) => manejarCambioSector(0, e)}
+          />
+        </div>
 
-        <input
-          type="number"
-          id="ID_Cliente"
-          placeholder="ID Cliente"
-          required
-          value={formData.ID_Cliente}
-          onChange={handleChange}
-        />
-
-        <input
-          type="number"
-          id="ID_inspector"
-          placeholder="ID Inspector"
-          required
-          value={formData.ID_inspector}
-          onChange={handleChange}
-        />
-
-        <input
-          type="number"
-          id="ID_contratista"
-          placeholder="ID Contratista"
-          required
-          value={formData.ID_contratista}
-          onChange={handleChange}
-        />
-
-        <input
-          type="number"
-          id="ID_estado"
-          placeholder="ID Estado"
-          required
-          value={formData.ID_estado}
-          onChange={handleChange}
-        />
-
-        {/* Sección para gestionar sectores */}
-        {sectores.map((sector, index) => (
-          <div key={index} className="sector-container">
+        {sectores.slice(1).map((sector, index) => (
+          <div key={index} className="sector-section">
+            <div className="sector-header">
+              <h3>Sector {index + 2}</h3>
+              <button type="button" className="delete-sector-button" onClick={() => eliminarSector(index + 1)}>
+                Eliminar sector
+              </button>
+            </div>
             <input
               type="text"
-              id="nombre_sector"
+              id={nombre_sector_${index + 1}}
               placeholder="Nombre del sector"
               required
               value={sector.nombre_sector}
-              onChange={(e) => manejarCambioSector(index, e)}
+              onChange={(e) => manejarCambioSector(index + 1, e)}
             />
             <input
               type="text"
-              id="dano_sector"
-              placeholder="Descripción del daño"
+              id={dano_sector_${index + 1}}
+              placeholder="Área dañada"
               required
               value={sector.dano_sector}
-              onChange={(e) => manejarCambioSector(index, e)}
+              onChange={(e) => manejarCambioSector(index + 1, e)}
             />
             <input
               type="number"
-              id="porcentaje_perdida"
+              id={porcentaje_perdida_${index + 1}}
               placeholder="Porcentaje de pérdida"
               required
               value={sector.porcentaje_perdida}
-              onChange={(e) => manejarCambioSector(index, e)}
+              onChange={(e) => manejarCambioSector(index + 1, e)}
             />
             <input
-              type="text"
-              id="total_costo"
+              type="number"
+              id={total_costo_${index + 1}}
               placeholder="Total costo"
               required
               value={sector.total_costo}
-              onChange={(e) => manejarCambioSector(index, e)}
+              onChange={(e) => manejarCambioSector(index + 1, e)}
             />
-            <button type="button" onClick={() => eliminarSector(index)}>Eliminar Sector</button>
           </div>
         ))}
 
-        <button type="button" onClick={agregarSector}>Agregar Sector</button>
+        <button type="button" className="add-sector-button" onClick={agregarSector}>
+          Agregar sector
+        </button>
 
-        {/* Botón para agregar imágenes */}
-        <button type="button" onClick={abrirModal}>Agregar Imagen</button>
+        <input
+          type="file"
+          id="imagenInput"
+          multiple
+          accept="image/*"
+          onChange={handleImagenesSeleccionadas}
+          style={{ display: 'none' }}
+        />
+        <button type="button" className="add-image-button" onClick={agregarImagenes}>
+          Agregar imágenes
+        </button>
 
-        {/* Modal para previsualizar la imagen */}
-        {mostrarModal && (
+        <button type="submit" className="submit-button">
+          Generar informe
+        </button>
+
+        {/* Modal for image preview */}
+        {isModalOpen && (
           <div className="modal">
             <div className="modal-content">
-              <span className="close" onClick={cerrarModal}>&times;</span>
-              {imagenPrevisualizada && (
-                <img src={imagenPrevisualizada} alt="Previsualización" className="preview-image" />
-              )}
-              <input type="file" onChange={handleImageChange} />
+              <span className="close" onClick={() => setIsModalOpen(false)}>&times;</span>
+              {imagenes.map((imagen, index) => (
+                <img key={index} src={imagen} alt={Preview ${index + 1}} className="preview-image" />
+              ))}
             </div>
           </div>
         )}
-
-        {/* Botón para generar informe */}
-        <button type="button" onClick={exportarExcel}>Generar Informe</button>
-
-        <button type="submit">Enviar Datos</button>
-      </form>
+      </div>
     </div>
   );
 };

@@ -53,7 +53,7 @@
 .form-container form input[type="number"],
 .form-container form select {
     color: #454444;
-    width: 100%;
+    width: 100%; /* Asegúrate que todos los inputs sean del 100% del contenedor */
     padding: 12px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
@@ -73,7 +73,7 @@
 .date-container input[type="number"],
 .date-container select {
     color: #454444;
-    width: 100%;
+    width: 100%; /* Asegúrate que todos los inputs sean del 100% del contenedor */
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 6px;
@@ -123,7 +123,7 @@
 .sector-section input[type="text"],
 .sector-section input[type="number"],
 .sector-section select {
-    width: 100%;
+    width: calc(100% - 20px); /* Dos inputs por fila, restando espacio entre ellos */
     padding: 12px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
@@ -149,18 +149,8 @@
     justify-content: space-between;
     margin-bottom: 15px;
 }
-
-/* Contenedor para los botones */
-.button-container {
-    display: flex;
-    flex-direction: column; /* Alinea los botones en una columna */
-    gap: 10px; /* Separación entre botones */
-    margin-top: 20px; /* Espaciado superior para los botones */
-}
-
-/* Estilos de los botones específicos */
 .button-container button {
-    background-color: #6a5acd; /* Color de fondo del tono deseado */
+    background-color: #6a5acd; /* Color de fondo morado */
     color: white;
     padding: 12px;
     border: none;
@@ -173,8 +163,11 @@
 
 /* Efectos hover para los botones */
 .button-container button:hover {
-    background-color: #5b4bb5; /* Color de fondo al pasar el mouse */
+    background-color: #5b4bb5; /* Color de fondo más oscuro al pasar el mouse */
 }
+
+
+
 
 /* Estilos del modal */
 .modal {
