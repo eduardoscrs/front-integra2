@@ -18,6 +18,7 @@
     width: 100%;
     max-width: 45%;
     box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 /* Media queries para pantallas más pequeñas */
@@ -53,7 +54,7 @@
 .form-container form input[type="number"],
 .form-container form select {
     color: #454444;
-    width: 100%; /* Asegúrate que todos los inputs sean del 100% del contenedor */
+    width: 100%;
     padding: 12px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
@@ -73,7 +74,7 @@
 .date-container input[type="number"],
 .date-container select {
     color: #454444;
-    width: 100%; /* Asegúrate que todos los inputs sean del 100% del contenedor */
+    width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 6px;
@@ -123,7 +124,7 @@
 .sector-section input[type="text"],
 .sector-section input[type="number"],
 .sector-section select {
-    width: calc(100% - 20px); /* Dos inputs por fila, restando espacio entre ellos */
+    width: 100%;
     padding: 12px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
@@ -149,25 +150,34 @@
     justify-content: space-between;
     margin-bottom: 15px;
 }
-.button-container button {
-    background-color: #6a5acd; /* Color de fondo morado */
+
+/* Estilos generales de los botones */
+.form-container button.add-section-button,
+.form-container button[type="submit"],
+.form-container button.add-images-button {
+    background-color: #6a5acd;
     color: white;
     padding: 12px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
+    width: 100%;
     font-weight: bold;
-    width: 100%; /* Botones ocupan el 100% del ancho del contenedor */
+    margin-top: 10px;
+}
+
+/* Estilos del botón de agregar imágenes */
+.form-container button.add-images-button {
+    background-color: #6a5acd;
 }
 
 /* Efectos hover para los botones */
-.button-container button:hover {
-    background-color: #5b4bb5; /* Color de fondo más oscuro al pasar el mouse */
+.form-container button.add-section-button:hover,
+.form-container button.add-images-button:hover,
+.form-container button[type="submit"]:hover {
+    background-color: #5b4bb5;
 }
-
-
-
 
 /* Estilos del modal */
 .modal {
@@ -220,3 +230,42 @@
     border: 1px solid #ddd;
     border-radius: 6px;
 }
+
+/* Contenedor para los botones */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Separación entre botones */
+    
+}
+/* Estilos para la subida y previsualización de imágenes */
+.image-upload {
+    margin-top: 20px;
+  }
+  
+  .image-upload input[type="file"] {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .image-preview {
+    margin-top: 10px;
+  }
+  
+  .image-preview img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .date-inputs {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .date-inputs input {
+    width: 30%;
+  }
+
