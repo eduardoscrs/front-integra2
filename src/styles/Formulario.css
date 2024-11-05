@@ -152,9 +152,7 @@
 }
 
 /* Estilos generales de los botones */
-.form-container button.add-section-button,
-.form-container button[type="submit"],
-.form-container button.add-images-button {
+.submit-button {
     background-color: #6a5acd;
     color: white;
     padding: 12px;
@@ -167,17 +165,16 @@
     margin-top: 10px;
 }
 
+/* Efecto hover para los botones */
+.submit-button:hover {
+    background-color: #5b4bb5;
+}
+
 /* Estilos del botón de agregar imágenes */
 .form-container button.add-images-button {
     background-color: #6a5acd;
 }
 
-/* Efectos hover para los botones */
-.form-container button.add-section-button:hover,
-.form-container button.add-images-button:hover,
-.form-container button[type="submit"]:hover {
-    background-color: #5b4bb5;
-}
 
 /* Estilos del modal */
 .modal {
