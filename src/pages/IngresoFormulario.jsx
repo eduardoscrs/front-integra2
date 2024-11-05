@@ -24,7 +24,8 @@ const IngresoFormulario = () => {
   });
 
   const [sectores, setSectores] = useState([]);
-  const [imagen, setImagen] = useState(null); 
+  const [imagenes, setImagenes] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la apertura de la modal
 
   const handleChange = (e) => {
     setFormData({
@@ -56,12 +57,15 @@ const IngresoFormulario = () => {
     setSectores(updatedSectores);
   };
 
-  const handleImagenChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imagenURL = URL.createObjectURL(file);
-      setImagen(imagenURL); // Guardar la URL de la imagen para previsualización
-    }
+  const agregarImagenes = () => {
+    document.getElementById('imagenInput').click(); // Simula un clic en el input de archivo
+  };
+
+  const handleImagenesSeleccionadas = (e) => {
+    const files = Array.from(e.target.files); // Convertir los archivos seleccionados a un array
+    const newImagenes = files.map((file) => URL.createObjectURL(file)); // Crear URLs temporales
+    setImagenes((prevImagenes) => [...prevImagenes, ...newImagenes]); // Añadir las nuevas imágenes al estado
+    setIsModalOpen(true); // Abrir la modal cuando se seleccionen imágenes
   };
 
   const enviarDatos = async () => {
@@ -229,6 +233,11 @@ const IngresoFormulario = () => {
             onChange={handleChange}
           />
 
+          {/* Botón para agregar nuevos sectores */}
+          <button type="button" className="submit-button" onClick={agregarSector}>
+            Agregar Sector
+          </button>
+
           {/* Sección para gestionar sectores */}
           {sectores.map((sector, index) => (
             <div key={index} className="sector-container">
@@ -268,28 +277,43 @@ const IngresoFormulario = () => {
             </div>
           ))}
 
-          <button type="button" className="submit-button" onClick={agregarSector}>Agregar Sector</button>
-          {/* Botón para cargar imagen */}
-          <div className="image-upload">
-            <h3>Subir Imagen</h3>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImagenChange}
-            />
-            {imagen && (
-              <div className="image-preview">
-                <h4>Previsualización de la imagen:</h4>
-                <img src={imagen} alt="Previsualización" width="200" />
-              </div>
-            )}
-          </div>
+          <button type="button" onClick={agregarImagenes} className="add-images-button">
+            Agregar imágenes
+          </button>
 
-          <button type="submit" className="submit-button">Enviar datos</button>
-          {/* Botón para generar el archivo Excel */}
-          <button type="button" className="submit-button" onClick={generarExcel}>Generar Excel</button>
+          <input
+            id="imagenInput"
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleImagenesSeleccionadas}
+            style={{ display: 'none' }} // Oculta el input de archivo
+          />
+
+          <button type="button" onClick={generarExcel} className="submit-button">
+            Generar Excel
+          </button>
+
+          <button type="submit" className="submit-button">
+            Enviar datos
+          </button>
         </form>
       </div>
+
+      {/* Ventana modal para mostrar las imágenes seleccionadas */}
+      {isModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={() => setIsModalOpen(false)}>&times;</span>
+            <h2>Previsualización de imágenes</h2>
+            <div className="image-preview">
+              {imagenes.map((imagen, index) => (
+                <img key={index} src={imagen} alt={`preview ${index}`} />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

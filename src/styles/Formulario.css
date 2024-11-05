@@ -152,7 +152,8 @@
 }
 
 /* Estilos generales de los botones */
-.submit-button {
+.submit-button,
+.add-images-button {
     background-color: #6a5acd;
     color: white;
     padding: 12px;
@@ -166,7 +167,8 @@
 }
 
 /* Efecto hover para los botones */
-.submit-button:hover {
+.submit-button:hover,
+.add-images-button:hover {
     background-color: #5b4bb5;
 }
 
