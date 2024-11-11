@@ -54,7 +54,6 @@ const PerfilUsuario = () => {
       />
       <section className="seccion-usuario">
         <h1>Usuario</h1>
-        <span>Detalles de perfil</span>
         <div className="div-componentes-usuario">
           <button className="btn-editar-perfil" onClick={handleEditarPerfil}>
             Editar perfil

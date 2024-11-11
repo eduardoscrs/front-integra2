@@ -60,6 +60,7 @@ const ActualizarUsuario = () => {
 
   return (
     <div className="contenedor-formulario-usuario">
+      <h1>Editar perfil</h1>
       <form onSubmit={handleSubmit}>
         <div className="div-campos">
           <label htmlFor="nombre">Nombre: </label>
