@@ -27,7 +27,7 @@ const Login = () => {
       localStorage.setItem('role', role);
   
       // Redirigir a la página según el rol
-      if (role === 'Cliente') {
+      if (role === 'Cliente') { // aqui se debe verificar ademas del rol de usuario, si el usuario está logueado o no
         navigate('/'); // Cliente va al Sidebar por defecto
       } else if (role === 'Inspector') {
         navigate('/inspector');
