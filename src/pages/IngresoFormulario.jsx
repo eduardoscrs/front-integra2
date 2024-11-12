@@ -90,19 +90,89 @@ const IngresoFormulario = () => {
   };
 
   // Función para generar el archivo Excel
-  const generarExcel = () => {
-    const data = [
-      { ...formData, sectores: undefined }, // Excluimos los sectores de la primera fila
-      ...sectores.map(sector => ({
-        ...formData,
-        ...sector // Mezclamos los datos del sector con los del formulario
-      }))
+  //Fun ción para generar el archivo Excel con formato específico
+  const generarExcelFormato = () => {
+    // Datos del cliente obtenidos del formulario
+    const clienteInfo = {
+      nombre: formData.nombre || "Nombre Cliente",
+      rut: formData.rut || "12345678-9",
+      fecha_siniestro: `${formData.dia}/${formData.mes}/${formData.año}`,
+      direccion: formData.direccion || "Dirección",
+      comuna: formData.comuna || "Comuna",
+      fecha_proyecto: "20/09/2024",
+      sn: "SN*1908983",
+    };
+  
+    // Detalle de partidas con datos reales y aleatorios
+    const detalles = sectores.map((sector) => ([
+      `SECTOR: ${sector.nombre_sector}`,
+      "M2",
+      parseFloat(sector.porcentaje_perdida) || (Math.random() * 5).toFixed(2),
+      Math.floor(Math.random() * (20000 - 1500 + 1)) + 1500,
+    ]));
+  
+    // Partidas predefinidas
+    detalles.push(["FRAGUE", "M2", 0.3, 3000 + Math.random() * 2000]);
+    detalles.push(["PREPARACIÓN DE SUPERFICIE", "M2", 0.3, 4000 + Math.random() * 1000]);
+    detalles.push(["PROV. E INST. CERAMICOS", "M2", 3.3, 15000 + Math.random() * 5000]);
+  
+    // Datos generales adicionales
+    const generales = [
+      ["Traslado de Materiales a Obra", "GL", 1, Math.floor(Math.random() * (70000 - 50000 + 1)) + 50000],
+      ["Retiro de Escombros", "GL", 1, Math.floor(Math.random() * (50000 - 30000 + 1)) + 30000],
+      ["Aseo Diario y Entrega Final", "GL", 1, Math.floor(Math.random() * (60000 - 30000 + 1)) + 30000],
     ];
-
-    const ws = XLSX.utils.json_to_sheet(data);
+  
+    // Crear hoja de cálculo
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Datos del Formulario");
-    XLSX.writeFile(wb, "Formulario_Datos.xlsx");
+    const wsData = [];
+  
+    // Encabezado del proyecto
+    wsData.push(["PROYECTO", "", "", "", "REPARACIÓN DAÑOS EN VIVIENDA"]);
+    wsData.push(["NOMBRE:", clienteInfo.nombre, "", "RUT:", clienteInfo.rut, clienteInfo.fecha_proyecto]);
+    wsData.push(["FECHA SINIESTRO:", clienteInfo.fecha_siniestro, "", "DIRECCIÓN:", clienteInfo.direccion]);
+    wsData.push(["COMUNA:", clienteInfo.comuna, "", "", ""]);
+    wsData.push([]);
+    wsData.push(["DETALLE DE PARTIDAS ITEMIZADAS", "", "", "", "DETERMINACIÓN DE VALORES"]);
+    wsData.push(["DESCRIPCIÓN", "Unid", "Cant.", "Prec. Unit.", "Prec. Total", "Obs"]);
+  
+    // Agregar detalles de partidas al Excel
+    let totalGeneral = 0;
+    detalles.forEach(([descripcion, unidad, cantidad, precioUnitario]) => {
+      const precioTotal = (cantidad * precioUnitario).toFixed(2);
+      wsData.push([descripcion, unidad, cantidad, precioUnitario, precioTotal, ""]);
+      totalGeneral += parseFloat(precioTotal);
+    });
+  
+    // Agregar datos generales al Excel
+    wsData.push([]);
+    wsData.push(["GENERAL", "", "", "", ""]);
+    generales.forEach(([descripcion, unidad, cantidad, precioUnitario]) => {
+      const precioTotal = (cantidad * precioUnitario).toFixed(2);
+      wsData.push([descripcion, unidad, cantidad, precioUnitario, precioTotal, ""]);
+      totalGeneral += parseFloat(precioTotal);
+    });
+  
+    // Cálculos de costos
+    const costoDirectoObra = totalGeneral;
+    const gastosGeneralesUtilidades = (costoDirectoObra * 0.25).toFixed(2);
+    const costoNeto = (costoDirectoObra + parseFloat(gastosGeneralesUtilidades)).toFixed(2);
+    const iva = (costoNeto * 0.19).toFixed(2);
+    const costoTotal = (parseFloat(costoNeto) + parseFloat(iva)).toFixed(2);
+  
+    // Agregar la sección de cálculo final al Excel
+    wsData.push([]);
+    wsData.push(["Total General", "", "", "", totalGeneral.toFixed(2)]);
+    wsData.push(["COSTO DIRECTO DE OBRA", "", "", "", costoDirectoObra.toFixed(2)]);
+    wsData.push(["GASTOS GENERALES Y UTILIDADES 25%", "", "", "", gastosGeneralesUtilidades]);
+    wsData.push(["COSTO NETO", "", "", "", costoNeto]);
+    wsData.push(["IVA 19%", "", "", "", iva]);
+    wsData.push(["COSTO TOTAL EN $", "", "", "", costoTotal]);
+  
+    // Crear hoja y archivo Excel
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+    XLSX.utils.book_append_sheet(wb, ws, "Reparacion_Danos");
+    XLSX.writeFile(wb, "Proyecto_Reparacion_Danos.xlsx");
   };
 
   return (
@@ -290,7 +360,7 @@ const IngresoFormulario = () => {
             style={{ display: 'none' }} // Oculta el input de archivo
           />
 
-          <button type="button" onClick={generarExcel} className="submit-button">
+          <button type="button" onClick={generarExcelFormato} className="submit-button">
             Generar Excel
           </button>
 
