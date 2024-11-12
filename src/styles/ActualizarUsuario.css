@@ -6,7 +6,7 @@ body {
 
 .contenedor-formulario-usuario {
   font-size: 12px;
-  background-color: rgb(153, 195, 250);
+  background-color: #9581d3;
   display: flex;
   flex-direction: column;
   align-items: center;

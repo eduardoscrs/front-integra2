@@ -1,3 +1,4 @@
+import '../styles/PerfilContrasena.css';
 import { useState, useEffect } from 'react';
 import {
   actualizarContrasena,
@@ -47,11 +48,11 @@ const ActualizarContrasena = () => {
   };
 
   return (
-    <div>
+    <div className="contenedor-update-pass">
       <h2>Actualizar Contraseña</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Contraseña Actual:</label>
+          <label>Contraseña Actual: </label>
           <input
             type="password"
             value={contrasenaActual}
@@ -60,7 +61,7 @@ const ActualizarContrasena = () => {
           />
         </div>
         <div>
-          <label>Nueva Contraseña:</label>
+          <label>Nueva Contraseña: </label>
           <input
             type="password"
             value={nuevaContrasena}
