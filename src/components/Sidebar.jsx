@@ -28,7 +28,11 @@ const Sidebar = () => {
 
       {/* Menu */}
       <ul className="sidebar__menu">
-        <li><i className="icon-home"></i> Inicio</li>
+        <li>
+          <Link to="/inicio">
+            <i className="icon-dashboard"></i>Inicio
+          </Link>
+        </li>
         <li>
           <Link to="/ingreso-formulario">
             <i className="icon-dashboard"></i>Formulario
