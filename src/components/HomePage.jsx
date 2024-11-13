@@ -2,10 +2,45 @@ import '../styles/Logout.css';
 import '../styles/HomePage.css';
 import APPmovil from '../assets/APPmovil.png';
 import APPmovil2 from '../assets/APPmovil2.png';
+import { Outlet, Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
     <div className="homepage">
+
+
+      <ul className="menu">
+        <li>
+          <Link to="/inicio">
+            <i className="inicio-h"></i>Inicio
+          </Link>
+        </li>
+        <li>
+          <Link to="/ingreso-formulario">
+            <i className="form-h"></i>Formulario
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/casos">
+            <i className="casos-h"></i> Casos
+          </Link>
+        </li>
+        
+        <li>
+          <Link to="/perfil-usuario">
+            <i className="perfil-h"></i> Perfil
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/logout">
+            <i className="logout-h"></i> Logout
+          </Link>
+        </li>
+
+      </ul> 
+      <Outlet/>
       
       <div id="title" className="slide header">
         <h1>Bienvenidos a</h1>
