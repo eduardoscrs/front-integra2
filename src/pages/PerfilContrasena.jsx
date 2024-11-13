@@ -51,7 +51,7 @@ const ActualizarContrasena = () => {
     <div className="contenedor-update-pass">
       <h2>Actualizar Contraseña</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="div-campos">
           <label>Contraseña Actual: </label>
           <input
             type="password"
@@ -60,7 +60,7 @@ const ActualizarContrasena = () => {
             required
           />
         </div>
-        <div>
+        <div className="div-campos">
           <label>Nueva Contraseña: </label>
           <input
             type="password"
