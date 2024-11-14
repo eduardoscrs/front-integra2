@@ -46,7 +46,9 @@ const PerfilUsuario = () => {
 
   return (
     <div className="contenedor-principal-perfil">
-      <Sidebar></Sidebar>
+      <div className="contendor-sidebar">
+        <Sidebar />
+      </div>
       <img
         src={usuarioImg}
         alt="Imagen de perfil del usuario"
