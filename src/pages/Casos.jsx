@@ -10,6 +10,8 @@ import { obtenerCasos, actualizarEstadoCaso } from '../services/casosService'; /
 const Casos = () => {
   const [casos, setCasos] = useState([]); // Estado para guardar los casos obtenidos de la API
   const [error, setError] = useState(null); // Estado para manejar errores
+  const [paginaActual, setPaginaActual] = useState(1);
+  const casosPorPagina = 4; // Cambia este número segun el numero de casos a mostrar por pagina
 
   // Efecto que se ejecuta cuando el componente se monta
   useEffect(() => {
@@ -29,6 +31,23 @@ const Casos = () => {
   if (error) {
     return <p>{error}</p>; // Muestra un mensaje de error si ocurre algún problema
   }
+
+  const indiceUltimoCaso = paginaActual * casosPorPagina;
+  const indicePrimerCaso = indiceUltimoCaso - casosPorPagina;
+  const casosEnPagina = casos.slice(indicePrimerCaso, indiceUltimoCaso);
+  const totalPaginas = Math.ceil(casos.length / casosPorPagina);
+
+  const handleSiguiente = () => {
+    if (paginaActual < totalPaginas) {
+      setPaginaActual(paginaActual + 1);
+    }
+  };
+
+  const handleAnterior = () => {
+    if (paginaActual > 1) {
+      setPaginaActual(paginaActual - 1);
+    }
+  };
 
   // Función para manejar la aceptación de un caso
   const aceptarCaso = async (id) => {
@@ -97,7 +116,7 @@ const Casos = () => {
             <h3>Acciones</h3>
           </section>
           <section className="seccion-lista-casos">
-            {casos.map((caso) => (
+            {casosEnPagina.map((caso) => (
               <ListaCasos
                 key={caso.ID_caso} // Asigna una clave única basada en el id del caso
                 numeroCaso={caso.ID_caso}
@@ -107,6 +126,15 @@ const Casos = () => {
               />
             ))}
           </section>
+          {/* Botones de paginación */}
+          <div className="paginacion">
+            {paginaActual > 1 && (
+              <button onClick={handleAnterior}>Anterior</button>
+            )}
+            {paginaActual < totalPaginas && (
+              <button onClick={handleSiguiente}>Siguiente</button>
+            )}
+          </div>
         </div>
       </div>
     </div>
