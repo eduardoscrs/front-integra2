@@ -121,6 +121,10 @@ const Casos = () => {
                 key={caso.ID_caso} // Asigna una clave única basada en el id del caso
                 numeroCaso={caso.ID_caso}
                 estadoCaso={caso.nombre_estado}
+                datosCaso={{
+                  tipo_siniestro: caso.tipo_siniestro,
+                  descripcion: caso.descripcion_siniestro,
+                }}
                 onAceptar={() => aceptarCaso(caso.ID_caso)}
                 onRechazar={() => rechazarCaso(caso.ID_caso)}
               />

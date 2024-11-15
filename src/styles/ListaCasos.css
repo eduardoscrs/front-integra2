@@ -13,6 +13,16 @@
   gap: 140px;
 }
 
+.link-caso {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link-caso:hover {
+  color: blue;
+  transition: color 650ms;
+}
+
 /* .lista-caso hr {
   width: 100%;
   display: flex;
