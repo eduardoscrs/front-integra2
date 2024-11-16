@@ -1,6 +1,6 @@
 // src/services/casoService.js
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://190.114.253.250:3000';
 
 // Función para obtener todos los casos
 export const obtenerCasos = async () => {
