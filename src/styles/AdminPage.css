@@ -21,8 +21,8 @@
     padding: 10px;
     border-radius: 5px;
     text-align: center;
-    width: 70%;
-    right: 9%;
+    width: 800px;
+    left: 20px;
     
     
 }
@@ -34,28 +34,68 @@
     padding: 10px;
     border-radius: 5px;
     text-align: center;
-    width: 50%;
-    left: 7%;
+    width: 500px;
+    right: 130px;
 }
 
+.box  {
+    position: relative;
+    background-color: #33333339;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 250px;
+    bottom: 50px;
+    height: 340px;
+    left: 294px;
+}
+
+.box2 {
+    position: relative;
+    background-color: #33333339;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 500px;
+    bottom: 360px;
+    height: 270px;
+    right: 130px;
+}
+
+.box3 {
+    position: relative;
+    background-color: #33333339;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 365px;
+    bottom: 700px;
+    height: 300px;
+    left: 654px;
+}
+
+.map  {
+    position: relative;
+    background-color: #33333339;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 365px;
+    bottom: 1390px;
+    height: 300px;
+    left: 654px;
+}
 
 .welcome-message p {
     color: #333;
     margin: 10px 0;
 }
 
-.quick-action__button {
-    position: relative;
-    background-color: #6b47dc;
-    color: white;
-    padding: 15px 25px;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    top: 2%;
-    right: 18%;
-    
-}
+
 
 .date-time {
     position: relative;
@@ -63,8 +103,14 @@
     gap: 10px; 
     justify-content: center; 
     margin-top: 10px; 
-    bottom: 54%;
-    left: 29%;
+    bottom: 1912px;
+    left: 654px;
+    background-color: #33333339;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    border-radius: 10px;
+    width: 365px;
+    height: 130px;
 }
 
 .date-time p {
@@ -93,9 +139,13 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 30%;
-    left: 30%;
-    bottom: 48%;
+    width: 250px;
+    left: 294px;
+    bottom: 1895px;
+    background-color: #33333339;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .stat-card {
