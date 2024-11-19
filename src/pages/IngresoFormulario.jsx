@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import * as XLSX from 'xlsx'; // Importa la biblioteca xlsx
+import { useState } from 'react'; // Importa la biblioteca xlsx
+import ExcelJS from "exceljs";
+import { saveAs } from "file-saver";
 import '../styles/Formulario.css';
 import { crearCaso } from '../services/formularioService';
 
@@ -127,88 +128,102 @@ const IngresoFormulario = () => {
 
   // Función para generar el archivo Excel
   //Fun ción para generar el archivo Excel con formato específico
-  const generarExcelFormato = () => {
-    // Datos del cliente obtenidos del formulario
-    const clienteInfo = {
-      nombre: formData.nombre || "Nombre Cliente",
-      rut: formData.rut || "12345678-9",
-      fecha_siniestro: `${formData.dia}/${formData.mes}/${formData.año}`,
-      direccion: formData.direccion || "Dirección",
-      comuna: formData.comuna || "Comuna",
-      fecha_proyecto: "20/09/2024",
-      sn: "SN*1908983",
+  const generarExcelFormato = async () => {
+    // Crear un nuevo libro de trabajo
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Reparacion_Danos");
+  
+    // Estilo común para encabezados
+    const headerStyle = {
+      font: { bold: true, color: { argb: "FFFFFF" } },
+      fill: { type: "pattern", pattern: "solid", fgColor: { argb: "4472C4" } },
+      alignment: { horizontal: "center", vertical: "middle" },
+      border: {
+        top: { style: "thin" },
+        left: { style: "thin" },
+        bottom: { style: "thin" },
+        right: { style: "thin" },
+      },
     };
   
-    // Detalle de partidas con datos reales y aleatorios
-    const detalles = sectores.map((sector) => ([
-      `SECTOR: ${sector.nombre_sector}`,
-      "M2",
-      parseFloat(sector.porcentaje_perdida) || (Math.random() * 5).toFixed(2),
-      Math.floor(Math.random() * (20000 - 1500 + 1)) + 1500,
-    ]));
+    // Encabezados del proyecto
+    worksheet.mergeCells("A1:E1");
+    worksheet.getCell("A1").value = "REPARACIÓN DAÑOS EN VIVIENDA";
+    worksheet.getCell("A1").font = { bold: true, size: 14, color: { argb: "000000" } };
+    worksheet.getCell("A1").alignment = { horizontal: "center" };
   
-    // Partidas predefinidas
-    detalles.push(["FRAGUE", "M2", 0.3, 3000 + Math.random() * 2000]);
-    detalles.push(["PREPARACIÓN DE SUPERFICIE", "M2", 0.3, 4000 + Math.random() * 1000]);
-    detalles.push(["PROV. E INST. CERAMICOS", "M2", 3.3, 15000 + Math.random() * 5000]);
+    worksheet.addRow(["NOMBRE:", formData.nombre || "Nombre Cliente", "", "RUT:", formData.rut || "12345678-9"]);
+    worksheet.addRow([
+      "FECHA SINIESTRO:",
+      `${formData.dia || "01"}/${formData.mes || "01"}/${formData.año || "2024"}`,
+      "",
+      "DIRECCIÓN:",
+      formData.direccion || "Dirección",
+    ]);
+    worksheet.addRow(["COMUNA:", formData.comuna || "Comuna", "", "FECHA PROYECTO:", "20/09/2024"]);
+    worksheet.addRow([]);
   
-    // Datos generales adicionales
+    // Títulos para el detalle de partidas
+    worksheet.addRow(["DETALLE DE PARTIDAS ITEMIZADAS", "", "", "", "DETERMINACIÓN DE VALORES"]).eachCell((cell) => {
+      cell.font = { bold: true };
+      cell.alignment = { horizontal: "center" };
+    });
+    worksheet.addRow(["DESCRIPCIÓN", "Unid", "Cant.", "Prec. Unit.", "Prec. Total", "Obs"]).eachCell((cell) => {
+      Object.assign(cell, headerStyle);
+    });
+  
+    // Detalles de las partidas
+    sectores.forEach((sector) => {
+      const cantidad = parseFloat(sector.porcentaje_perdida) || parseFloat((Math.random() * 5).toFixed(2));
+      const precioUnitario = Math.floor(Math.random() * (20000 - 1500 + 1)) + 1500;
+      const precioTotal = (cantidad * precioUnitario).toFixed(2);
+      worksheet.addRow([
+        `SECTOR: ${sector.nombre_sector || "Sector Desconocido"}`,
+        "M2",
+        cantidad,
+        precioUnitario,
+        precioTotal,
+        "",
+      ]);
+    });
+  
+    // Agregar partidas generales
     const generales = [
-      ["Traslado de Materiales a Obra", "GL", 1, Math.floor(Math.random() * (70000 - 50000 + 1)) + 50000],
-      ["Retiro de Escombros", "GL", 1, Math.floor(Math.random() * (50000 - 30000 + 1)) + 30000],
-      ["Aseo Diario y Entrega Final", "GL", 1, Math.floor(Math.random() * (60000 - 30000 + 1)) + 30000],
+      ["Traslado de Materiales a Obra", "GL", 1, 60000, 60000],
+      ["Retiro de Escombros", "GL", 1, 30000, 30000],
+      ["Aseo Diario y Entrega Final", "GL", 1, 40000, 40000],
     ];
   
-    // Crear hoja de cálculo
-    const wb = XLSX.utils.book_new();
-    const wsData = [];
-  
-    // Encabezado del proyecto
-    wsData.push(["PROYECTO", "", "", "", "REPARACIÓN DAÑOS EN VIVIENDA"]);
-    wsData.push(["NOMBRE:", clienteInfo.nombre, "", "RUT:", clienteInfo.rut, clienteInfo.fecha_proyecto]);
-    wsData.push(["FECHA SINIESTRO:", clienteInfo.fecha_siniestro, "", "DIRECCIÓN:", clienteInfo.direccion]);
-    wsData.push(["COMUNA:", clienteInfo.comuna, "", "", ""]);
-    wsData.push([]);
-    wsData.push(["DETALLE DE PARTIDAS ITEMIZADAS", "", "", "", "DETERMINACIÓN DE VALORES"]);
-    wsData.push(["DESCRIPCIÓN", "Unid", "Cant.", "Prec. Unit.", "Prec. Total", "Obs"]);
-  
-    // Agregar detalles de partidas al Excel
-    let totalGeneral = 0;
-    detalles.forEach(([descripcion, unidad, cantidad, precioUnitario]) => {
-      const precioTotal = (cantidad * precioUnitario).toFixed(2);
-      wsData.push([descripcion, unidad, cantidad, precioUnitario, precioTotal, ""]);
-      totalGeneral += parseFloat(precioTotal);
+    worksheet.addRow([]);
+    worksheet.addRow(["GENERAL", "", "", "", ""]).eachCell((cell) => {
+      cell.font = { bold: true };
     });
   
-    // Agregar datos generales al Excel
-    wsData.push([]);
-    wsData.push(["GENERAL", "", "", "", ""]);
-    generales.forEach(([descripcion, unidad, cantidad, precioUnitario]) => {
-      const precioTotal = (cantidad * precioUnitario).toFixed(2);
-      wsData.push([descripcion, unidad, cantidad, precioUnitario, precioTotal, ""]);
-      totalGeneral += parseFloat(precioTotal);
+    generales.forEach(([descripcion, unidad, cantidad, precioUnitario, precioTotal]) => {
+      worksheet.addRow([descripcion, unidad, cantidad, precioUnitario, precioTotal, ""]);
     });
   
-    // Cálculos de costos
-    const costoDirectoObra = totalGeneral;
-    const gastosGeneralesUtilidades = (costoDirectoObra * 0.25).toFixed(2);
-    const costoNeto = (costoDirectoObra + parseFloat(gastosGeneralesUtilidades)).toFixed(2);
-    const iva = (costoNeto * 0.19).toFixed(2);
-    const costoTotal = (parseFloat(costoNeto) + parseFloat(iva)).toFixed(2);
+    // Agregar cálculos finales
+    worksheet.addRow([]);
+    worksheet.addRow(["COSTO DIRECTO DE OBRA", "", "", "", 100000]);
+    worksheet.addRow(["GASTOS GENERALES Y UTILIDADES 25%", "", "", "", 25000]);
+    worksheet.addRow(["COSTO NETO", "", "", "", 125000]);
+    worksheet.addRow(["IVA 19%", "", "", "", 23750]);
+    worksheet.addRow(["COSTO TOTAL EN $", "", "", "", 148750]);
   
-    // Agregar la sección de cálculo final al Excel
-    wsData.push([]);
-    wsData.push(["Total General", "", "", "", totalGeneral.toFixed(2)]);
-    wsData.push(["COSTO DIRECTO DE OBRA", "", "", "", costoDirectoObra.toFixed(2)]);
-    wsData.push(["GASTOS GENERALES Y UTILIDADES 25%", "", "", "", gastosGeneralesUtilidades]);
-    wsData.push(["COSTO NETO", "", "", "", costoNeto]);
-    wsData.push(["IVA 19%", "", "", "", iva]);
-    wsData.push(["COSTO TOTAL EN $", "", "", "", costoTotal]);
+    // Ajustar anchos de columnas
+    worksheet.columns = [
+      { width: 30 },
+      { width: 10 },
+      { width: 10 },
+      { width: 15 },
+      { width: 15 },
+      { width: 10 },
+    ];
   
-    // Crear hoja y archivo Excel
-    const ws = XLSX.utils.aoa_to_sheet(wsData);
-    XLSX.utils.book_append_sheet(wb, ws, "Reparacion_Danos");
-    XLSX.writeFile(wb, "Proyecto_Reparacion_Danos.xlsx");
+    // Guardar el archivo
+    const buffer = await workbook.xlsx.writeBuffer();
+    saveAs(new Blob([buffer]), "Proyecto_Reparacion_Danos.xlsx");
   };
 
   return (
