@@ -4,82 +4,51 @@
 .admin-page {
   display: flex;
   flex-direction: column;
-  min-height: 100%; /* Asegura que ocupe al menos toda la pantalla */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  min-height: 100vh; /* Cambia de 100% a 100vh para abarcar toda la altura */
+  background-size: cover; /* Ajusta la imagen de fondo si la usas */
+  background-position: center; /* Centra la imagen o el contenido */
+  background-repeat: no-repeat; /* Evita que se repita el fondo */
+  background-color: #496fb400; /* Asegura el fondo azul */
   z-index: 1;
 }
 
 
 
-
-
-.admin-page::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; /* Esto asegura que cubra toda la pantalla */
-  /*background-image: url("../assets/SegurAPPP.jpg"); */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.5; /* Ajusta según lo que necesites */
-  z-index: -1;
-}
-
-
-
-.admin-page__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
-    gap: 20px;
-    
-}
-
 .welcome-banner h1 {
-    position: relative;
     background-color: #934adb;
     color: white;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
     width: 580px;
-    left: 20px;
+    margin-left: 30px;
     
     
     
 }
 
 .welcome-message  {
-    position: relative;
     background-color: #33333339;
     color: white;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
     width: 580px;
-    top: 20px;
-    left: 20px;
+    margin-top: 90px;
+    margin-left: 30px;
     
 }
 
 .box  {
-    position: relative;
     background-color: #33333339;
     color: white;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
     width: 250px;
-    bottom: 150px;
+    margin-top: 10px;
     height: 340px;
-    left: 500px;
+    margin-left: 730px;
 }
 
 .box h3 {
@@ -139,16 +108,15 @@
 
 
 .box2 {
-    position: relative;
     background-color: #33333339;
     color: white;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
     width: 580px;
-    bottom: 590px;
+    margin-top: -120px;
     height: 500px;
-    left: 20px;
+    margin-left: 30px;
 }
 
 .box2 h2 {
@@ -212,14 +180,13 @@
 
 
 .logo {
-    position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 250px;
     height: 200px;
-    left: 500px;
-    bottom: 430px;
+    margin-left: 730px;
+    margin-top: -444px;
     background-color: #33333339;
     color: rgb(0, 0, 0);
     padding: 10px;
@@ -231,7 +198,6 @@
 }
 
 .box3  {
-    position: relative;
     background-color: #33333339;
     display: flex;
     color: white;
@@ -239,9 +205,10 @@
     border-radius: 5px;
     text-align: center;
     width: 365px;
-    bottom: 1030px;
+    margin-top: -454px;
     height: 300px;
-    left: 890px;
+    margin-left: 1110px;
+
     
 }
 
@@ -263,7 +230,7 @@
   text-align: center;
   width: 70px; /* Ancho fijo */
   height: 90px; /* Alto fijo */
-  right: 78px;
+  right: 80px;
   display: flex;
   top: 50px;
   flex-direction: column;
@@ -319,16 +286,15 @@ button:hover {
 
 
 .map  {
-    position: relative;
     background-color: #33333339;
     color: white;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
     width: 365px;
-    bottom: 1730px;
+    margin-top:  -670px;
     height: 300px;
-    left: 890px;
+    margin-left: 1110px;
 }
 
 
@@ -396,13 +362,11 @@ button:hover {
 
 
 .date-time {
-    position: relative;
     display: flex;
     gap: 10px; 
     justify-content: center; 
-    margin-top: 10px; 
-    bottom: 2280px;
-    left: 890px;
+    margin-top: -488px; 
+    margin-left: 1110px;
     background-color: #33333339;
     color: rgb(0, 0, 0);
     padding: 10px;
@@ -433,13 +397,12 @@ button:hover {
     
 
 .key-stats {
-    position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 250px;
-    left: 500px;
-    bottom: 2210px;
+    margin-left: 730px;
+    margin-top:  430px;
     background-color: #33333339;
     color: rgb(0, 0, 0);
     padding: 10px;
@@ -459,8 +422,8 @@ button:hover {
 
 .menu {
     position: absolute;
-    top: 120px;
-    left: 360px;
+    top: 110px;
+    left: 330px;
     transform: translateX(-50%);
     z-index: 3;
     display: flex;
