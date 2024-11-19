@@ -27,6 +27,16 @@ const IngresoFormulario = () => {
   const [imagenes, setImagenes] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la apertura de la modal
 
+  const [errors, setErrors] = useState({
+    nombre: '',
+    rut: '',
+    direccion: '',
+    comuna: '',
+    dia: '',
+    mes: '',
+    año: '',
+  });
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -68,6 +78,26 @@ const IngresoFormulario = () => {
     setIsModalOpen(true); // Abrir la modal cuando se seleccionen imágenes
   };
 
+  const validarFormulario = () => {
+    const newErrors = {};
+
+    if (!formData.nombre) newErrors.nombre = 'El nombre es obligatorio.';
+    if (!formData.rut) newErrors.rut = 'El RUT es obligatorio.';
+    if (!formData.direccion) newErrors.direccion = 'La dirección es obligatoria.';
+    if (!formData.comuna) newErrors.comuna = 'La comuna es obligatoria.';
+    if (!formData.dia || formData.dia < 1 || formData.dia > 31)
+      newErrors.dia = 'El día debe ser un número entre 1 y 31.';
+    if (!formData.mes || formData.mes < 1 || formData.mes > 12)
+      newErrors.mes = 'El mes debe ser un número entre 1 y 12.';
+    if (!formData.año || formData.año < 1900 || formData.año > new Date().getFullYear())
+      newErrors.año = 'El año debe ser un número válido.';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+
+
   const enviarDatos = async () => {
     const datosAEnviar = {
       ...formData,
@@ -86,6 +116,12 @@ const IngresoFormulario = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    const esValido = validarFormulario();
+    if (!esValido) {
+      console.log("El formulario no es válido");
+      return;
+    }
     enviarDatos();
   };
 
@@ -177,72 +213,119 @@ const IngresoFormulario = () => {
 
   return (
     <div className="forms-wrapper">
-      {/* Formulario de Caso */}
-      <div className="form-container">
-        <h2>Formulario de Caso</h2>
-        <form id="case-form" noValidate>
-          <input
-            type="text"
-            id="nombre"
-            placeholder="Nombre"
-            required
-            value={formData.nombre}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            id="rut"
-            placeholder="Rut"
-            required
-            value={formData.rut}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            id="direccion"
-            placeholder="Dirección"
-            required
-            value={formData.direccion}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            id="comuna"
-            placeholder="Comuna"
-            required
-            value={formData.comuna}
-            onChange={handleChange}
-          />
-          
-          {/* Sección de la fecha */}
-          <div className="date-inputs">
-            <input
-              type="number"
-              id="dia"
-              placeholder="Día"
-              required
-              value={formData.dia}
-              onChange={handleChange}
-            />
-            <input
-              type="number"
-              id="mes"
-              placeholder="Mes"
-              required
-              value={formData.mes}
-              onChange={handleChange}
-            />
-            <input
-              type="number"
-              id="año"
-              placeholder="Año"
-              required
-              value={formData.año}
-              onChange={handleChange}
-            />
-          </div>
-        </form>
+  {/* Formulario de Caso */}
+  <div className="form-container">
+    <h2>Formulario de Caso</h2>
+    <form id="case-form" onSubmit={handleSubmit} noValidate>
+      {/* Campo de Nombre */}
+      <div className="form-group">
+        <input
+          type="text"
+          id="nombre"
+          placeholder="Nombre"
+          value={formData.nombre}
+          onChange={handleChange}
+          className={errors.nombre ? "input-error" : ""}
+        />
+        {errors.nombre && (
+          <span className="floating-error">{errors.nombre}</span>
+        )}
       </div>
+
+      {/* Campo de Rut */}
+      <div className="form-group">
+        <input
+          type="text"
+          id="rut"
+          placeholder="RUT"
+          required
+          value={formData.rut}
+          onChange={handleChange}
+          className={errors.rut ? "input-error" : ""}
+        />
+        {errors.rut && <span className="floating-error">{errors.rut}</span>}
+      </div>
+
+      {/* Campo de Dirección */}
+      <div className="form-group">
+        <input
+          type="text"
+          id="direccion"
+          placeholder="Dirección"
+          required
+          value={formData.direccion}
+          onChange={handleChange}
+          className={errors.direccion ? "input-error" : ""}
+        />
+        {errors.direccion && (
+          <span className="floating-error">{errors.direccion}</span>
+        )}
+      </div>
+
+      {/* Campo de Comuna */}
+      <div className="form-group">
+        <input
+          type="text"
+          id="comuna"
+          placeholder="Comuna"
+          required
+          value={formData.comuna}
+          onChange={handleChange}
+          className={errors.comuna ? "input-error" : ""}
+        />
+        {errors.comuna && (
+          <span className="floating-error">{errors.comuna}</span>
+        )}
+      </div>
+
+      {/* Sección de Fecha */}
+      <div className="date-inputs">
+        {/* Día */}
+        <div className="form-group">
+          <input
+            type="number"
+            id="dia"
+            placeholder="Día"
+            required
+            value={formData.dia}
+            onChange={handleChange}
+            className={errors.dia ? "input-error" : ""}
+          />
+          {errors.dia && <span className="floating-error">{errors.dia}</span>}
+        </div>
+
+        {/* Mes */}
+        <div className="form-group">
+          <input
+            type="number"
+            id="mes"
+            placeholder="Mes"
+            required
+            value={formData.mes}
+            onChange={handleChange}
+            className={errors.mes ? "input-error" : ""}
+          />
+          {errors.mes && <span className="floating-error">{errors.mes}</span>}
+        </div>
+
+        {/* Año */}
+        <div className="form-group">
+          <input
+            type="number"
+            id="año"
+            placeholder="Año"
+            required
+            value={formData.año}
+            onChange={handleChange}
+            className={errors.año ? "input-error" : ""}
+          />
+          {errors.año && <span className="floating-error">{errors.año}</span>}
+        </div>
+      </div>
+    </form>
+  </div>
+
+
 
       {/* Formulario de Datos */}
       <div className="form-container">
