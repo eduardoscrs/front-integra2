@@ -1,9 +1,19 @@
 import { useState, useEffect } from "react";
-import Sidebar from './Sidebar';
 import '../Styles/AdminPage.css';
+import { Outlet, Link } from "react-router-dom";
 
 const AdminPage = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [formData, setFormData] = useState({
+    nombre: "",
+    apellido: "",
+    correo: "",
+    celular: "",
+    contraseña: "",
+    direccion: "",
+    comuna: "",
+    rol: "inspector", // Por defecto "inspector"
+  });
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -13,16 +23,61 @@ const AdminPage = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Usuario creado:", formData);
+    alert("Usuario creado exitosamente.");
+    // Aquí puedes agregar la lógica para enviar los datos al backend
+  };
+
   const formattedDate = currentTime.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   const formattedTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const dayOfWeek = currentTime.toLocaleString('en-US', { weekday: 'short' });
 
   return (
     <div className="admin-page">
-      <Sidebar />
+
+
+    <ul className="menu">
+        <li>
+          <Link to="/inicio">
+            <i className="inicio-h"></i>Inicio
+          </Link>
+        </li>
+        <li>
+          <Link to="/ingreso-formulario">
+            <i className="form-h"></i>Formulario
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/casos">
+            <i className="casos-h"></i> Casos
+          </Link>
+        </li>
+        
+        <li>
+          <Link to="/perfil-usuario">
+            <i className="perfil-h"></i> Perfil
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/logout">
+            <i className="logout-h"></i> Logout
+          </Link>
+        </li>
+
+      </ul> 
+      <Outlet/>
       <div className="admin-page__content">
         <div className="welcome-banner">
-          <h1>¡Bienvenido/a al panel de administración!</h1>
+          <h1>Panel de administración</h1>
         </div>
 
         <div className="main-info">
@@ -34,39 +89,69 @@ const AdminPage = () => {
         </div>
 
         <div className="main-info">
+          <div className="logo">
+          </div>
+        </div>
+
+        <div className="main-info">
           <div className="box">
+          eliminar usuario
           </div>
         </div>
 
         <div className="main-info">
           <div className="box2">
+            <h3>Crear Usuario</h3>
+            <form onSubmit={handleSubmit} className="user-form">
+              <label>
+                Nombre:
+                <input type="text" name="nombre" value={formData.nombre} onChange={handleInputChange} required />
+              </label>
+              <label>
+                Apellido:
+                <input type="text" name="apellido" value={formData.apellido} onChange={handleInputChange} required />
+              </label>
+              <label>
+                Correo:
+                <input type="email" name="correo" value={formData.correo} onChange={handleInputChange} required />
+              </label>
+              <label>
+                Celular:
+                <input type="tel" name="celular" value={formData.celular} onChange={handleInputChange} required />
+              </label>
+              <label>
+                Contraseña:
+                <input type="password" name="contraseña" value={formData.contraseña} onChange={handleInputChange} required />
+              </label>
+              <label>
+                Dirección:
+                <input type="text" name="direccion" value={formData.direccion} onChange={handleInputChange} required />
+              </label>
+              <label>
+                Comuna:
+                <input type="text" name="comuna" value={formData.comuna} onChange={handleInputChange} required />
+              </label>
+              <label>
+                Rol:
+                <select name="rol" value={formData.rol} onChange={handleInputChange}>
+                  <option value="inspector">Inspector</option>
+                  <option value="cliente">Cliente</option>
+                </select>
+              </label>
+              <button type="submit">Crear Usuario</button>
+            </form>
           </div>
         </div>
 
         <div className="main-info">
           <div className="box3">
-          <iframe
-            width="350"
-            height="300"
-            src="https://www.youtube.com/embed/6y-BJPlTGic"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
+          Ver todos los casos.
           </div>
         </div>
 
         <div className="main-info">
           <div className="map">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5140.765314279909!2d-72.55041642268066!3d-38.702891171766254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d25bb3523b6b%3A0x6d64cbb854e11a5b!2sUniversidad%20Cat%C3%B3lica%20de%20Temuco%20-%20Campus%20San%20Juan%20Pablo%20Segundo%2C%20IX%20Regi%C3%B3n%2C%20Chile!5e1!3m2!1ses-419!2scl!4v1731949017879!5m2!1ses-419!2scl"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-          ></iframe>
+          cambiar precio de materiales
           </div>
         </div>
 

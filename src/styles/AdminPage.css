@@ -3,6 +3,8 @@
 .admin-page {
     display: flex;
     padding: 20px;
+    
+
 }
 
 .admin-page__content {
@@ -12,17 +14,19 @@
     width: 100%;
     padding: 20px;
     gap: 20px;
+    
 }
 
 .welcome-banner h1 {
     position: relative;
-    background-color: #333;
+    background-color: #934adb;
     color: white;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
-    width: 800px;
+    width: 580px;
     left: 20px;
+    
     
     
 }
@@ -34,8 +38,10 @@
     padding: 10px;
     border-radius: 5px;
     text-align: center;
-    width: 500px;
-    right: 130px;
+    width: 580px;
+    top: 20px;
+    left: 20px;
+    
 }
 
 .box  {
@@ -46,9 +52,9 @@
     border-radius: 5px;
     text-align: center;
     width: 250px;
-    bottom: 50px;
+    bottom: 150px;
     height: 340px;
-    left: 294px;
+    left: 500px;
 }
 
 .box2 {
@@ -58,13 +64,92 @@
     padding: 10px;
     border-radius: 5px;
     text-align: center;
-    width: 500px;
-    bottom: 360px;
-    height: 270px;
-    right: 130px;
+    width: 580px;
+    bottom: 590px;
+    height: 500px;
+    left: 20px;
 }
 
-.box3 {
+.box2 h2 {
+    text-align: center;
+    color: #333; /* Color del texto */
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .box2 form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    gap: 15px; /* Espaciado entre elementos */
+  }
+  
+  .box2 form label {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #555;
+    margin: 10px;
+  }
+  
+  .box2 form input,
+  .box2 form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #6868689b;
+    font-size: 14px;
+    margin-left: -10px;
+  }
+  
+  .box2 form input:focus,
+  .box2 form select:focus {
+    border-color: #934adb;
+    outline: none;
+  }
+  
+  .box2 form .full-width {
+    grid-column: span 2; /* Elemento ocupa ambas columnas */
+  }
+  
+  .box2 form button {
+    grid-column: span 1; /* Botón ocupa ambas columnas */
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #934adb;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .box2 form button:hover {
+    background-color: #8000ff;
+  }
+
+
+.logo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
+    height: 200px;
+    left: 500px;
+    bottom: 430px;
+    background-color: #33333339;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    border-radius: 10px;
+    background-image: url("../assets/Segurapp_rbg.png");
+    background-size: cover; 
+    background-position: center; 
+    z-index: 1;
+}
+
+.box3  {
     position: relative;
     background-color: #33333339;
     color: white;
@@ -72,9 +157,10 @@
     border-radius: 5px;
     text-align: center;
     width: 365px;
-    bottom: 700px;
+    bottom: 1030px;
     height: 300px;
-    left: 654px;
+    left: 890px;
+    
 }
 
 .map  {
@@ -85,9 +171,9 @@
     border-radius: 5px;
     text-align: center;
     width: 365px;
-    bottom: 1390px;
+    bottom: 1730px;
     height: 300px;
-    left: 654px;
+    left: 890px;
 }
 
 .welcome-message p {
@@ -103,8 +189,8 @@
     gap: 10px; 
     justify-content: center; 
     margin-top: 10px; 
-    bottom: 1912px;
-    left: 654px;
+    bottom: 2280px;
+    left: 890px;
     background-color: #33333339;
     color: rgb(0, 0, 0);
     padding: 10px;
@@ -140,8 +226,8 @@
     flex-direction: column;
     gap: 10px;
     width: 250px;
-    left: 294px;
-    bottom: 1895px;
+    left: 500px;
+    bottom: 2210px;
     background-color: #33333339;
     color: rgb(0, 0, 0);
     padding: 10px;
@@ -156,3 +242,63 @@
     font-weight: bold;
     color: #333;
 }
+
+
+.menu {
+    position: absolute;
+    top: 140px;
+    left: 360px;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 10px 60px;
+    background-color: rgba(0, 0, 0, 0.22);
+    border-radius: 5px;
+    color: #fff;
+    
+}
+  
+.menu li {
+    padding: 5px 10px;
+}
+   
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+  
+a:hover {
+    text-decoration: underline;
+}
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .user-form label {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-form input, .user-form select {
+    padding: 8px;
+    margin-top: 5px;
+  }
+  
+  .user-form button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .user-form button:hover {
+    background-color: #45a049;
+  }
+  
