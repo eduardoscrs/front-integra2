@@ -14,6 +14,7 @@ const AdminPage = () => {
     comuna: "",
     rol: "inspector", // Por defecto "inspector"
   });
+  
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -94,8 +95,18 @@ const AdminPage = () => {
         </div>
 
         <div className="main-info">
-          <div className="box">
-          eliminar usuario
+        <div className="box">
+            <h3>Eliminar Usuario</h3>
+            <form className="delete-user-form" onSubmit={(e) => e.preventDefault()}>
+              <label>
+                Correo del Usuario:
+                <input type="email" name="correo" placeholder="Ejemplo: usuario@email.com" required />
+              </label>
+              <button type="submit">Eliminar Usuario</button>
+            </form>
+            <p className="delete-user-message">
+              Ingresa el correo electrónico del usuario que deseas eliminar y presiona el botón.
+            </p>
           </div>
         </div>
 
@@ -145,18 +156,43 @@ const AdminPage = () => {
 
         <div className="main-info">
           <div className="box3">
-          Ver todos los casos.
+               <h3>Casos</h3>
+              <div className="scard">Casos Totales</div>
+              <div className="scard">Aceptados</div>
+              <div className="scard">Rechazados</div>
+              <Link to="/casos">
+              <button type="submit">ir a Casos</button>
+              </Link>
           </div>
         </div>
 
         <div className="main-info">
-          <div className="map">
-          cambiar precio de materiales
+              <div className="map">
+            <h3>Actualizar Precios de Materiales</h3>
+            <form>
+              <label>
+                Selecciona un material:
+                <select required>
+                  <option value="">-- Seleccionar --</option>
+                  <option value="Cemento">Cemento</option>
+                  <option value="Arena">Arena</option>
+                  <option value="Grava">Grava</option>
+                </select>
+              </label>
+              <label>
+                Ingresa el nuevo precio:
+                <input
+                  type="number"
+                  placeholder="Ej: 6000"
+                  required
+                />
+              </label>
+              <button type="submit">Actualizar Precio</button>
+            </form>
           </div>
         </div>
 
          
-
         <div className="date-time">
           <h2>{dayOfWeek}</h2>
           <h1>{currentTime.getDate()}</h1>
