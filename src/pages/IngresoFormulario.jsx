@@ -146,12 +146,13 @@ const IngresoFormulario = () => {
       },
     };
   
-    // Encabezados del proyecto
+    // Títulos principales
     worksheet.mergeCells("A1:E1");
     worksheet.getCell("A1").value = "REPARACIÓN DAÑOS EN VIVIENDA";
     worksheet.getCell("A1").font = { bold: true, size: 14, color: { argb: "000000" } };
     worksheet.getCell("A1").alignment = { horizontal: "center" };
   
+    // Datos del proyecto
     worksheet.addRow(["NOMBRE:", formData.nombre || "Nombre Cliente", "", "RUT:", formData.rut || "12345678-9"]);
     worksheet.addRow([
       "FECHA SINIESTRO:",
@@ -163,41 +164,45 @@ const IngresoFormulario = () => {
     worksheet.addRow(["COMUNA:", formData.comuna || "Comuna", "", "FECHA PROYECTO:", "20/09/2024"]);
     worksheet.addRow([]);
   
-    // Títulos para el detalle de partidas
-    worksheet.addRow(["DETALLE DE PARTIDAS ITEMIZADAS", "", "", "", "DETERMINACIÓN DE VALORES"]).eachCell((cell) => {
+    // Encabezados para el detalle de partidas
+    worksheet.mergeCells("A5:C5");
+    worksheet.getCell("A5").value = "DETALLE DE PARTIDAS ITEMIZADAS";
+    worksheet.mergeCells("D5:F5");
+    worksheet.getCell("D5").value = "DETERMINACIÓN DE VALORES";
+  
+    worksheet.getRow(5).eachCell((cell) => {
       cell.font = { bold: true };
       cell.alignment = { horizontal: "center" };
     });
+  
     worksheet.addRow(["DESCRIPCIÓN", "Unid", "Cant.", "Prec. Unit.", "Prec. Total", "Obs"]).eachCell((cell) => {
       Object.assign(cell, headerStyle);
     });
   
-    // Detalles de las partidas
+    // Detalles de las partidas por sector
     sectores.forEach((sector) => {
-      const cantidad = parseFloat(sector.porcentaje_perdida) || parseFloat((Math.random() * 5).toFixed(2));
-      const precioUnitario = Math.floor(Math.random() * (20000 - 1500 + 1)) + 1500;
-      const precioTotal = (cantidad * precioUnitario).toFixed(2);
-      worksheet.addRow([
-        `SECTOR: ${sector.nombre_sector || "Sector Desconocido"}`,
-        "M2",
-        cantidad,
-        precioUnitario,
-        precioTotal,
-        "",
-      ]);
+      worksheet.addRow([`SECTOR: ${sector.nombre_sector || "Sector Desconocido"}`]).getCell(1).font = {
+        bold: true,
+      };
+  
+      sector.partidas.forEach((partida) => {
+        const { descripcion, unidad, cantidad, precioUnitario } = partida;
+        const precioTotal = (cantidad * precioUnitario).toFixed(2);
+        worksheet.addRow([descripcion, unidad, cantidad, precioUnitario, precioTotal, ""]);
+      });
     });
   
     // Agregar partidas generales
+    worksheet.addRow([]);
+    worksheet.addRow(["GENERAL", "", "", "", ""]).eachCell((cell) => {
+      cell.font = { bold: true };
+    });
+  
     const generales = [
       ["Traslado de Materiales a Obra", "GL", 1, 60000, 60000],
       ["Retiro de Escombros", "GL", 1, 30000, 30000],
       ["Aseo Diario y Entrega Final", "GL", 1, 40000, 40000],
     ];
-  
-    worksheet.addRow([]);
-    worksheet.addRow(["GENERAL", "", "", "", ""]).eachCell((cell) => {
-      cell.font = { bold: true };
-    });
   
     generales.forEach(([descripcion, unidad, cantidad, precioUnitario, precioTotal]) => {
       worksheet.addRow([descripcion, unidad, cantidad, precioUnitario, precioTotal, ""]);
@@ -213,12 +218,12 @@ const IngresoFormulario = () => {
   
     // Ajustar anchos de columnas
     worksheet.columns = [
-      { width: 30 },
+      { width: 40 },
       { width: 10 },
       { width: 10 },
       { width: 15 },
       { width: 15 },
-      { width: 10 },
+      { width: 15 },
     ];
   
     // Guardar el archivo
