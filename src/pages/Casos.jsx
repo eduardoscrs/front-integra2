@@ -3,13 +3,16 @@ import '../styles/ListaCasos.css';
 import CuadradoCasos from '../components/CuadradoCasos';
 import ListaCasos from '../components/ListaCasos';
 import { xCircle, folder, checkCircle } from '../assets';
-import Sidebar from '../components/Sidebar';
-import { useEffect, useState } from 'react'; // Para manejar el estado y el efecto
+import { useEffect, useState } from 'react'; // Aquí se hace el import de useState y useEffect
 import { obtenerCasos, actualizarEstadoCaso } from '../services/casosService'; // Importa el servicio para hacer la petición a la API
+import { Outlet, Link } from "react-router-dom"; // Importa Link para redirigir
+import '../styles/Sidebar.css';
+import logo from '../assets/Segurapp_rbg.png'; 
 
 const Casos = () => {
   const [casos, setCasos] = useState([]); // Estado para guardar los casos obtenidos de la API
   const [error, setError] = useState(null); // Estado para manejar errores
+  const [isOpen, setIsOpen] = useState(true); // Hook para manejar la apertura/cierre del sidebar
 
   // Efecto que se ejecuta cuando el componente se monta
   useEffect(() => {
@@ -66,9 +69,68 @@ const Casos = () => {
     }
   };
 
+  const handleMouseEnter = () => {
+    setIsOpen(true); // Sidebar se abre
+  };
+
+  const handleMouseLeave = () => {
+    setIsOpen(false); // Sidebar se cierra
+  };
+
   return (
     <div className="contenedor-casos">
-      <Sidebar />
+
+      <div
+        className={`sidebar ${isOpen ? "sidebar--open" : "sidebar--closed"}`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+
+        <div className="sidebar__logo">
+          <img src={logo} alt="Logo" />
+        </div>
+
+        <ul className="sidebar__menu">
+          <li>
+            <Link to="/inicio">
+              <i className="icon-dashboard"></i>Inicio
+            </Link>
+          </li>
+          <li>
+            <Link to="/ingreso-formulario">
+              <i className="icon-dashboard"></i>Formulario
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/casos">
+              <i className="icon-products"></i> Casos
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/perfil-usuario">
+              <i className="icon-analytics"></i> Perfil
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/logout">
+              <i className="icon-analytics"></i> Logout
+            </Link>
+          </li>
+
+        </ul>
+
+        <div className="sidebar__login">
+          <Link to="/login">
+            <button className="login__button">Login</button>
+          </Link>
+        </div>
+        <Outlet/>
+
+      </div>
+
       <div className="no-sidebar">
         <h1>Casos Pendientes</h1>
         <section className="seccion-cuadrados">

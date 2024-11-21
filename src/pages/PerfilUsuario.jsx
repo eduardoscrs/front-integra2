@@ -1,23 +1,26 @@
 import '../styles/PerfilUsuario.css';
 import '../styles/DatosUsuario.css';
+import '../styles/Sidebar.css';
+import { Outlet, Link } from "react-router-dom";
+import logo from '../assets/Segurapp_rbg.png';
 import DatosUsuario from '../components/DatosUsuario';
 import { usuarioImg } from '../assets';
-import Sidebar from '../components/Sidebar';
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { obtenerUsuarioId } from '../services/perfilService';
 
 const PerfilUsuario = () => {
-  const navigate = useNavigate(); // Inicializa useNavigate
-  const [usuario, setUsuario] = useState(null); // Estado para guardar los casos obtenidos de la API
-  const [error, setError] = useState(null); // Estado para manejar errores
-  const userId = 1; // Cambia esto por la forma en que obtienes el ID del usuario (ej. desde el auth)
+  const navigate = useNavigate();
+  const [usuario, setUsuario] = useState(null);
+  const [error, setError] = useState(null);
+  const [isOpen, setIsOpen] = useState(true);
+  const userId = 1; // Cambia esto según corresponda
 
   useEffect(() => {
     const fetchUsuario = async () => {
       try {
-        const datoUsuario = await obtenerUsuarioId(userId); // Llama a la función del servicio para obtener los casos
-        setUsuario(datoUsuario); // Almacena los casos en el estado
+        const datoUsuario = await obtenerUsuarioId(userId);
+        setUsuario(datoUsuario);
       } catch (error) {
         setError('Error al cargar el perfil del usuario');
         console.error(error);
@@ -25,58 +28,108 @@ const PerfilUsuario = () => {
     };
 
     fetchUsuario();
-  }, [userId]); // Se ejecuta solo al montar el componente
+  }, [userId]);
 
-  if (error) {
-    return <p>Error: {error}</p>; // Muestra un mensaje de error si ocurre algún problema
-  }
-
-  if (!usuario) {
-    return <p>Cargando...</p>;
-  }
-
-  // Función para manejar la navegación al hacer clic en "Editar perfil"
   const handleEditarPerfil = () => {
-    navigate('/actualizar-usuario'); // Redirige a la página de ActualizarUsuario
+    navigate('/actualizar-usuario');
   };
 
   const handleCambiarContrasena = () => {
     navigate('/actualizar-contrasena');
   };
 
+  const handleMouseEnter = () => {
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="imagen-datos">
-      <Sidebar></Sidebar>
-      <img
-        src={usuarioImg}
-        alt="Imagen de perfil del usuario"
-        className="imagen-usuario"
-      />
-      <section className="seccion-usuario">
-        <h1>Usuario</h1>
-        <span>Detalles de perfil</span>
-        <div className="div-componentes-usuario">
-          <button className="btn-editar-perfil" onClick={handleEditarPerfil}>
-            Editar perfil
-          </button>
-          <DatosUsuario datoBold="Rol" datoUsuario={usuario.nombre_rol} />
-          <DatosUsuario
-            datoBold="Nombre"
-            datoUsuario={`${usuario.nombre} ${usuario.apellido}`}
-          />
-          <DatosUsuario datoBold="Correo" datoUsuario={usuario.correo} />
-          <DatosUsuario datoBold="Celular" datoUsuario={usuario.celular} />
-          <DatosUsuario datoBold="Direccion" datoUsuario={usuario.direccion} />
-          <DatosUsuario datoBold="Comuna" datoUsuario={usuario.comuna} />
+      <div
+        className={`sidebar ${isOpen ? "sidebar--open" : "sidebar--closed"}`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      ></div>
 
-          <button
-            className="btn-cambiar-contraseña"
-            onClick={handleCambiarContrasena}
-          >
-            Cambiar contraseña
-          </button>
-        </div>
-      </section>
+      <div className="sidebar__logo">
+        <img src={logo} alt="Logo" />
+      </div>
+
+      <ul className="sidebar__menu">
+        <li>
+          <Link to="/inicio">
+            <i className="icon-dashboard"></i>Inicio
+          </Link>
+        </li>
+        <li>
+          <Link to="/ingreso-formulario">
+            <i className="icon-dashboard"></i>Formulario
+          </Link>
+        </li>
+        <li>
+          <Link to="/casos">
+            <i className="icon-products"></i>Casos
+          </Link>
+        </li>
+        <li>
+          <Link to="/perfil-usuario">
+            <i className="icon-analytics"></i>Perfil
+          </Link>
+        </li>
+        <li>
+          <Link to="/logout">
+            <i className="icon-analytics"></i>Logout
+          </Link>
+        </li>
+      </ul>
+
+      <div className="sidebar__login">
+        <Link to="/login">
+          <button className="login__button">Login</button>
+        </Link>
+      </div>
+      <Outlet />
+
+      {error ? (
+        <p>Error: {error}</p>
+      ) : !usuario ? (
+        <p>Cargando...</p>
+      ) : (
+        <>
+          <img
+            src={usuarioImg}
+            alt="Imagen de perfil del usuario"
+            className="imagen-usuario"
+          />
+          <section className="seccion-usuario">
+            <h1>Usuario</h1>
+            <span>Detalles de perfil</span>
+            <div className="div-componentes-usuario">
+              <button className="btn-editar-perfil" onClick={handleEditarPerfil}>
+                Editar perfil
+              </button>
+              <DatosUsuario datoBold="Rol" datoUsuario={usuario.nombre_rol} />
+              <DatosUsuario
+                datoBold="Nombre"
+                datoUsuario={`${usuario.nombre} ${usuario.apellido}`}
+              />
+              <DatosUsuario datoBold="Correo" datoUsuario={usuario.correo} />
+              <DatosUsuario datoBold="Celular" datoUsuario={usuario.celular} />
+              <DatosUsuario datoBold="Direccion" datoUsuario={usuario.direccion} />
+              <DatosUsuario datoBold="Comuna" datoUsuario={usuario.comuna} />
+              <button
+                className="btn-cambiar-contraseña"
+                onClick={handleCambiarContrasena}
+              >
+                Cambiar contraseña
+              </button>
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 };

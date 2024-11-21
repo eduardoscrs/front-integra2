@@ -1,0 +1,480 @@
+/* AdminPage.css */
+
+/* AdminPage.css */
+.admin-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Cambia de 100% a 100vh para abarcar toda la altura */
+  background-size: cover; /* Ajusta la imagen de fondo si la usas */
+  background-position: center; /* Centra la imagen o el contenido */
+  background-repeat: no-repeat; /* Evita que se repita el fondo */
+  background-color: #496fb400; /* Asegura el fondo azul */
+  z-index: 1;
+}
+
+
+
+.welcome-banner h1 {
+    background-color: #934adb;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 580px;
+    margin-left: 30px;
+    
+    
+    
+}
+
+.welcome-message  {
+    background-color: #33333339;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 580px;
+    margin-top: 90px;
+    margin-left: 30px;
+    
+}
+
+.box  {
+    background-color: #33333339;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 250px;
+    margin-top: 10px;
+    height: 340px;
+    margin-left: 730px;
+}
+
+.box h3 {
+  font-size: 1.5em;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.delete-user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.delete-user-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.delete-user-form input {
+  width: 90%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #6868689b;
+  font-size: 14px;
+}
+
+.delete-user-form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #ff4d4d;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-user-form button:hover {
+  background-color: #ff1a1a;
+}
+
+.delete-user-message {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #272727;
+  text-align: center;
+}
+
+
+.box2 {
+    background-color: #33333339;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 580px;
+    margin-top: -120px;
+    height: 500px;
+    margin-left: 30px;
+}
+
+.box2 h2 {
+    text-align: center;
+    color: #333; /* Color del texto */
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .box2 form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    gap: 15px; /* Espaciado entre elementos */
+  }
+  
+  .box2 form label {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #555;
+    margin: 10px;
+  }
+  
+  .box2 form input,
+  .box2 form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #6868689b;
+    font-size: 14px;
+    margin-left: -10px;
+  }
+  
+  .box2 form input:focus,
+  .box2 form select:focus {
+    border-color: #934adb;
+    outline: none;
+  }
+  
+  .box2 form .full-width {
+    grid-column: span 2; /* Elemento ocupa ambas columnas */
+  }
+  
+  .box2 form button {
+    grid-column: span 1; /* Botón ocupa ambas columnas */
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #934adb;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .box2 form button:hover {
+    background-color: #8000ff;
+  }
+
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
+    height: 200px;
+    margin-left: 730px;
+    margin-top: -444px;
+    background-color: #33333339;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    border-radius: 10px;
+    background-image: url("../assets/Segurapp_rbg.png");
+    background-size: cover; 
+    background-position: center; 
+    z-index: 1;
+}
+
+.box3  {
+    background-color: #33333339;
+    display: flex;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 365px;
+    margin-top: -454px;
+    height: 300px;
+    margin-left: 1110px;
+
+    
+}
+
+.box3 h3 {
+  position: relative;
+  font-size: 1.5em;
+  color: white;
+  margin-bottom: 15px;
+  left: 150px;
+  bottom: 20px;
+}
+
+.scard {
+  position: relative;
+  background-color: #d9f7e8; /* Fondo verde claro */
+  border: 2px solid #b8e0d2; /* Bordes claros */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 1rem;
+  text-align: center;
+  width: 70px; /* Ancho fijo */
+  height: 90px; /* Alto fijo */
+  right: 80px;
+  display: flex;
+  top: 50px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem; /* Separación entre las tarjetas */
+  font-size: 1rem; /* Tamaño de texto */
+  font-weight: bold; /* Texto en negrita */
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.scard:nth-child(1)::after {
+  content: "0"; /* Valor estático */
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.scard:nth-child(2)::after {
+  content: "0"; /* Valor estático */
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.scard:nth-child(3)::after {
+  content: "0"; /* Valor estático */
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.box3 button {
+  position: relative;
+  background-color: #934adb; /* Botón verde */
+  top: 220px;
+  right: 400px;
+  width: 240px;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: #8913ff; /* Cambio de color al pasar el mouse */
+}
+
+
+.map  {
+    background-color: #33333339;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 365px;
+    margin-top:  -670px;
+    height: 300px;
+    margin-left: 1110px;
+}
+
+
+.map h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #1d0404;
+}
+
+.map form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.map label {
+  font-size: 14px;
+  text-align: left;
+}
+
+.map select {
+  width: 360px; /* Ancho del select */
+  height: 40px; /* Altura del select */
+  font-size: 16px; /* Tamaño del texto en el select y options */
+}
+
+.map input {
+  width: 350px; /* Ancho del input */
+  height: 35px; /* Altura del input */
+  font-size: 12px; /* Tamaño del texto en el input */
+  padding: 5px; /* Espaciado interno para mayor legibilidad */
+}
+
+.map button {
+  padding: 30px;
+  background-color: #934adb;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.map button:hover {
+  background-color: #680ac6;
+}
+
+.material-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.material-list li {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #555;
+}
+
+
+.welcome-message p {
+    color: #333;
+    margin: 10px 0;
+}
+
+
+
+.date-time {
+    display: flex;
+    gap: 10px; 
+    justify-content: center; 
+    margin-top: -488px; 
+    margin-left: 1110px;
+    background-color: #33333339;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    border-radius: 10px;
+    width: 365px;
+    height: 130px;
+}
+
+.date-time p {
+    font-size: 0.9rem; 
+    color: #1c6bff;
+    background-color: #d0d3d4; 
+    padding: 8px 12px; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    text-align: center; 
+}
+
+.date-time h2 {
+    font-size: 1.5rem;
+}
+
+.date-time h1 {
+    font-size: 4rem;
+}
+
+    
+
+.key-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
+    margin-left: 730px;
+    margin-top:  430px;
+    background-color: #33333339;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.stat-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+
+
+.menu {
+    position: absolute;
+    top: 110px;
+    left: 330px;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 10px 60px;
+    background-color: rgba(0, 0, 0, 0.22);
+    border-radius: 5px;
+    color: #fff;
+    
+}
+  
+.menu li {
+    padding: 5px 10px;
+}
+   
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+  
+a:hover {
+    text-decoration: underline;
+}
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .user-form label {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-form input, .user-form select {
+    padding: 8px;
+    margin-top: 5px;
+  }
+  
+  .user-form button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .user-form button:hover {
+    background-color: #45a049;
+  }
+  
