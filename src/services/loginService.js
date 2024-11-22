@@ -1,5 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-
+const API_URL = import.meta.env.VITE_API_URL || 'http://190.114.253.250:3000';
 export const Alogin = async (usuario) => {
   try {
     // Realiza una petición GET para obtener todos los usuarios
