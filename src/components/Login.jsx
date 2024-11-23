@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; // Importa useNavigate para la redirección
 import '../styles/Login.css';
 import logo from '../assets/logo.png';
-import logo_google from '../assets/logo_google.png';
 import { Alogin } from '../services/loginService'; // Importar el servicio de login
 import LoginPropTypes from '../config/LoginPropTypes'; // Importar validaciones
+import background from '../assets/SegurAPPP.jpg';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -42,15 +42,15 @@ const Login = () => {
 
   return (
     <div className="login-page">
+      <div className="bacground">
+      <img src={background} alt="Logo" />
+      </div>
       <div className="login-box">
         <div className="login-image">
           <img src={logo} alt="App logo" />
         </div>
         <div className="login-container">
           <h2 className="login-title">Bienvenido a SegurApp</h2>
-          <button className="google-login-btn">
-            <img src={logo_google} alt="Google Icon" /> Login with Google
-          </button>
           <form className="login-form" onSubmit={handleLogin}>
             <div className="input-groups">
               <label>Email</label>
