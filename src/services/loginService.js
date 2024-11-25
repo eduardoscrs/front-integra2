@@ -37,6 +37,8 @@ export const Alogin = async (usuario) => {
     if (user.ID_rol === 1) role = 'Cliente';
     else if (user.ID_rol === 2) role = 'Inspector';
     else if (user.ID_rol === 3) role = 'Contratista';
+    else if (user.ID_rol === 4) role = 'Liquidador';
+    else if (user.ID_rol === 5) role = 'Administrador';
 
     // Retorna el token y el rol del usuario
     return { token, role };
