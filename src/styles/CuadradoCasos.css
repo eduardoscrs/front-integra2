@@ -27,6 +27,10 @@
   background-color: rgb(213, 235, 218);
   border-radius: 20px;
   box-shadow: 5px 5px 10px rgba(0, 23, 88, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .cuadrado-casos img {
@@ -37,9 +41,11 @@
 
 .contenido-cuadrado {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  height: 100%;
+  /* width: 100%; */
 }
 
 .titulos-casos {
@@ -55,5 +61,6 @@
   margin: 0;
   padding: 0;
   color: black;
-  font-size: 70px;
+  font-size: 60px;
+  text-align: center;
 }
