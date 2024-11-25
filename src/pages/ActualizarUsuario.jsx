@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { actualizarPerfil, obtenerUsuarioId } from '../services/perfilService';
 import '../styles/ActualizarUsuario.css';
+import { useNavigate } from 'react-router-dom';
 
 const ActualizarUsuario = () => {
   const [usuario, setUsuario] = useState({
@@ -13,6 +14,7 @@ const ActualizarUsuario = () => {
   });
 
   const [mensaje, setMensaje] = useState('');
+  const navigate = useNavigate();
 
   // Obtener datos del usuario al cargar el componente
   useEffect(() => {
@@ -52,6 +54,7 @@ const ActualizarUsuario = () => {
     try {
       await actualizarPerfil(1, datosUsuario); // Cambia el ID del usuario según sea necesario
       setMensaje('Usuario actualizado correctamente.');
+      navigate('/perfil-usuario');
     } catch (error) {
       setMensaje('Error al actualizar el usuario.', error);
       // console.error(mensaje);

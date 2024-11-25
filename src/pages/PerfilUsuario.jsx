@@ -1,7 +1,7 @@
 import '../styles/PerfilUsuario.css';
 import '../styles/DatosUsuario.css';
 import DatosUsuario from '../components/DatosUsuario';
-import { usuarioImg } from '../assets';
+// import { usuarioImg } from '../assets';
 import Sidebar from '../components/Sidebar';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -49,11 +49,11 @@ const PerfilUsuario = () => {
       <div className="contendor-sidebar">
         <Sidebar />
       </div>
-      <img
+      {/* <img
         src={usuarioImg}
         alt="Imagen de perfil del usuario"
         className="imagen-usuario"
-      />
+      /> */}
       <section className="seccion-usuario">
         <h1>Usuario</h1>
         <div className="div-componentes-usuario">
