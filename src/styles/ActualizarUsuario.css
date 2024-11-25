@@ -21,6 +21,17 @@ h1 {
   box-shadow: 0px 0px 10px rgba(0, 23, 88, 0.5);
 }
 
+.contenedor-contenedor {
+  height: 30vw;
+  width: 20vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #a9c6df;
+  border-radius: 7px;
+  box-shadow: 0px 0px 9px rgba(1, 20, 75, 0.856);
+}
+
 .div-campos {
   margin-bottom: 15px;
   display: flex;

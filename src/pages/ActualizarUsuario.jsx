@@ -64,69 +64,51 @@ const ActualizarUsuario = () => {
   return (
     <div className="contenedor-formulario-usuario">
       <h1>Editar perfil</h1>
-      <form onSubmit={handleSubmit}>
-        {/* <div className="div-campos">
-          <label htmlFor="nombre">Nombre: </label>
-          <input
-            type="text"
-            name="nombre"
-            value={usuario.nombre || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="div-campos">
-          <label htmlFor="apellido">Apellido: </label>
-          <input
-            type="text"
-            name="apellido"
-            value={usuario.apellido || ''}
-            onChange={handleChange}
-            required
-          />
-        </div> */}
-        <div className="div-campos">
-          <label htmlFor="celular">Celular: </label>
-          <input
-            type="text"
-            name="celular"
-            value={usuario.celular || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="div-campos">
-          <label htmlFor="correo">Correo: </label>
-          <input
-            type="text"
-            name="email"
-            value={usuario.correo || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="div-campos">
-          <label htmlFor="direccion">Direccion: </label>
-          <input
-            type="text"
-            name="direccion"
-            value={usuario.direccion || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="div-campos">
-          <label htmlFor="comuna">Comuna: </label>
-          <input
-            type="text"
-            name="comuna"
-            value={usuario.comuna || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Actualizar Usuario</button>
-      </form>
+      <div className="contenedor-contenedor">
+        <form onSubmit={handleSubmit}>
+          <div className="div-campos">
+            <label htmlFor="celular">Celular: </label>
+            <input
+              type="text"
+              name="celular"
+              value={usuario.celular || ''}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="div-campos">
+            <label htmlFor="correo">Correo: </label>
+            <input
+              type="text"
+              name="email"
+              value={usuario.correo || ''}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="div-campos">
+            <label htmlFor="direccion">Direccion: </label>
+            <input
+              type="text"
+              name="direccion"
+              value={usuario.direccion || ''}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="div-campos">
+            <label htmlFor="comuna">Comuna: </label>
+            <input
+              type="text"
+              name="comuna"
+              value={usuario.comuna || ''}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit">Actualizar Usuario</button>
+        </form>
+      </div>
       {mensaje && <p>{mensaje}</p>}
     </div>
   );
