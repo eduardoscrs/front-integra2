@@ -18,6 +18,7 @@ const Casos = () => {
     const fetchCasos = async () => {
       try {
         const casosObtenidos = await obtenerCasos(); // Llama a la función del servicio para obtener los casos
+        console.log('Casos obtenidos:', casosObtenidos);
         setCasos(casosObtenidos); // Almacena los casos en el estado
       } catch (error) {
         setError('Error al cargar los casos');
@@ -118,7 +119,7 @@ const Casos = () => {
           <section className="seccion-lista-casos">
             {casosEnPagina.map((caso) => (
               <ListaCasos
-                key={caso.ID_caso} // Asigna una clave única basada en el id del caso
+                key={caso.ID_caso}
                 numeroCaso={caso.ID_caso}
                 estadoCaso={caso.nombre_estado}
                 datosCaso={{

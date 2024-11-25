@@ -22,10 +22,11 @@
 }
 
 .cuadrado-casos {
-  width: 200px;
-  height: 170px;
+  width: 170px;
+  height: 160px;
   background-color: rgb(213, 235, 218);
   border-radius: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 23, 88, 0.5);
 }
 
 .cuadrado-casos img {
