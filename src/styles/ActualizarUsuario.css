@@ -4,6 +4,10 @@ body {
   /* background-color: rgb(234, 238, 241); */
 }
 
+h1 {
+  color: #15307a;
+}
+
 .contenedor-formulario-usuario {
   font-size: 12px;
   background-color: white;

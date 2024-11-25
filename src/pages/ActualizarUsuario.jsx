@@ -62,7 +62,7 @@ const ActualizarUsuario = () => {
     <div className="contenedor-formulario-usuario">
       <h1>Editar perfil</h1>
       <form onSubmit={handleSubmit}>
-        <div className="div-campos">
+        {/* <div className="div-campos">
           <label htmlFor="nombre">Nombre: </label>
           <input
             type="text"
@@ -81,7 +81,7 @@ const ActualizarUsuario = () => {
             onChange={handleChange}
             required
           />
-        </div>
+        </div> */}
         <div className="div-campos">
           <label htmlFor="celular">Celular: </label>
           <input
