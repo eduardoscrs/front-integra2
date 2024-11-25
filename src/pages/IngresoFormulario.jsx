@@ -339,7 +339,7 @@ const IngresoFormulario = () => {
             onChange={handleChange}
             className={errors.año ? "input-error" : ""}
           />
-          {errors.año && <span className="floating-error">{errors.año}</span>}
+          
         </div>
       </div>
     </form>
