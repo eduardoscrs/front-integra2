@@ -6,16 +6,16 @@ import { xCircle, folder, checkCircle } from '../assets';
 import Sidebar from '../components/Sidebar';
 import { useEffect, useState } from 'react';
 import { obtenerCasos, actualizarEstadoCaso } from '../services/casosService';
-import { Outlet, Link } from "react-router-dom"; // Importa Link para redirigir
+// import { Outlet, Link } from "react-router-dom"; // Importa Link para redirigir
 import '../styles/Sidebar.css';
-import logo from '../assets/Segurapp_rbg.png'; 
+// import logo from '../assets/Segurapp_rbg.png'; 
 
 const Casos = () => {
   const [casos, setCasos] = useState([]); // Estado para guardar los casos obtenidos de la API
   const [error, setError] = useState(null); // Estado para manejar errores
   const [paginaActual, setPaginaActual] = useState(1);
   const casosPorPagina = 4; // Cambia este número segun el numero de casos a mostrar por pagina
-  const [isOpen, setIsOpen] = useState(true); // Hook para manejar la apertura/cierre del sidebar
+  // const [isOpen, setIsOpen] = useState(true); // Hook para manejar la apertura/cierre del sidebar
 
   // Efecto que se ejecuta cuando el componente se monta
   useEffect(() => {
