@@ -1,8 +1,84 @@
 import { useState, useEffect } from "react";
 import '../Styles/AdminPage.css';
 import { Outlet, Link } from "react-router-dom";
+import { getMaterials, updateMaterialPrice } from "../services/adminService"; // Asegúrate de importar el service
+import { obtenerCasos } from "../services/casosService";
 
 const AdminPage = () => {
+
+  const [casos, setCasos] = useState({ total: 0, aceptados: 0, rechazados: 0 });
+
+  useEffect(() => {
+    const fetchCasos = async () => {
+      try {
+        const casosData = await obtenerCasos(); // Llamamos al servicio
+        setCasos({
+          total: casosData.length, // Casos totales
+          aceptados: casosData.filter((caso) => caso.ID_estado === 3).length, // Casos aceptados
+          rechazados: casosData.filter((caso) => caso.ID_estado === 4).length, // Casos rechazados
+        });
+      } catch (error) {
+        console.error("Error al cargar los casos:", error);
+      }
+    };
+
+    fetchCasos(); // Ejecutamos la función para cargar los casos
+  }, []); // El hook se ejecuta solo una vez al montar el componente
+
+  const [materials, setMaterials] = useState([]);
+  const [selectedMaterial, setSelectedMaterial] = useState("");
+  const [newPrice, setNewPrice] = useState("");
+
+  // Cargar los materiales al cargar el componente
+  useEffect(() => {
+    const fetchMaterials = async () => {
+      try {
+        const materialsData = await getMaterials();
+        setMaterials(materialsData); // Actualiza el estado con los materiales obtenidos
+      } catch (error) {
+        console.error("Error al cargar los materiales:", error);
+      }
+    };
+    fetchMaterials();
+  }, []);
+
+  const handleMaterialChange = (e) => {
+    setSelectedMaterial(e.target.value);
+  };
+
+  const handlePriceChange = (e) => {
+    setNewPrice(e.target.value);
+  };
+
+  const handleUpdatePrice = async (e) => {
+    e.preventDefault();
+    if (selectedMaterial && newPrice) {
+      try {
+        const updatedMaterial = await updateMaterialPrice(selectedMaterial, newPrice);
+        if (updatedMaterial) {
+          alert("Precio actualizado exitosamente");
+
+          // Actualizar el estado local para reflejar el nuevo precio
+          setMaterials((prevMaterials) =>
+            prevMaterials.map((material) =>
+              material.ID_material === selectedMaterial
+                ? { ...material, precio: newPrice }
+                : material
+            )
+          );
+          setSelectedMaterial(""); // Limpia la selección
+          setNewPrice(""); // Limpia el campo de precio
+        }
+      } catch (error) {
+        alert("Hubo un error al actualizar el precio. Por favor, inténtalo de nuevo.");
+        console.error("Error al actualizar el precio:", error);
+      }
+    } else {
+      alert("Por favor selecciona un material y un nuevo precio.");
+    }
+  };
+
+
   const [currentTime, setCurrentTime] = useState(new Date());
   const [formData, setFormData] = useState({
     nombre: "",
@@ -157,9 +233,9 @@ const AdminPage = () => {
         <div className="main-info">
           <div className="box3">
                <h3>Casos</h3>
-              <div className="scard">Casos Totales</div>
-              <div className="scard">Aceptados</div>
-              <div className="scard">Rechazados</div>
+              <div className="scard">Casos Totales {casos.total}</div>
+              <div className="scard">Aceptados {casos.aceptados}</div>
+              <div className="scard">Rechazados {casos.rechazados}</div>
               <Link to="/casos">
               <button type="submit">ir a Casos</button>
               </Link>
@@ -167,22 +243,26 @@ const AdminPage = () => {
         </div>
 
         <div className="main-info">
-              <div className="map">
+            <div className="map">
             <h3>Actualizar Precios de Materiales</h3>
-            <form>
+            <form onSubmit={handleUpdatePrice}>
               <label>
                 Selecciona un material:
-                <select required>
+                <select value={selectedMaterial} onChange={handleMaterialChange} required>
                   <option value="">-- Seleccionar --</option>
-                  <option value="Cemento">Cemento</option>
-                  <option value="Arena">Arena</option>
-                  <option value="Grava">Grava</option>
+                  {materials.map((material) => (
+                    <option key={material.ID_material} value={material.ID_material}>
+                      {material.nombre_material}
+                    </option>
+                  ))}
                 </select>
               </label>
               <label>
                 Ingresa el nuevo precio:
                 <input
                   type="number"
+                  value={newPrice}
+                  onChange={handlePriceChange}
                   placeholder="Ej: 6000"
                   required
                 />

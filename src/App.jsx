@@ -5,8 +5,11 @@ import Login from './components/Login';
 import PasswordRecovery from './components/PasswordRecovery';  
 import AdminPage from './components/AdminPage';  // Página simulada para el admin
 import InspectorPage from './components/InspectorPage';  // Página simulada para el inspector
+import UsuarioPage from './components/UsuarioPage';
 import Logout from './components/Logout'; 
 import HomePage from './components/HomePage';
+import ContratistaPage from './components/ContratistaPage.jsx';
+import SupervisorPage from './components/SupervisorPage.jsx';
 import ActualizarUsuario from './pages/ActualizarUsuario'; 
 import PerfilContrasena from './pages/PerfilContrasena'; 
 import { Casos, IngresoFormulario, PerfilUsuario } from './pages';
@@ -51,6 +54,11 @@ function App() {
           <Route path="/password-recovery" element={<PasswordRecovery />} />
 
           {/* Rutas basadas en el rol del usuario */}
+
+          <Route path="/contratista" element={<ContratistaPage />} />
+          <Route path="/supervisor" element={<SupervisorPage />} />
+          <Route path="/usuario" element={<UsuarioPage />} />
+          <Route path="/inspector" element={<InspectorPage />} />
           <Route path="/inicio" element={<HomePage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/inspector" element={<InspectorPage />} />
