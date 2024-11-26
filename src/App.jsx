@@ -35,12 +35,17 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
+          {/* Ruta para la página de inicio o raíz */}
           {/* Si el usuario no está logueado, redirigir al login */}
           <Route
             path="/"
             element={
               isLoggedIn ? (
                 <Sidebar />
+                <div className="main-content">
+                  {/* Aquí puedes poner contenido adicional o componentes para la página principal */}
+                </div>
+              </>
               ) : (
                 <Navigate to="/login" />
               )
@@ -50,8 +55,10 @@ function App() {
           {/* Ruta para la página de login */}
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
 
+
           {/* Ruta para la recuperación de contraseña */}
           <Route path="/password-recovery" element={<PasswordRecovery />} />
+
 
           {/* Rutas basadas en el rol del usuario */}
 
@@ -68,6 +75,7 @@ function App() {
           <Route path="/logout" element={<Logout />} />
 
           {/* Rutas adicionales */}
+
           <Route path="/actualizar-usuario" element={<ActualizarUsuario />} />
           <Route path="/actualizar-contrasena" element={<PerfilContrasena />} />
         </Routes>
@@ -77,4 +85,3 @@ function App() {
 }
 
 export default App;
-

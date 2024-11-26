@@ -23,7 +23,7 @@ export const Alogin = async (usuario) => {
       throw new Error('Usuario no encontrado');
     }
 
-    // Compara la contraseña (por simplicidad, en este ejemplo se asume que las contraseñas no están encriptadas, 
+    // Compara la contraseña (por simplicidad, en este ejemplo se asume que las contraseñas no están encriptadas,
     // pero si usas bcrypt en el backend, deberías usar bcrypt.compare en el frontend).
     if (usuario.password !== user.contrasena) {
       throw new Error('Contraseña incorrecta');
@@ -47,6 +47,3 @@ export const Alogin = async (usuario) => {
     throw error;
   }
 };
-
-
-
