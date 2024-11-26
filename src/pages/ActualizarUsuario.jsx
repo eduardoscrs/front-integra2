@@ -109,6 +109,7 @@ const ActualizarUsuario = () => {
           <button type="submit">Actualizar Usuario</button>
         </form>
       </div>
+
       {mensaje && <p>{mensaje}</p>}
     </div>
   );

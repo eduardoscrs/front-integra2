@@ -57,6 +57,7 @@ function ListaCasos({
     doc.save(`Informe_Caso${numeroCaso}.pdf`);
   };
 
+function ListaCasos({ numeroCaso, estadoCaso, onAceptar, onRechazar }) {
   return (
     <div className="lista-caso">
       <div>
