@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import '../Styles/AdminPage.css';
 import { Outlet, Link } from "react-router-dom";
-import { getMaterials, updateMaterialPrice } from "../services/adminService"; // Asegúrate de importar el service
+import { getMaterials, updateMaterialPrice } from "../services/preciosService"; // Asegúrate de importar el service
 import { obtenerCasos } from "../services/casosService";
+import { crearUsuario } from "../services/CrearUserService";
+import { fetchRoles } from "../services/rolService"; 
 
 const AdminPage = () => {
 
@@ -90,6 +92,7 @@ const AdminPage = () => {
 
 
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [roles, setRoles] = useState([]);
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -98,8 +101,21 @@ const AdminPage = () => {
     contraseña: "",
     direccion: "",
     comuna: "",
-    rol: "inspector", // Por defecto "inspector"
+    rol: "", // Por defecto "inspector"
   });
+
+  useEffect(() => {
+    const loadRoles = async () => {
+      try {
+        const rolesData = await fetchRoles();
+        setRoles(rolesData); // Guardamos los roles en el estado
+      } catch (error) {
+        console.error("Error al cargar los roles:", error);
+      }
+    };
+
+    loadRoles(); // Llamamos a la función para cargar los roles
+  }, []);
   
 
   useEffect(() => {
@@ -115,11 +131,42 @@ const AdminPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Usuario creado:", formData);
-    alert("Usuario creado exitosamente.");
-    // Aquí puedes agregar la lógica para enviar los datos al backend
+  
+    try {
+      // Prepara los datos del usuario
+      const usuarioData = {
+        nombre: formData.nombre,
+        apellido: formData.apellido,
+        celular: formData.celular,
+        correo: formData.correo,
+        contrasena: formData.contraseña, // En la API, se espera la contraseña en texto plano
+        direccion: formData.direccion,
+        comuna: formData.comuna,
+        ID_rol: formData.rol, // Mapear roles a sus IDs
+      };
+  
+      // Llama al servicio para crear el usuario
+      const nuevoUsuario = await crearUsuario(usuarioData);
+  
+      // Notificar éxito
+      alert(`Usuario creado exitosamente: ${nuevoUsuario.nombre} ${nuevoUsuario.apellido}`);
+      
+      // Limpia el formulario
+      setFormData({
+        nombre: "",
+        apellido: "",
+        correo: "",
+        celular: "",
+        contraseña: "",
+        direccion: "",
+        comuna: "",
+        rol: "", // Valor por defecto
+      });
+    } catch (error) {
+      alert(`Error al crear el usuario: ${error.message}`);
+    }
   };
 
   const formattedDate = currentTime.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -230,9 +277,13 @@ const AdminPage = () => {
               </label>
               <label>
                 Rol:
-                <select name="rol" value={formData.rol} onChange={handleInputChange}>
-                  <option value="inspector">Inspector</option>
-                  <option value="cliente">Cliente</option>
+                <select name="rol" value={formData.rol} onChange={handleInputChange} required>
+                  <option value="">-- Seleccionar Rol --</option>
+                  {roles.map((rol) => (
+                    <option key={rol.ID_rol} value={rol.ID_rol}>
+                      {rol.nombre_rol}
+                    </option>
+                  ))}
                 </select>
               </label>
               <button type="submit">Crear Usuario</button>
