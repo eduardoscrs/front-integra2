@@ -2,19 +2,18 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
-import PasswordRecovery from './components/PasswordRecovery';  
-import AdminPage from './components/AdminPage';  // Página simulada para el admin
-import InspectorPage from './components/InspectorPage';  // Página simulada para el inspector
+import PasswordRecovery from './components/PasswordRecovery';
+import AdminPage from './components/AdminPage'; // Página simulada para el admin
+import InspectorPage from './components/InspectorPage'; // Página simulada para el inspector
 import UsuarioPage from './components/UsuarioPage';
-import Logout from './components/Logout'; 
+import Logout from './components/Logout';
 import HomePage from './components/HomePage';
 import ContratistaPage from './components/ContratistaPage.jsx';
 import SupervisorPage from './components/SupervisorPage.jsx';
-import ActualizarUsuario from './pages/ActualizarUsuario'; 
-import PerfilContrasena from './pages/PerfilContrasena'; 
+import ActualizarUsuario from './pages/ActualizarUsuario';
+import PerfilContrasena from './pages/PerfilContrasena';
 import { Casos, IngresoFormulario, PerfilUsuario } from './pages';
 import './styles/login.css';
-
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,11 +40,12 @@ function App() {
             path="/"
             element={
               isLoggedIn ? (
-                <Sidebar />
-                <div className="main-content">
-                  {/* Aquí puedes poner contenido adicional o componentes para la página principal */}
-                </div>
-              </>
+                <>
+                  <Sidebar />
+                  <div className="main-content">
+                    {/* Aquí puedes poner contenido adicional o componentes para la página principal */}
+                  </div>
+                </>
               ) : (
                 <Navigate to="/login" />
               )
@@ -55,27 +55,22 @@ function App() {
           {/* Ruta para la página de login */}
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
 
-
           {/* Ruta para la recuperación de contraseña */}
           <Route path="/password-recovery" element={<PasswordRecovery />} />
 
-
           {/* Rutas basadas en el rol del usuario */}
-
           <Route path="/contratista" element={<ContratistaPage />} />
           <Route path="/supervisor" element={<SupervisorPage />} />
           <Route path="/usuario" element={<UsuarioPage />} />
           <Route path="/inspector" element={<InspectorPage />} />
           <Route path="/inicio" element={<HomePage />} />
           <Route path="/admin" element={<AdminPage />} />
-          <Route path="/inspector" element={<InspectorPage />} />
           <Route path="/ingreso-formulario" element={<IngresoFormulario />} />
           <Route path="/casos" element={<Casos />} />
           <Route path="/perfil-usuario" element={<PerfilUsuario />} />
           <Route path="/logout" element={<Logout />} />
 
           {/* Rutas adicionales */}
-
           <Route path="/actualizar-usuario" element={<ActualizarUsuario />} />
           <Route path="/actualizar-contrasena" element={<PerfilContrasena />} />
         </Routes>
