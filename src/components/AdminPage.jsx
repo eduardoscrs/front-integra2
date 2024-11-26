@@ -2,8 +2,28 @@ import { useState, useEffect } from "react";
 import '../Styles/AdminPage.css';
 import { Outlet, Link } from "react-router-dom";
 import { getMaterials, updateMaterialPrice } from "../services/adminService"; // Asegúrate de importar el service
+import { obtenerCasos } from "../services/casosService";
 
 const AdminPage = () => {
+
+  const [casos, setCasos] = useState({ total: 0, aceptados: 0, rechazados: 0 });
+
+  useEffect(() => {
+    const fetchCasos = async () => {
+      try {
+        const casosData = await obtenerCasos(); // Llamamos al servicio
+        setCasos({
+          total: casosData.length, // Casos totales
+          aceptados: casosData.filter((caso) => caso.ID_estado === 3).length, // Casos aceptados
+          rechazados: casosData.filter((caso) => caso.ID_estado === 4).length, // Casos rechazados
+        });
+      } catch (error) {
+        console.error("Error al cargar los casos:", error);
+      }
+    };
+
+    fetchCasos(); // Ejecutamos la función para cargar los casos
+  }, []); // El hook se ejecuta solo una vez al montar el componente
 
   const [materials, setMaterials] = useState([]);
   const [selectedMaterial, setSelectedMaterial] = useState("");
@@ -195,9 +215,9 @@ const AdminPage = () => {
         <div className="main-info">
           <div className="box3">
                <h3>Casos</h3>
-              <div className="scard">Casos Totales</div>
-              <div className="scard">Aceptados</div>
-              <div className="scard">Rechazados</div>
+              <div className="scard">Casos Totales {casos.total}</div>
+              <div className="scard">Aceptados {casos.aceptados}</div>
+              <div className="scard">Rechazados {casos.rechazados}</div>
               <Link to="/casos">
               <button type="submit">ir a Casos</button>
               </Link>
