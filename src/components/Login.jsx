@@ -28,11 +28,17 @@ const Login = () => {
   
       // Redirigir a la página según el rol
       if (role === 'Cliente') {
-        navigate('/'); // Cliente va al Sidebar por defecto
+        navigate('/usuario'); // Cliente va al Sidebar por defecto
       } else if (role === 'Inspector') {
         navigate('/inspector');
+      } else if (role === 'Liquidador') {
+        navigate('/supervisor');
+
+      } else if (role === 'Administrador') {
+        navigate('/admin');
+
       } else if (role === 'Contratista') {
-        navigate('/admin'); // O la página correspondiente al contratista
+        navigate('/contratista'); // O la página correspondiente al contratista
       }
     } catch (error) {
       console.error('Error en el login:', error);
