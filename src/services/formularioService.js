@@ -3,7 +3,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://190.114.253.250:3000';
 
 export const crearCaso = async (nuevoCaso) => {
   try {
-    const response = await fetch(`${API_URL}/api/casos`, {
+    const response = await fetch(`${API_URL}/api/sectores`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,9 +23,9 @@ export const crearCaso = async (nuevoCaso) => {
 };
 
 
-export const crearSector = async (nuevoSector) => {
+export const nuevoSector = async (nuevoSector) => {
   try {
-    const response = await fetch(`${API_URL}/api/sectores`, {
+    const response = await fetch(`${API_URL}/api/subsectores`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

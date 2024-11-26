@@ -26,6 +26,23 @@
     flex-direction: column;
     gap: 20px; /* Espacio entre los inputs */
 }
+.form-container textarea {
+  background-color: #f5f5f5;  /* Fondo igual al de los otros campos */
+  color: #030303;  /* Color del texto igual al de los otros campos */
+  border: 1px solid #ddd;  /* Borde suave */
+  border-radius: 5px;  /* Bordes redondeados */
+  padding: 10px;  /* Relleno dentro del campo */
+  width: 100%;  /* Ancho completo */
+  box-sizing: border-box;  /* Asegura que el borde y el relleno no afecten el tamaño total */
+  margin-bottom: 15px;  /* Espaciado entre campos */
+  font-size: 16px;  /* Tamaño de fuente igual al de los otros campos */
+}
+
+.form-container textarea:focus {
+  border-color: #6c63ff;  /* Cambia el color del borde cuando el campo está enfocado */
+  outline: none;  /* Elimina el contorno predeterminado */
+}
+
 
 /* Estilos generales para los inputs */
 .form-container input {
@@ -37,6 +54,7 @@
     font-size: 14px;
     box-sizing: border-box;
 }
+
 
 .error {
   position: relative;

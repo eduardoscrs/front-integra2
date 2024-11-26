@@ -6,14 +6,12 @@ import { crearCaso } from '../services/formularioService';
 
 const IngresoFormulario = () => {
   const [formData, setFormData] = useState({
-    ID_caso: 30,
-    tipo_siniestro: '',
-    descripcion_siniestro: '',
-    ID_Cliente: '',
-    ID_inspector: '',
-    ID_contratista: '',
-    ID_estado: '',
-    nombre_estado: 'Aceptado',
+    ID_sector: "",
+    nombre_sector: "",
+    dano_sector: "",
+    porcentaje_perdida: "",
+    total_costo: "",
+    ID_caso: "",
     nombre: '',
     rut: '',
     direccion: '',
@@ -47,19 +45,20 @@ const IngresoFormulario = () => {
 
   const agregarSector = () => {
     const nuevoSector = {
-      ID_sector: Math.random(),
-      nombre_sector: '',
-      dano_sector: '',
-      porcentaje_perdida: '',
-      total_costo: '',
-      ID_caso: formData.ID_caso,
+      nombre_sub_sector: '', 
+      cantidad_material: '', 
+      tipo_reparacion: '', 
+      ID_material: '', 
+      ID_sector: 1,
     };
+
     setSectores([...sectores, nuevoSector]);
   };
 
+
   const manejarCambioSector = (index, e) => {
     const updatedSectores = [...sectores];
-    updatedSectores[index][e.target.id] = e.target.value;
+    updatedSectores[index][e.target.name] = e.target.value;
     setSectores(updatedSectores);
   };
 
@@ -311,7 +310,7 @@ const IngresoFormulario = () => {
             onChange={handleChange}
             className={errors.dia ? "input-error" : ""}
           />
-          {errors.dia && <span className="floating-error">{errors.dia}</span>}
+          
         </div>
 
         {/* Mes */}
@@ -325,7 +324,7 @@ const IngresoFormulario = () => {
             onChange={handleChange}
             className={errors.mes ? "input-error" : ""}
           />
-          {errors.mes && <span className="floating-error">{errors.mes}</span>}
+          
         </div>
 
         {/* Año */}
@@ -352,59 +351,65 @@ const IngresoFormulario = () => {
         <form id="case-form" onSubmit={handleSubmit} noValidate>
           <h2>Formulario de Datos</h2>
 
-          <input
-            type="text"
-            id="tipo_siniestro"
-            placeholder="Tipo de siniestro"
-            required
-            value={formData.tipo_siniestro}
-            onChange={handleChange}
-          />
+      <input
+        type="number"
+        id="ID_sector"
+        name="ID_sector"
+        placeholder="ID del Sector"
+        required
+        value={formData.ID_sector}
+        onChange={handleChange}
+      />
 
-          <input
-            type="text"
-            id="descripcion_siniestro"
-            placeholder="Descripción del siniestro"
-            required
-            value={formData.descripcion_siniestro}
-            onChange={handleChange}
-          />
+      <input
+        type="text"
+        id="nombre_sector"
+        name="nombre_sector"
+        placeholder="Nombre del Sector"
+        required
+        value={formData.nombre_sector}
+        onChange={handleChange}
+      />
 
-          <input
-            type="number"
-            id="ID_Cliente"
-            placeholder="ID Cliente"
-            required
-            value={formData.ID_Cliente}
-            onChange={handleChange}
-          />
+      <textarea
+        id="dano_sector"
+        name="dano_sector"
+        placeholder="Daño en el sector"
+        required
+        value={formData.dano_sector}
+        onChange={handleChange}
+      ></textarea>
 
-          <input
-            type="number"
-            id="ID_inspector"
-            placeholder="ID Inspector"
-            required
-            value={formData.ID_inspector}
-            onChange={handleChange}
-          />
+      <input
+        type="number"
+        id="porcentaje_perdida"
+        name="porcentaje_perdida"
+        placeholder="Porcentaje de pérdida"
+        required
+        value={formData.porcentaje_perdida}
+        onChange={handleChange}
+      />
 
-          <input
-            type="number"
-            id="ID_contratista"
-            placeholder="ID Contratista"
-            required
-            value={formData.ID_contratista}
-            onChange={handleChange}
-          />
+      <input
+        type="number"
+        id="total_costo"
+        name="total_costo"
+        placeholder="Costo total del sector"
+        required
+        value={formData.total_costo}
+        onChange={handleChange}
+      />
 
-          <input
-            type="number"
-            id="ID_estado"
-            placeholder="ID Estado"
-            required
-            value={formData.ID_estado}
-            onChange={handleChange}
-          />
+      <input
+        type="number"
+        id="ID_caso"
+        name="ID_caso"
+        placeholder="ID del Caso relacionado"
+        required
+        value={formData.ID_caso}
+        onChange={handleChange}
+      />
+
 
           {/* Botón para agregar nuevos sectores */}
           <button type="button" className="submit-button" onClick={agregarSector}>
@@ -412,38 +417,38 @@ const IngresoFormulario = () => {
           </button>
 
           {/* Sección para gestionar sectores */}
-          {sectores.map((sector, index) => (
+          {sectores.map((subsector, index) => (
             <div key={index} className="sector-container">
               <input
                 type="text"
-                id="nombre_sector"
-                placeholder="Nombre del sector"
+                id="nombre_sub_sector"
+                placeholder="Nombre del sub-sector"
                 required
-                value={sector.nombre_sector}
+                value={subsector.nombre_sub_sector}
                 onChange={(e) => manejarCambioSector(index, e)}
               />
               <input
                 type="text"
-                id="dano_sector"
-                placeholder="Descripción del daño"
+                id="cantidad_material"
+                placeholder="Cantidad de material"
                 required
-                value={sector.dano_sector}
+                value={subsector.cantidad_material}
+                onChange={(e) => manejarCambioSector(index, e)}
+              />
+              <input
+                type="text"
+                id="tipo_reparacion"
+                placeholder="Tipo de reparación"
+                required
+                value={subsector.tipo_reparacion}
                 onChange={(e) => manejarCambioSector(index, e)}
               />
               <input
                 type="number"
-                id="porcentaje_perdida"
-                placeholder="Porcentaje de pérdida"
+                id="ID_material"
+                placeholder="ID Material"
                 required
-                value={sector.porcentaje_perdida}
-                onChange={(e) => manejarCambioSector(index, e)}
-              />
-              <input
-                type="text"
-                id="total_costo"
-                placeholder="Total costo"
-                required
-                value={sector.total_costo}
+                value={subsector.ID_material}
                 onChange={(e) => manejarCambioSector(index, e)}
               />
               <button type="button" className="submit-button" onClick={() => eliminarSector(index)}>Eliminar Sector</button>
