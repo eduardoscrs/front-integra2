@@ -1,4 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL || 'http://190.114.253.250:3000';
+
 export const Alogin = async (usuario) => {
   try {
     // Realiza una petición GET para obtener todos los usuarios
@@ -37,8 +38,6 @@ export const Alogin = async (usuario) => {
     if (user.ID_rol === 1) role = 'Cliente';
     else if (user.ID_rol === 2) role = 'Inspector';
     else if (user.ID_rol === 3) role = 'Contratista';
-    else if (user.ID_rol === 4) role = 'Liquidador';
-    else if (user.ID_rol === 5) role = 'Administrador';
 
     // Retorna el token y el rol del usuario
     return { token, role };

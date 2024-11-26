@@ -1,8 +1,5 @@
 import '../styles/PerfilUsuario.css';
 import '../styles/DatosUsuario.css';
-import '../styles/Sidebar.css';
-import { Outlet, Link } from "react-router-dom";
-import logo from '../assets/Segurapp_rbg.png';
 import DatosUsuario from '../components/DatosUsuario';
 // import { usuarioImg } from '../assets';
 import Sidebar from '../components/Sidebar';
@@ -11,10 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import { obtenerUsuarioId } from '../services/perfilService';
 
 const PerfilUsuario = () => {
-  const navigate = useNavigate();
-  const [usuario, setUsuario] = useState(null);
-  const [error, setError] = useState(null);
-  const userId = 1;
+  const navigate = useNavigate(); // Inicializa useNavigate
+  const [usuario, setUsuario] = useState(null); // Estado para guardar los casos obtenidos de la API
+  const [error, setError] = useState(null); // Estado para manejar errores
+  const userId = 1; // Cambia esto por la forma en que obtienes el ID del usuario (ej. desde el auth)
 
   useEffect(() => {
     const fetchUsuario = async () => {
