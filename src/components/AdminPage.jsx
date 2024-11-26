@@ -1,8 +1,46 @@
 import { useState, useEffect } from "react";
 import '../Styles/AdminPage.css';
 import { Outlet, Link } from "react-router-dom";
+import { getMaterials, updateMaterialPrice } from "../services/adminService"; // Asegúrate de importar el service
 
 const AdminPage = () => {
+
+  const [materials, setMaterials] = useState([]);
+  const [selectedMaterial, setSelectedMaterial] = useState("");
+  const [newPrice, setNewPrice] = useState("");
+
+  // Cargar los materiales al cargar el componente
+  useEffect(() => {
+    const fetchMaterials = async () => {
+      console.log(materialsData)
+      const materialsData = await getMaterials();
+      setMaterials(materialsData);
+    };
+    fetchMaterials();
+  }, []);
+
+  const handleMaterialChange = (e) => {
+    setSelectedMaterial(e.target.value);
+  };
+
+  const handlePriceChange = (e) => {
+    setNewPrice(e.target.value);
+  };
+
+  const handleUpdatePrice = async (e) => {
+    e.preventDefault();
+    if (selectedMaterial && newPrice) {
+      const updatedMaterial = await updateMaterialPrice(selectedMaterial, newPrice);
+      if (updatedMaterial) {
+        alert('Precio actualizado exitosamente');
+        // Podrías también actualizar el estado local de los materiales si es necesario
+      }
+    } else {
+      alert('Por favor selecciona un material y un nuevo precio.');
+    }
+  };
+
+
   const [currentTime, setCurrentTime] = useState(new Date());
   const [formData, setFormData] = useState({
     nombre: "",
@@ -167,22 +205,26 @@ const AdminPage = () => {
         </div>
 
         <div className="main-info">
-              <div className="map">
+            <div className="map">
             <h3>Actualizar Precios de Materiales</h3>
-            <form>
+            <form onSubmit={handleUpdatePrice}>
               <label>
                 Selecciona un material:
-                <select required>
+                <select value={selectedMaterial} onChange={handleMaterialChange} required>
                   <option value="">-- Seleccionar --</option>
-                  <option value="Cemento">Cemento</option>
-                  <option value="Arena">Arena</option>
-                  <option value="Grava">Grava</option>
+                  {materials.map((material) => (
+                    <option key={material.ID_material} value={material.ID_material}>
+                      {material.nombre_material}
+                    </option>
+                  ))}
                 </select>
               </label>
               <label>
                 Ingresa el nuevo precio:
                 <input
                   type="number"
+                  value={newPrice}
+                  onChange={handlePriceChange}
                   placeholder="Ej: 6000"
                   required
                 />
