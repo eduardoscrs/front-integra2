@@ -27,6 +27,7 @@ const AdminPage = () => {
 
   const [materials, setMaterials] = useState([]);
   const [selectedMaterial, setSelectedMaterial] = useState("");
+  const [currentPrice, setCurrentPrice] = useState(""); // Precio actual
   const [newPrice, setNewPrice] = useState("");
 
   // Cargar los materiales al cargar el componente
@@ -43,7 +44,16 @@ const AdminPage = () => {
   }, []);
 
   const handleMaterialChange = (e) => {
-    setSelectedMaterial(e.target.value);
+    const materialId = e.target.value;
+    setSelectedMaterial(materialId);
+
+    // Buscar el precio actual del material seleccionado
+    const selected = materials.find((material) => material.ID_material === materialId);
+    if (selected) {
+      setCurrentPrice(selected.precio); // Actualizamos el precio actual
+    } else {
+      setCurrentPrice("");
+    }
   };
 
   const handlePriceChange = (e) => {
@@ -58,20 +68,20 @@ const AdminPage = () => {
         if (updatedMaterial) {
           alert("Precio actualizado exitosamente");
 
-          // Actualizar el estado local para reflejar el nuevo precio
-          setMaterials((prevMaterials) =>
-            prevMaterials.map((material) =>
-              material.ID_material === selectedMaterial
-                ? { ...material, precio: newPrice }
-                : material
-            )
-          );
-          setSelectedMaterial(""); // Limpia la selección
-          setNewPrice(""); // Limpia el campo de precio
+          // Recargar la lista de materiales para reflejar el cambio
+          const updatedMaterials = await getMaterials();
+          setMaterials(updatedMaterials);
+
+          // Restablecer los valores
+          setNewPrice("");
+          setCurrentPrice("");
+          setSelectedMaterial("");
+        } else {
+          alert("Hubo un problema al actualizar el precio");
         }
       } catch (error) {
-        alert("Hubo un error al actualizar el precio. Por favor, inténtalo de nuevo.");
         console.error("Error al actualizar el precio:", error);
+        alert("Error al actualizar el precio.");
       }
     } else {
       alert("Por favor selecciona un material y un nuevo precio.");
@@ -263,7 +273,7 @@ const AdminPage = () => {
                   type="number"
                   value={newPrice}
                   onChange={handlePriceChange}
-                  placeholder="Ej: 6000"
+                  placeholder={currentPrice ? `Ej: ${currentPrice}` : "Ej: 6000"}
                   required
                 />
               </label>
