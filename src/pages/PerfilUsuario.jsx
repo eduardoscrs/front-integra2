@@ -1,8 +1,8 @@
 import '../styles/PerfilUsuario.css';
 import '../styles/DatosUsuario.css';
 import '../styles/Sidebar.css';
-import { Outlet, Link } from "react-router-dom";
-import logo from '../assets/Segurapp_rbg.png';
+// import { Outlet, Link } from "react-router-dom";
+// import logo from '../assets/Segurapp_rbg.png';
 import DatosUsuario from '../components/DatosUsuario';
 // import { usuarioImg } from '../assets';
 import Sidebar from '../components/Sidebar';
