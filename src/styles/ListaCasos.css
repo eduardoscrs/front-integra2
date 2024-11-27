@@ -13,6 +13,16 @@
   gap: 140px;
 }
 
+.link-caso {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link-caso:hover {
+  color: blue;
+  transition: color 650ms;
+}
+
 /* .lista-caso hr {
   width: 100%;
   display: flex;
@@ -49,4 +59,19 @@
 
 .btn-rechazar {
   background-color: #ef4444;
+}
+
+.paginacion {
+  display: flex;
+  /* gap: 10px; */
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.paginacion button {
+  /* padding: 5px 10px; */
+  background-color: black;
+  /* background-color: #7a5adc; */
+  /* border: 1px solid #ccc; */
+  cursor: pointer;
 }

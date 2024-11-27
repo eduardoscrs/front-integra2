@@ -1,25 +1,47 @@
-.imagen-datos {
+.contenedor-principal-perfil {
   display: flex;
-  gap: 40px;
-  padding: 10px;
+  /* flex-direction: row; */
+  /* padding: 10px; */
   background-color: white;
+  width: 90vw;
+  height: 105vh;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.contendor-sidebar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  /* transform: scale(0.9); */
 }
 
 .imagen-usuario {
   display: flex;
-  height: 500px;
-  width: 450px;
-  /* justify-content: center;
-  align-items: center; */
+  height: 250px;
+  width: 225px;
+  /* row-gap: 5px; */
+  /* margin: 0 auto; */
 }
 
 .seccion-usuario {
   display: flex;
   flex-direction: column;
+  /* height: 100vh; */
+  transform: scale(0.8);
 }
 
-.seccion-usuario span {
+/* Eliminado
+  .seccion-usuario span {
   display: block;
+} */
+
+.seccion-usuario h1 {
+  color: #15307a;
+  text-align: center;
+  margin: 5px;
 }
 
 .btn-editar-perfil {
@@ -29,10 +51,11 @@
 .div-componentes-usuario {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
+  /* height: 100vh; */
 }
 
 .btn-cambiar-contraseña {
   background-color: #ec221f;
-  width: 500px;
+  width: 400px;
 }

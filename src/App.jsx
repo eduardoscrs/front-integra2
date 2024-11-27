@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; // Añade Navigate para las redirecciones
 import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
@@ -14,7 +15,6 @@ import ActualizarUsuario from './pages/ActualizarUsuario';
 import PerfilContrasena from './pages/PerfilContrasena'; 
 import { Casos, IngresoFormulario, PerfilUsuario } from './pages';
 import './styles/login.css';
-
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,12 +35,18 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
+          {/* Ruta para la página de inicio o raíz */}
           {/* Si el usuario no está logueado, redirigir al login */}
           <Route
             path="/"
             element={
               isLoggedIn ? (
-                <Sidebar />
+                <>
+                  <Sidebar />
+                  <div className="main-content">
+                    {/* Aquí puedes poner contenido adicional o componentes para la página principal */}
+                  </div>
+                </>
               ) : (
                 <Navigate to="/login" />
               )
@@ -54,14 +60,12 @@ function App() {
           <Route path="/password-recovery" element={<PasswordRecovery />} />
 
           {/* Rutas basadas en el rol del usuario */}
-
           <Route path="/contratista" element={<ContratistaPage />} />
           <Route path="/supervisor" element={<SupervisorPage />} />
           <Route path="/usuario" element={<UsuarioPage />} />
           <Route path="/inspector" element={<InspectorPage />} />
           <Route path="/inicio" element={<HomePage />} />
           <Route path="/admin" element={<AdminPage />} />
-          <Route path="/inspector" element={<InspectorPage />} />
           <Route path="/ingreso-formulario" element={<IngresoFormulario />} />
           <Route path="/casos" element={<Casos />} />
           <Route path="/perfil-usuario" element={<PerfilUsuario />} />
@@ -77,4 +81,3 @@ function App() {
 }
 
 export default App;
-
