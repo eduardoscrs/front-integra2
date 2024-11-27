@@ -1,17 +1,18 @@
+
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; // Añade Navigate para las redirecciones
 import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
-import PasswordRecovery from './components/PasswordRecovery';
-import AdminPage from './components/AdminPage'; // Página simulada para el admin
-import InspectorPage from './components/InspectorPage'; // Página simulada para el inspector
+import PasswordRecovery from './components/PasswordRecovery';  
+import AdminPage from './components/AdminPage';  // Página simulada para el admin
+import InspectorPage from './components/InspectorPage';  // Página simulada para el inspector
 import UsuarioPage from './components/UsuarioPage';
-import Logout from './components/Logout';
+import Logout from './components/Logout'; 
 import HomePage from './components/HomePage';
 import ContratistaPage from './components/ContratistaPage.jsx';
 import SupervisorPage from './components/SupervisorPage.jsx';
-import ActualizarUsuario from './pages/ActualizarUsuario';
-import PerfilContrasena from './pages/PerfilContrasena';
+import ActualizarUsuario from './pages/ActualizarUsuario'; 
+import PerfilContrasena from './pages/PerfilContrasena'; 
 import { Casos, IngresoFormulario, PerfilUsuario } from './pages';
 import './styles/login.css';
 
