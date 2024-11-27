@@ -378,8 +378,6 @@ button.add-sector-button {
     display: flex;
     flex-direction: column;
     gap: 10px; /* Separación entre botones */
-    
-}
 /* Estilos para la subida y previsualización de imágenes */
 .image-upload {
     margin-top: 20px;
@@ -410,4 +408,5 @@ button.add-sector-button {
   .date-inputs input {
     width: 30%;
   }
+
 

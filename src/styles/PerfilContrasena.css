@@ -1,0 +1,20 @@
+/* body {
+  display: flex;
+  justify-content: center;
+} */
+
+.contenedor-update-pass {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  /* background-color: #9581d3; */
+  width: 60vw;
+  height: 44vw;
+}
+
+.contenedor-update-pass form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
