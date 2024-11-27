@@ -20,6 +20,123 @@
     box-sizing: border-box;
     flex-shrink: 0;
 }
+/* Estilo del contenedor del formulario */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre los inputs */
+}
+.form-container textarea {
+  background-color: #f5f5f5;  /* Fondo igual al de los otros campos */
+  color: #030303;  /* Color del texto igual al de los otros campos */
+  border: 1px solid #ddd;  /* Borde suave */
+  border-radius: 5px;  /* Bordes redondeados */
+  padding: 10px;  /* Relleno dentro del campo */
+  width: 100%;  /* Ancho completo */
+  box-sizing: border-box;  /* Asegura que el borde y el relleno no afecten el tamaño total */
+  margin-bottom: 15px;  /* Espaciado entre campos */
+  font-size: 16px;  /* Tamaño de fuente igual al de los otros campos */
+}
+
+.form-container textarea:focus {
+  border-color: #6c63ff;  /* Cambia el color del borde cuando el campo está enfocado */
+  outline: none;  /* Elimina el contorno predeterminado */
+}
+
+
+/* Estilos generales para los inputs */
+.form-container input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+
+.error {
+  position: relative;
+  color: #ff4d4d;
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.error::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -10px;
+  width: 5px;
+  height: 5px;
+  background-color: #ff4d4d;
+  border-radius: 50%;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container .tooltip {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(255, 77, 77, 0.9);
+  color: white;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-top: 5px;
+  z-index: 10;
+  display: none;
+}
+
+.input-container.error .tooltip {
+  display: block;
+}
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  /* Input con error */
+  .input-error {
+    border: 1px solid #e74c3c;
+    background-color: #ffe6e6;
+  }
+  
+  /* Mensaje flotante */
+  .floating-error {
+    position: absolute;
+    top: 50%;
+    left: 105%;
+    transform: translateY(-50%);
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+  }
+  
+  /* Animación para entrada suave */
+  .floating-error {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
 /* Media queries para pantallas más pequeñas */
 @media (max-width: 1200px) {
@@ -134,6 +251,7 @@
 
 .sector-section input[name="nombreSector"] {
     width: 93%;
+    
 }
 
 /* Estilos de la subcategoría */
@@ -150,11 +268,35 @@
     justify-content: space-between;
     margin-bottom: 15px;
 }
+.submit-button,
+.add-images-button,
+button.add-sector-button {
+    background-color: #6a5acd;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    font-weight: bold;
+    margin-bottom: 10px; /* Espacio debajo del botón */
+}
 
+/* Estilo para los inputs dentro de la sección sector */
+.sector-section input {
+    margin-top: 10px; /* Ajusta el margen superior si es necesario */
+}
+
+/* Opcional: Usa flexbox si hay más elementos */
+.sector-section {
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos estén en columna */
+    gap: 15px; /* Espaciado uniforme entre elementos */
+}
 /* Estilos generales de los botones */
-.form-container button.add-section-button,
-.form-container button[type="submit"],
-.form-container button.add-images-button {
+.submit-button,
+.add-images-button {
     background-color: #6a5acd;
     color: white;
     padding: 12px;
@@ -167,17 +309,17 @@
     margin-top: 10px;
 }
 
+/* Efecto hover para los botones */
+.submit-button:hover,
+.add-images-button:hover {
+    background-color: #5b4bb5;
+}
+
 /* Estilos del botón de agregar imágenes */
 .form-container button.add-images-button {
     background-color: #6a5acd;
 }
 
-/* Efectos hover para los botones */
-.form-container button.add-section-button:hover,
-.form-container button.add-images-button:hover,
-.form-container button[type="submit"]:hover {
-    background-color: #5b4bb5;
-}
 
 /* Estilos del modal */
 .modal {
@@ -236,5 +378,35 @@
     display: flex;
     flex-direction: column;
     gap: 10px; /* Separación entre botones */
-}
+/* Estilos para la subida y previsualización de imágenes */
+.image-upload {
+    margin-top: 20px;
+  }
+  
+  .image-upload input[type="file"] {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .image-preview {
+    margin-top: 10px;
+  }
+  
+  .image-preview img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .date-inputs {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .date-inputs input {
+    width: 30%;
+  }
+
 
