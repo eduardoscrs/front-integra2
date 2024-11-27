@@ -51,6 +51,9 @@ const ActualizarUsuario = () => {
       comuna: usuario.comuna,
     };
 
+    // Mostrar los datos del formulario en la consola
+    console.log('Datos enviados del formulario:', datosUsuario);
+
     try {
       await actualizarPerfil(1, datosUsuario); // Cambia el ID del usuario según sea necesario
       setMensaje('Usuario actualizado correctamente.');
@@ -66,6 +69,26 @@ const ActualizarUsuario = () => {
       <h1>Editar perfil</h1>
       <div className="contenedor-contenedor">
         <form onSubmit={handleSubmit}>
+          {/* <div className="div-campos">
+            <label htmlFor="nombre">Nombre: </label>
+            <input
+              type="text"
+              name="nombre"
+              value={usuario.nombre || ''}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="div-campos">
+            <label htmlFor="apellido">Apellido: </label>
+            <input
+              type="text"
+              name="apellido"
+              value={usuario.apellido || ''}
+              onChange={handleChange}
+              required
+            />
+          </div> */}
           <div className="div-campos">
             <label htmlFor="celular">Celular: </label>
             <input
