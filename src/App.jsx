@@ -10,6 +10,7 @@ import UsuarioPage from './components/UsuarioPage';
 import Logout from './components/Logout'; 
 import HomePage from './components/HomePage';
 import ContratistaPage from './components/ContratistaPage.jsx';
+import CasoContratista from './components/CasoContratista.jsx';
 import SupervisorPage from './components/SupervisorPage.jsx';
 import ActualizarUsuario from './pages/ActualizarUsuario'; 
 import PerfilContrasena from './pages/PerfilContrasena'; 
@@ -61,6 +62,7 @@ function App() {
 
           {/* Rutas basadas en el rol del usuario */}
           <Route path="/contratista" element={<ContratistaPage />} />
+          <Route path="/casocontratista" element={<CasoContratista />} />
           <Route path="/supervisor" element={<SupervisorPage />} />
           <Route path="/usuario" element={<UsuarioPage />} />
           <Route path="/inspector" element={<InspectorPage />} />

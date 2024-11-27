@@ -17,7 +17,7 @@ const HomePage = () => {
         </li>
 
         <li>
-          <Link to="/casos">
+          <Link to="/casocontratista">
             <i className="casos-h"></i> Casos
           </Link>
         </li>
