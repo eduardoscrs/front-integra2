@@ -49,7 +49,8 @@ const IngresoFormulario = () => {
       cantidad_material: '', 
       tipo_reparacion: '', 
       ID_material: '', 
-      ID_sector: 1,
+      ID_sector: '',
+      partidas: []
     };
 
     setSectores([...sectores, nuevoSector]);
@@ -57,11 +58,14 @@ const IngresoFormulario = () => {
 
 
   const manejarCambioSector = (index, e) => {
-    const updatedSectores = [...sectores];
-    updatedSectores[index][e.target.name] = e.target.value;
-    setSectores(updatedSectores);
+    const { name, value } = e.target; // Obtén el nombre del campo y su nuevo valor
+    const updatedSectores = [...sectores]; // Copia del estado actual
+  
+    // Actualiza el campo correcto dentro del objeto sector
+    updatedSectores[index][name] = value;
+  
+    setSectores(updatedSectores); // Actualiza el estado con los sectores modificados
   };
-
   const eliminarSector = (index) => {
     const updatedSectores = sectores.filter((_, i) => i !== index);
     setSectores(updatedSectores);
@@ -419,9 +423,9 @@ const IngresoFormulario = () => {
           {/* Sección para gestionar sectores */}
           {sectores.map((subsector, index) => (
             <div key={index} className="sector-container">
-              <input
+             <input
                 type="text"
-                id="nombre_sub_sector"
+                name="nombre_sub_sector"
                 placeholder="Nombre del sub-sector"
                 required
                 value={subsector.nombre_sub_sector}
@@ -429,7 +433,7 @@ const IngresoFormulario = () => {
               />
               <input
                 type="text"
-                id="cantidad_material"
+                name="cantidad_material"
                 placeholder="Cantidad de material"
                 required
                 value={subsector.cantidad_material}
@@ -437,7 +441,7 @@ const IngresoFormulario = () => {
               />
               <input
                 type="text"
-                id="tipo_reparacion"
+                name="tipo_reparacion"
                 placeholder="Tipo de reparación"
                 required
                 value={subsector.tipo_reparacion}
@@ -445,7 +449,7 @@ const IngresoFormulario = () => {
               />
               <input
                 type="number"
-                id="ID_material"
+                name="ID_material"
                 placeholder="ID Material"
                 required
                 value={subsector.ID_material}
