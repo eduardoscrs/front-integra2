@@ -1,10 +1,10 @@
 import '../styles/ListaCasos.css';
 import CuadradoCasos from '../components/CuadradoCasos';
-import ListaCasos from '../components/ListaCasos';
+import ListaCasos from '../components/listaContratista';
 import { xCircle, folder, checkCircle } from '../assets';
 import Sidebar from '../components/Sidebar';
 import { useEffect, useState } from 'react';
-import { obtenerCasos, actualizarEstadoCaso } from '../services/casosService';
+import { obtenerCasos } from '../services/casosService';
 // import { Outlet, Link } from "react-router-dom"; // Importa Link para redirigir
 import '../styles/Sidebar.css';
 // import logo from '../assets/Segurapp_rbg.png'; 
@@ -54,40 +54,12 @@ const Casos = () => {
   };
 
   // Función para manejar la aceptación de un caso
-  const aceptarCaso = async (id) => {
-    // Actualiza el estado antes de la respuesta en el front
-    setCasos(
-      casos.map((caso) =>
-        caso.ID_caso === id
-          ? { ...caso, ID_estado: 3, nombre_estado: 'Aceptado' }
-          : caso
-      )
-    );
 
-    try {
-      await actualizarEstadoCaso(id, 3);
-    } catch (error) {
-      console.error('Error al aceptar el caso:', error);
-    }
-  };
 
   // Función para manejar el rechazo de un caso
-  const rechazarCaso = async (id) => {
-    // Actualiza el estado antes de la respuesta en el front
-    setCasos(
-      casos.map((caso) =>
-        caso.ID_caso === id
-          ? { ...caso, ID_estado: 4, nombre_estado: 'Rechazado' }
-          : caso
-      )
-    );
+  
 
-    try {
-      await actualizarEstadoCaso(id, 4);
-    } catch (error) {
-      console.error('Error al rechazar el caso:', error);
-    }
-  };
+  
 
   return (
     <div className="contenedor-casos">
@@ -117,7 +89,6 @@ const Casos = () => {
           <section className="seccion-titulos3">
             <h3>Caso</h3>
             <h3>Estado</h3>
-            <h3>Acciones</h3>
           </section>
           <section className="seccion-lista-casos">
             {casosEnPagina.map((caso) => (
@@ -129,8 +100,7 @@ const Casos = () => {
                   tipo_siniestro: caso.tipo_siniestro,
                   descripcion: caso.descripcion_siniestro,
                 }}
-                onAceptar={() => aceptarCaso(caso.ID_caso)}
-                onRechazar={() => rechazarCaso(caso.ID_caso)}
+               
               />
             ))}
           </section>
